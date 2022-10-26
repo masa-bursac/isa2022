@@ -28,16 +28,26 @@ insert into education (id,education,profession) values
 insert into education (id,education,profession) values 
 (4,'ftn','assistant');
 
-insert into center (id,name,center_address,description,rating) values
-(1,'Centar Novi Sad','Novi Sad Bulevar Oslobodjenja 1','Centar za transfuziju krvi u Novom Sadu',5);
-insert into center (id,name,center_address,description,rating) values
-(2,'Centar Novo Naselje','Novi Sad Bulevar Oslobodjenja 8','Centar za transfuziju krvi na Novom Naselju',3);
-insert into center (id,name,center_address,description,rating) values
-(3,'Centar Beograd','Beograd Bulevar Evrope 10','Centar za transfuziju krvi u Beogradu',5);
-insert into center (id,name,center_address,description,rating) values
-(4,'Centar Novi Beograd','Beograd Bulevar Oslobodjenja 15','Centar za transfuziju krvi na Novom Beogradu',4);
+insert into center (id,name,description,rating) values
+(1,'Centar Novi Sad','Centar za transfuziju krvi u Novom Sadu',5);
+insert into center (id,name,description,rating) values
+(2,'Centar Novo Naselje','Centar za transfuziju krvi na Novom Naselju',3);
+insert into center (id,name,description,rating) values
+(3,'Centar Beograd','Centar za transfuziju krvi u Beogradu',5);
+insert into center (id,name,description,rating) values
+(4,'Centar Novi Beograd','Centar za transfuziju krvi na Novom Beogradu',4);
+
+insert into center_address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(1,0,0,'Bulevar Oslobodjenja','Novi Sad','Srbija','5','21000');
+insert into center_address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(2,0,0,'Bulevar Vojvode Stepe','Novi Sad','Srbija','10','21000');
+insert into center_address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(3,0,0,'Beogradska','Beograd','Srbija','21','21000');
+insert into center_address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(4,0,0,'Bulevar Vojvode Putnika','Beograd','Srbija','4','21000');
 
 alter sequence user_entity_id_seq restart with 5;
 alter sequence user_address_id_seq restart with 5;
 alter sequence user_education_id_seq restart with 5;
 alter sequence center_id_seq restart with 5;
+alter sequence center_address_id_seq restart with 5;

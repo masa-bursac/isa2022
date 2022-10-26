@@ -26,7 +26,10 @@ public class Center {
     @Column(name = "id")
 	private Integer id;
 	private String name;
-	private String centerAddress;
+	@JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="center_address_id", referencedColumnName = "id")
+	private CenterAddress centerAddress;
 	private String description;
 	private Double rating;
 	@OneToMany(mappedBy="center")
@@ -35,7 +38,7 @@ public class Center {
 	private List<CenterAdministrator> staff;
 	
 		
-	public Center(Integer id, String name, String centerAddress, String description, Double rating,
+	public Center(Integer id, String name, CenterAddress centerAddress, String description, Double rating,
 			List<Appointment> appointments, List<CenterAdministrator> staff) {
 		super();
 		this.id = id;
@@ -61,10 +64,10 @@ public class Center {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCenterAddress() {
+	public CenterAddress getCenterAddress() {
 		return centerAddress;
 	}
-	public void setCenterAddress(String centerAddress) {
+	public void setCenterAddress(CenterAddress centerAddress) {
 		this.centerAddress = centerAddress;
 	}
 	public String getDescription() {
