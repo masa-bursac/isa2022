@@ -1,12 +1,14 @@
 --password 123
-insert into users (role,id,email,name,password,phone_number,surname,jmbg,gender) values
-(2,1,'pera@gmail.com','Pera','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','Perovic','3012457898654', 0);
-insert into users (role,id,email,name,password,phone_number,surname,jmbg,gender) values
-(1,2,'mila@gmail.com','Mila','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0696754324','Milic','2567854569852', 1);
-insert into users (role,id,email,name,password,phone_number,surname,jmbg,gender) values
-(0,3,'vlada@gmail.com','Vladimir','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','Vladic','4567894561234', 2);
-insert into users (role,id,email,name,password,phone_number,surname,jmbg,gender) values
-(2,4,'veljko@gmail.com','Veljko','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','Veljkovic','4568521236987', 3);
+--role REGISTERED 0 CENTERADMIN 1 SYSTEMADMIN 2 UNREGISTERED 3
+--gender MALE 0 FEMALE 1 NONBINARY 2 OTHER 3
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender) values
+(1,2,'Pera','Perovic','pera@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','3012457898654', 0);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender) values
+(2,1,'Mila','Milic','mila@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0696754324','2567854569852', 1);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender) values
+(3,0,'Vladimir','Vladic','vlada@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','4567894561234', 2);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender) values
+(4,2,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0);
 
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (1,0,0,'Njegoseva','Novi Sad','Srbija','5','21000');
@@ -26,6 +28,16 @@ insert into education (id,education,profession) values
 insert into education (id,education,profession) values 
 (4,'ftn','assistant');
 
+insert into center (id,name,center_address,description,rating) values
+(1,'Centar Novi Sad','Novi Sad Bulevar Oslobodjenja 1','Centar za transfuziju krvi u Novom Sadu',5);
+insert into center (id,name,center_address,description,rating) values
+(2,'Centar Novo Naselje','Novi Sad Bulevar Oslobodjenja 8','Centar za transfuziju krvi na Novom Naselju',3);
+insert into center (id,name,center_address,description,rating) values
+(3,'Centar Beograd','Beograd Bulevar Evrope 10','Centar za transfuziju krvi u Beogradu',5);
+insert into center (id,name,center_address,description,rating) values
+(4,'Centar Novi Beograd','Beograd Bulevar Oslobodjenja 15','Centar za transfuziju krvi na Novom Beogradu',4);
+
 alter sequence user_entity_id_seq restart with 5;
 alter sequence user_address_id_seq restart with 5;
 alter sequence user_education_id_seq restart with 5;
+alter sequence center_id_seq restart with 5;

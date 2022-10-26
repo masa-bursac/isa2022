@@ -1,6 +1,7 @@
 package com.example.projectIsa.Model;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.DiscriminatorType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,10 +23,7 @@ import javax.persistence.CascadeType;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy=SINGLE_TABLE)
-/*@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor*/
+@DiscriminatorColumn(name="role", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class User {
 	@Id
     @SequenceGenerator(name = "user_entity_id_seq", sequenceName = "user_entity_id_seq", allocationSize = 1)
@@ -38,6 +37,7 @@ public abstract class User {
 	private String phoneNumber;
 	private String jmbg;
 	private Gender gender;
+	@Column(insertable = false, updatable = false)
 	private Role role;
 	//https://www.baeldung.com/jpa-one-to-one
 	@JsonIgnore
@@ -48,6 +48,7 @@ public abstract class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="education_id", referencedColumnName = "id")
 	private Education education;
+	
 	public Integer getId() {
 		return id;
 	}

@@ -14,10 +14,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "education")
-/*@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor*/
 public class Education {
 	@Id
     @SequenceGenerator(name = "user_education_id_seq", sequenceName = "user_education_id_seq", allocationSize = 1)
@@ -29,6 +25,7 @@ public class Education {
 	@JsonIgnore
 	@OneToOne(mappedBy = "education")
 	private User user;
+	
 	public Integer getId() {
 		return id;
 	}
