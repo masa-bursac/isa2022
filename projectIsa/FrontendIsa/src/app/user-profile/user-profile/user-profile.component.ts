@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProfileService } from 'src/app/profile.service';
+
+interface Gender {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-user-profile',
@@ -8,34 +14,57 @@ import { NgForm } from '@angular/forms';
 })
 export class UserProfileComponent implements OnInit {
 
-  public id!: number;
-  public name: string = "";
-  public surname: string = "";
-  public email: string = "email.com";
-  public password: string = "";
-  public phoneNumber: string = "";
-  //public dateOfBirth = new Date();
-  public jmbg: string = "";
-  public gender: string = "";
-  
-  public street: string = "";
-  public houseNumber!: number;
-  public city: string = "";
-  public state: string = "";
-  public postcode!: number;
+  validateForm = new FormGroup({
+    name: new FormControl(),
+    surname: new FormControl(),
+    email: new FormControl(),
+    phoneNumber : new FormControl(),
+    jmbg : new FormControl(),
+    gender: new FormControl(),
+    street: new FormControl(),
+    houseNumber: new FormControl(),
+    city: new FormControl(),
+    state: new FormControl(),
+    postcode: new FormControl(),
+    education: new FormControl(),
+    profession: new FormControl(),  
+  }); 
 
-  public education: string = "";
-  public profession: string = "";
+  selectedValueGender = 'MALE';
+
+  genders: Gender[] = [
+    {value: 'MALE', viewValue: 'MALE'},
+    {value: 'FEMALE', viewValue: 'FEMALE'},
+    {value: 'NONBINARY', viewValue: 'NONBINARY'},
+    {value: 'OTHER', viewValue: 'OTHER'}
+  ];
 
 
-  constructor() { }
-
-  onSubmit(f: NgForm) {
-    console.log(f.value); 
-    console.log(f.valid);  
-  }
+  constructor(private fb: FormBuilder, private profileService : ProfileService) { }
 
   ngOnInit(): void {
+    //this.decoded_token = this.authService.getDataFromToken();
+    this.profileService.getProfile('vlada@gmail.com').subscribe(data=> {
+      this.validateForm = this.fb.group({
+        name: [data.name,[Validators.required]],
+        surname: [data.surname,[Validators.required]],
+        email: [data.email,[Validators.required]],
+        phoneNumber : [data.phoneNumber,[Validators.required]],
+        jmbg: [data.jmbg,[Validators.required]],
+        gender: [data.gender,[Validators.required]],
+        street: [data.street,[Validators.required]],
+        houseNumber: [data.houseNumber,[Validators.required]],
+        city: [data.city,[Validators.required]],
+        state: [data.state,[Validators.required]],
+        postcode: [data.postcode,[Validators.required]],
+        education: [data.education,[Validators.required]],
+        profession: [data.profession,[Validators.required]],
+      });
+      this.selectedValueGender = data.gender;
+    });
+
   }
+
+  submitForm(): void {}
 
 }

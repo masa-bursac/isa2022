@@ -13,6 +13,7 @@ public class RegisteredUser extends User{
 	@OneToMany(mappedBy="regUser")
 	private List<Appointment> appointments;
 	
+	public RegisteredUser() {}
 	
 	public RegisteredUser(Integer id, String name, String surname, String email, String password, String phoneNumber,
 			String jmbg, Gender gender, Role role, Address address, Education education,

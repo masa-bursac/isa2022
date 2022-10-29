@@ -7,4 +7,6 @@ import com.example.projectIsa.Model.Education;
 
 @Repository
 public interface EducationRepository  extends JpaRepository<Education, Integer>{
+	
+	Education findOneById(int id);
 }

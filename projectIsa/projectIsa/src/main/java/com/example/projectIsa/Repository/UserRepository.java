@@ -7,4 +7,6 @@ import com.example.projectIsa.Model.User;
 
 @Repository
 public interface UserRepository  extends JpaRepository<User, Integer>{
+	
+	User findOneByEmail(String email);
 }
