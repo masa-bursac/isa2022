@@ -1,11 +1,14 @@
 package com.example.projectIsa.Service.Implementation;
 
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.UpdateDTO;
 import com.example.projectIsa.Model.Address;
 import com.example.projectIsa.Model.Education;
+import com.example.projectIsa.Model.Gender;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AddressRepository;
 import com.example.projectIsa.Repository.EducationRepository;
@@ -50,5 +53,44 @@ public class ProfileService implements IProfileService{
 		
 		return getUser;
 
+	}
+	
+	@Override
+	public Boolean update(UpdateDTO userInfo) {
+		User userForUpdating = userRepository.findOneByEmail(userInfo.getEmail());
+		
+		userForUpdating.setName(userInfo.getName());
+		userForUpdating.setSurname(userInfo.getSurname());
+		userForUpdating.setEmail(userInfo.getEmail());
+		userForUpdating.setPhoneNumber(userInfo.getPhoneNumber());
+		userForUpdating.setJmbg(userInfo.getJmbg());
+		
+		if(userInfo.getGender().toLowerCase().equals(Gender.MALE.toString().toLowerCase(Locale.ROOT)))
+			userForUpdating.setGender(Gender.MALE);
+        else if(userInfo.getGender().toLowerCase().equals(Gender.FEMALE.toString().toLowerCase(Locale.ROOT)))
+        	userForUpdating.setGender(Gender.FEMALE);
+        else if(userInfo.getGender().toLowerCase().equals(Gender.NONBINARY.toString().toLowerCase(Locale.ROOT)))
+        	userForUpdating.setGender(Gender.NONBINARY);
+        else
+        	userForUpdating.setGender(Gender.OTHER);
+		
+		Address address = addressRepository.findOneById(userForUpdating.getId());
+		address.setStreet(userInfo.getStreet());
+		address.setHouseNumber(userInfo.getHouseNumber());
+		address.setCity(userInfo.getCity());
+		address.setState(userInfo.getState());
+		address.setPostcode(userInfo.getPostcode());
+		
+		Education education = educationRepository.findOneById(userForUpdating.getId());
+		education.setEducation(userInfo.getEducation());
+		education.setProfession(userInfo.getProfession());
+		
+		
+        if (educationRepository.save(education) != null && addressRepository.save(address) != null && userRepository.save(userForUpdating) != null) {
+        	return true;
+        }        
+        else
+            return false;
+        
 	}
 }
