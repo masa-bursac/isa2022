@@ -1,0 +1,18 @@
+.navbar {
+    background: rgb(255, 136, 136);
+    background-image: linear-gradient(to right, rgb(255, 136, 136), rgb(255, 180, 180));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mat-button {
+    font-size: 18px;
+    color: white;
+}
+.mat-menu-content {
+    background: rgb(255, 180, 180);
+}
+.mat-icon-button {
+    color: white;
+}
+

@@ -1,0 +1,21 @@
+<mat-toolbar class="navbar">
+    <span>
+      <img title="Home" class="img-responsive" src="assets/images/pod-blood-icon.png" routerLink="/homePage"/>
+    </span>
+    <span>
+        <button mat-button [matMenuTriggerFor]="menu">Medical center</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/registration">List of medical center</button>
+            <button mat-menu-item routerLink="/registration">Upcomming appointments</button>
+            <button mat-menu-item routerLink="/registration">History of appointments</button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="menuProfile">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menuProfile="matMenu">
+            <button mat-menu-item routerLink="/registration">My profile</button>
+            <button mat-menu-item routerLink="/registration">My complaints</button>
+            <button mat-menu-item routerLink="/registration">Log out</button>
+        </mat-menu>
+    </span>
+</mat-toolbar>
