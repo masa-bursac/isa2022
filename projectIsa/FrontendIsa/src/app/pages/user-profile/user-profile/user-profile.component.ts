@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProfileService } from 'src/app/profile.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 interface Gender {
   value: string;

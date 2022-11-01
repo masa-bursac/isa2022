@@ -13,11 +13,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { AppComponent } from './app.component';
-import { UserProfileComponent } from './user-profile/user-profile/user-profile.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomePageComponent } from './home-page/home-page.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile/user-profile.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NavbarComponent } from './pages/navbar/navbar.component';
 
 @NgModule({
   declarations: [
