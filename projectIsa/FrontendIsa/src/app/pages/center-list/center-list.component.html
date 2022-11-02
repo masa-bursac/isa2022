@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+<div class="div-search">
+    <form class="example-form">      
+        <mat-form-field style="width:50vw" appearance="fill">
+          <input type="text" class="mat-card-font" matInput placeholder="Search centers by name or address" name="search" [(ngModel)]="search">
+          <button matSuffix mat-button (click)="Search()"><mat-icon>search</mat-icon></button>
+        </mat-form-field>
+      </form>
+</div>
+
+<div *ngIf="search !== ''">
+<div *ngFor="let searched of searchedCenters">
+    <div class="review-holder" class="div-inline">
+        <mat-card class="example-card">
+            <mat-card-content class="mat-card-font">
+              <h1>{{ searched.name }}</h1>
+              <p>{{ searched.city }}, {{ searched.street }} {{ searched.houseNumber }}</p>
+              <p>{{ searched.description }}</p>
+              <p>Rating: {{ searched.rating }}</p>
+            </mat-card-content>
+        </mat-card>
+        </div>
+    <br>
+    <br>
+</div>
+</div>
+
+<div *ngFor="let center of allCenters">
+    <div class="review-holder">
+    <mat-card class="example-card">
+        <mat-card-content class="mat-card-font">
+          <h1>{{ center.name }}</h1>
+          <p>{{ center.city }}, {{ center.street }} {{ center.houseNumber }}</p>
+          <p>{{ center.description }}</p>
+          <p>Rating: {{ center.rating }}</p>
+        </mat-card-content>
+    </mat-card>
+    </div>
+    <br>
+    <br>
+</div>
+
