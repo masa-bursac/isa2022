@@ -4,26 +4,61 @@
     <form class="example-form">      
         <mat-form-field style="width:50vw" appearance="fill">
           <input type="text" class="mat-card-font" matInput placeholder="Search centers by name or address" name="search" [(ngModel)]="search">
-          <button matSuffix mat-button (click)="Search()"><mat-icon>search</mat-icon></button>
+          <button matSuffix mat-button (click)="searchCenters()"><mat-icon>search</mat-icon></button>
         </mat-form-field>
+        <div class="div-holder">
+          <mat-form-field appearance="fill" class="mat-field-space">
+            <mat-label>Rating</mat-label>
+            <mat-select (selectionChange)="filterRating($event.value)">
+              <mat-option *ngFor="let rating of ratings" [value]="rating.value">
+                {{rating.viewValue}}
+              </mat-option>
+              <mat-option>None</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="mat-field-space">
+            <mat-label>City</mat-label>
+            <mat-select (selectionChange)="filterCity($event.value)">
+              <mat-option *ngFor="let city of citys" [value]="city.value">
+                {{city.viewValue}}
+              </mat-option>
+              <mat-option>None</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </form>
 </div>
 
-<div *ngIf="search !== ''">
-<div *ngFor="let searched of searchedCenters">
+<div *ngFor="let filtered of allFiltered">
     <div class="review-holder" class="div-inline">
         <mat-card class="example-card">
             <mat-card-content class="mat-card-font">
-              <h1>{{ searched.name }}</h1>
-              <p>{{ searched.city }}, {{ searched.street }} {{ searched.houseNumber }}</p>
-              <p>{{ searched.description }}</p>
-              <p>Rating: {{ searched.rating }}</p>
+              <h1>{{ filtered.name }}</h1>
+              <p>{{ filtered.city }}, {{ filtered.street }} {{ filtered.houseNumber }}</p>
+              <p>{{ filtered.description }}</p>
+              <p>Rating: {{ filtered.rating }}</p>
             </mat-card-content>
         </mat-card>
         </div>
     <br>
     <br>
 </div>
+
+<div *ngIf="search !== ''">
+  <div *ngFor="let searched of searchedCenters">
+      <div class="review-holder" class="div-inline">
+          <mat-card class="example-card">
+              <mat-card-content class="mat-card-font">
+                <h1>{{ searched.name }}</h1>
+                <p>{{ searched.city }}, {{ searched.street }} {{ searched.houseNumber }}</p>
+                <p>{{ searched.description }}</p>
+                <p>Rating: {{ searched.rating }}</p>
+              </mat-card-content>
+          </mat-card>
+          </div>
+      <br>
+      <br>
+  </div>
 </div>
 
 <div *ngFor="let center of allCenters">

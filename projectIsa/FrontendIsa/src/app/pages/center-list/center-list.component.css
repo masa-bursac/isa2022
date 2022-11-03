@@ -34,3 +34,14 @@
 .example-full {
     width: 300px;
 }
+
+.mat-field-space {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 60%;
+}
+
+.div-holder {
+    display: flex;
+    justify-content: center;
+}
