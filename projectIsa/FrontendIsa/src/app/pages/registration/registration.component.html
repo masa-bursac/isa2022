@@ -9,9 +9,19 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Name" formControlName="name">
           </mat-form-field>
+          <div *ngIf="validateForm.get('name')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('name')?.invalid &&
+                (validateForm.get('name')?.dirty || validateForm.get('name')?.touched)"class="alert">
+                Name must be at least 2 characters long with first upper case letter, no spaces, special characters or numbers
+          </div>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Surname" formControlName="surname">
           </mat-form-field>
+          <div *ngIf="validateForm.get('surname')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('surname')?.invalid &&
+                (validateForm.get('surname')?.dirty || validateForm.get('surname')?.touched)"class="alert">
+                Surname must be at least 2 characters long with first upper case letter, no spaces, special characters or numbers
+          </div>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Email" formControlName="email">
           </mat-form-field>
@@ -24,14 +34,57 @@
             <mat-icon matSuffix (click)="hideRp = !hideRp">{{hideRp ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Phone" formControlName="phone">
+            <input matInput placeholder="Phone" formControlName="phoneNumber">
           </mat-form-field>
+          <div *ngIf="validateForm.get('phoneNumber')?.errors?.['required']" class="alert">Field is required</div>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Jmbg" formControlName="jmbg">
           </mat-form-field>
+          <div *ngIf="validateForm.get('jmbg')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('jmbg')?.invalid &&
+                (validateForm.get('jmbg')?.dirty || validateForm.get('jmbg')?.touched)"class="alert">
+                JMBG must have 13 numbers
+          </div>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Address" formControlName="address">
+            <input matInput placeholder="Street" formControlName="street">
           </mat-form-field>
+          <div *ngIf="validateForm.get('street')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('street')?.invalid &&
+                (validateForm.get('street')?.dirty || validateForm.get('street')?.touched)"class="alert">
+                Street must be at least 2 characters long with first upper case letter, no special characters or numbers
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="House number" formControlName="houseNumber">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('houseNumber')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('houseNumber')?.invalid &&
+                (validateForm.get('houseNumber')?.dirty || validateForm.get('houseNumber')?.touched)"class="alert">
+                House number must have only numbers and letters
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="City" formControlName="city">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('city')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('city')?.invalid &&
+                (validateForm.get('city')?.dirty || validateForm.get('city')?.touched)"class="alert">
+                City must be at least 2 characters long with first upper case letter, no special characters or numbers
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="State" formControlName="state">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('state')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('state')?.invalid &&
+                (validateForm.get('state')?.dirty || validateForm.get('state')?.touched)"class="alert">
+                State must be at least 2 characters long with first upper case letter, no special characters or numbers
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Postcode" formControlName="postcode">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('postcode')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('postcode')?.invalid &&
+                (validateForm.get('postcode')?.dirty || validateForm.get('postcode')?.touched)"class="alert">
+                Postcode must have numbers only
+          </div>
           <mat-form-field appearance="fill" borderRadius="5px">
             <mat-label>Gender</mat-label>
             <mat-select [(ngModel)] = "selectedValueGender" [ngModelOptions]="{standalone: true}">
@@ -41,11 +94,13 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Job" formControlName="job">
+            <input matInput placeholder="Education" formControlName="education">
           </mat-form-field>
+          <div *ngIf="validateForm.get('education')?.errors?.['required']" class="alert">Field is required</div>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Company" formControlName="company">
+            <input matInput placeholder="Profession" formControlName="profession">
           </mat-form-field>
+          <div *ngIf="validateForm.get('profession')?.errors?.['required']" class="alert">Field is required</div>
         </mat-card-content>
         <button mat-stroked-button color="accent" class="btn-block">Register</button>
       </form>
