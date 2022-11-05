@@ -16,15 +16,6 @@
               <mat-option>None</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="fill" class="mat-field-space">
-            <mat-label>City</mat-label>
-            <mat-select (selectionChange)="filterCity($event.value)">
-              <mat-option *ngFor="let city of citys" [value]="city.value">
-                {{city.viewValue}}
-              </mat-option>
-              <mat-option>None</mat-option>
-            </mat-select>
-          </mat-form-field>
         </div>
       </form>
 </div>
@@ -44,7 +35,7 @@
     <br>
 </div>
 
-<div *ngIf="search !== ''">
+<div *ngIf="search !== '' && allFiltered.length === 0">
   <div *ngFor="let searched of searchedCenters">
       <div class="review-holder" class="div-inline">
           <mat-card class="example-card">

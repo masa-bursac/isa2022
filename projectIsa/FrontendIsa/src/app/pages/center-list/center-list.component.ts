@@ -1,16 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CenterService } from 'src/app/services/center.service';
 
-interface Rating {
-  value: number;
-  viewValue: string;
-}
-
-interface City {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-center-list',
   templateUrl: './center-list.component.html',
@@ -22,6 +12,7 @@ export class CenterListComponent implements OnInit {
   public searchedCenters: any[] = [];
   public allFiltered: any[] = [];
   search : string = '';
+  selectedValue : number = 0;
 
   constructor(private centerService : CenterService) { }
 
@@ -35,14 +26,17 @@ export class CenterListComponent implements OnInit {
     });
   }
 
-  public searchCenters(): void {
-    this.centerService.searchCenters(this.search).subscribe(data => {
-      this.searchedCenters = data;
-    }
+  public searchCenters(): any {
+      this.centerService.searchCenters(this.search).subscribe(data => {
+        this.searchedCenters = data;
+        if(this.selectedValue !== 0){
+          this.allFiltered = this.searchedCenters.filter(center => center.rating === this.selectedValue);
+        }
+      }
     );
   }
 
-  ratings: Rating[] = [
+  ratings: any[] = [
     {value: 5, viewValue: '5'},
     {value: 4, viewValue: '4'},
     {value: 3, viewValue: '3'},
@@ -50,17 +44,16 @@ export class CenterListComponent implements OnInit {
     {value: 1, viewValue: '1'}
   ];
 
-  citys: City[] = [
-    {value: 'Novi Sad', viewValue: 'Novi Sad'},
-    {value: 'Beograd', viewValue: 'Beograd'}
-  ];
-
   public filterRating(value: number): void {
-    this.allFiltered = this.allCenters.filter(center => center.rating === value);
-  }
-
-  public filterCity(value: string): void {
-    this.allFiltered = this.allCenters.filter(center => center.city === value);
+    this.selectedValue = value;
+    if(this.search===''){
+      this.searchedCenters = [];
+    }
+    if(this.searchedCenters.length === 0) {
+      this.allFiltered = this.allCenters.filter(center => center.rating === value);
+    } else {
+      this.allFiltered = this.searchedCenters.filter(center => center.rating === value);
+    }
   }
 
 }
