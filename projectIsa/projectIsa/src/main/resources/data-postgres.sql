@@ -1,14 +1,14 @@
 --password 123
 --role REGISTERED 0 CENTERADMIN 1 SYSTEMADMIN 2 UNREGISTERED 3
 --gender MALE 0 FEMALE 1 NONBINARY 2 OTHER 3
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender) values
-(1,2,'Pera','Perovic','pera@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','3012457898654', 0);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender) values
-(2,1,'Mila','Milic','mila@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0696754324','2567854569852', 1);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender) values
-(3,0,'Vladimir','Vladic','vlada@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','4567894561234', 2);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender) values
-(4,2,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
+(1,2,'Pera','Perovic','pera@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','3012457898654', 0, false);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
+(2,1,'Mila','Milic','mila@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0696754324','2567854569852', 1, false);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
+(3,0,'Vladimir','Vladic','vlada@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','4567894561234', 2, false);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
+(4,2,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0, false);
 
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (1,0,0,'Njegoseva','Novi Sad','Srbija','5','21000');

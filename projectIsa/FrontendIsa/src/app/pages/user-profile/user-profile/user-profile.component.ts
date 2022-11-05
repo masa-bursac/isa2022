@@ -44,7 +44,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     //this.decoded_token = this.authService.getDataFromToken();
-    this.profileService.getProfile('mila@gmail.com').subscribe(data=> {
+    this.profileService.getProfile('vlada@gmail.com').subscribe(data=> {
       this.validateForm = this.fb.group({
         name: [data.name,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
         surname: [data.surname,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
