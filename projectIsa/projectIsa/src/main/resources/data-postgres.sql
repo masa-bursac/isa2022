@@ -28,6 +28,15 @@ insert into education (id,education,profession) values
 insert into education (id,education,profession) values 
 (4,'ftn','assistant');
 
+insert into medical_equipment (id,quantity,blood_type) values 
+(1,500,0);
+insert into medical_equipment (id,quantity,blood_type) values 
+(2,1000,1);
+insert into medical_equipment (id,quantity,blood_type) values 
+(3,400,2);
+insert into medical_equipment (id,quantity,blood_type) values 
+(4,300,3);
+
 insert into center (id,name,description,rating) values
 (1,'Centar Novi Sad','Centar za transfuziju krvi u Novom Sadu',5);
 insert into center (id,name,description,rating) values

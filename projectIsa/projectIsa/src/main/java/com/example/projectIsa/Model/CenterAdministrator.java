@@ -17,7 +17,6 @@ public class CenterAdministrator extends User{
 	private Appointment appointment;
 	private boolean hasToChangePass;	
 		
-	
 	public CenterAdministrator(Integer id, String name, String surname, String email, String password,
 			String phoneNumber, String jmbg, Gender gender, Role role, Address address, Education education,
 			Center center, Appointment appointment, boolean hasToChangePass) {
@@ -48,6 +47,6 @@ public class CenterAdministrator extends User{
 	public void setHasToChangePass(boolean hasToChangePass) {
 		this.hasToChangePass = hasToChangePass;
 	}
-	
+	public CenterAdministrator() {}
 	
 }

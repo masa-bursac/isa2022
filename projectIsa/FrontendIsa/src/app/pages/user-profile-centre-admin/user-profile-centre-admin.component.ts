@@ -8,11 +8,11 @@ interface Gender {
 }
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'app-user-profile-centre-admin',
+  templateUrl: './user-profile-centre-admin.component.html',
+  styleUrls: ['./user-profile-centre-admin.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileCentreAdminComponent implements OnInit {
 
   validateForm = new FormGroup({
     name: new FormControl(),
@@ -44,7 +44,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     //this.decoded_token = this.authService.getDataFromToken();
-    this.profileService.getProfile('mila@gmail.com').subscribe(data=> {
+    this.profileService.getProfile('"pera@gmail.com').subscribe(data=> {
       this.validateForm = this.fb.group({
         name: [data.name,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
         surname: [data.surname,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
@@ -95,5 +95,4 @@ export class UserProfileComponent implements OnInit {
       alert('Form is not valid');
     }
   }
-
 }

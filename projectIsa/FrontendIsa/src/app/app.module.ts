@@ -18,6 +18,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile/user-pro
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
+import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
     UserProfileComponent,
     RegistrationComponent,
     HomePageComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserProfileCentreAdminComponent
   ],
   imports: [
     BrowserModule,
