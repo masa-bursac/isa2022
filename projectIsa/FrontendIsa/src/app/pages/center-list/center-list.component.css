@@ -36,12 +36,22 @@
 }
 
 .mat-field-space {
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 60%;
+    width: 100%;
+    padding: 2%;
 }
 
 .div-holder {
     display: flex;
     justify-content: center;
+    width: 100%;
+}
+
+.label-sort {
+    font-size: large;
+}
+
+.sort-items {
+    display: flex;
+    align-items: inline;
+    justify-content: space-between;
 }

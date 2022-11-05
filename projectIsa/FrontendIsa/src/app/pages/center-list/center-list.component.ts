@@ -56,4 +56,45 @@ export class CenterListComponent implements OnInit {
     }
   }
 
+  allDirections: any[] = [
+    {value: 'ascending', viewValue: 'ascending'},
+    {value: 'descending', viewValue: 'descending'}
+  ];
+
+  public sortByName(value: string) {
+    if (value === 'ascending') {
+      this.allCenters.sort((a,b) => a.name > b.name ? 1 : -1);
+      this.allFiltered.sort((a,b) => a.name > b.name ? 1 : -1);
+      this.searchedCenters.sort((a,b) => a.name > b.name ? 1 : -1);
+    } else if (value === 'descending') {
+      this.allCenters.sort((a,b) => a.name < b.name ? 1 : -1);
+      this.allFiltered.sort((a,b) => a.name < b.name ? 1 : -1);
+      this.searchedCenters.sort((a,b) => a.name < b.name ? 1 : -1);
+    }
+  }
+
+  public sortByCity(value: string) {
+    if (value === 'ascending') {
+      this.allCenters.sort((a,b) => a.city > b.city ? 1 : -1);
+      this.allFiltered.sort((a,b) => a.city > b.city ? 1 : -1);
+      this.searchedCenters.sort((a,b) => a.city > b.city ? 1 : -1);
+    } else if (value === 'descending') {
+      this.allCenters.sort((a,b) => a.city < b.city ? 1 : -1);
+      this.allFiltered.sort((a,b) => a.city < b.city ? 1 : -1);
+      this.searchedCenters.sort((a,b) => a.city < b.city ? 1 : -1);
+    }
+  }
+
+  public sortByRating(value: string) {
+    if (value === 'ascending') {
+      this.allCenters.sort((a,b) => a.rating > b.rating ? 1 : -1);
+      this.allFiltered.sort((a,b) => a.rating > b.rating ? 1 : -1);
+      this.searchedCenters.sort((a,b) => a.rating > b.rating ? 1 : -1);
+    } else if (value === 'descending') {
+      this.allCenters.sort((a,b) => a.rating < b.rating ? 1 : -1);
+      this.allFiltered.sort((a,b) => a.rating < b.rating ? 1 : -1);
+      this.searchedCenters.sort((a,b) => a.rating < b.rating ? 1 : -1);
+    }
+  }
+
 }
