@@ -14,7 +14,7 @@ public class WebSecurity{
         http
         	.csrf().disable()
             .authorizeHttpRequests((authz) -> authz
-                .antMatchers("/profile/getProfile/{email}").permitAll()
+                .antMatchers("/profile/getProfile/{email}").permitAll().antMatchers("/medicalEquipment/getBlood").permitAll()
             );
         return http.build();
     }

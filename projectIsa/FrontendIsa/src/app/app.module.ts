@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatTableModule } from '@angular/material/table'  
 import { AppRoutingModule } from './app-routing.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
@@ -19,6 +19,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
+import { BloodInStockOverviewComponent } from './pages/blood-in-stock-overview/blood-in-stock-overview.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-adm
     RegistrationComponent,
     HomePageComponent,
     NavbarComponent,
-    UserProfileCentreAdminComponent
+    UserProfileCentreAdminComponent,
+    BloodInStockOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-adm
     MatToolbarModule,
     MatIconModule,
     BrowserAnimationsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

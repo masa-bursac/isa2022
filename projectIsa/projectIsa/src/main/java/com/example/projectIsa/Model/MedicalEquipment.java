@@ -23,7 +23,6 @@ public class MedicalEquipment {
 	
 	
 	public MedicalEquipment() {
-		super();
 	}
 	public MedicalEquipment(Integer id, double quantity, BloodType bloodType) {
 		super();
