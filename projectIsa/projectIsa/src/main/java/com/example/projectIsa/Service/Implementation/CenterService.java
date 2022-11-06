@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.projectIsa.DTO.CenterAdministratorDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.Model.Center;
 import com.example.projectIsa.Model.CenterAddress;
 import com.example.projectIsa.Repository.CenterAddressRepository;
 import com.example.projectIsa.Repository.CenterRepository;
+import com.example.projectIsa.Service.ICenterAdministratorService;
 import com.example.projectIsa.Service.ICenterService;
 
 @Service
@@ -18,11 +20,15 @@ public class CenterService implements ICenterService{
 	
 	private final CenterRepository centerRepository;
 	private final CenterAddressRepository centerAddressRepository;
+	private final ICenterAdministratorService centerAdministratorService;
+
 	
 	@Autowired
-    public CenterService(CenterRepository centerRepository, CenterAddressRepository centerAddressRepository){
+    public CenterService(CenterRepository centerRepository, CenterAddressRepository centerAddressRepository,
+    		ICenterAdministratorService centerAdministratorService){
         this.centerRepository = centerRepository;
         this.centerAddressRepository = centerAddressRepository;
+        this.centerAdministratorService = centerAdministratorService;
     }
 
 	@Override
@@ -76,6 +82,27 @@ public class CenterService implements ICenterService{
 		}
 		
 		return allCenters;
+	}
+
+	@Override
+	public CentersDTO registerCenter(CentersDTO centerDTO) {
+		Center center = new Center(centerDTO);
+		center.setId((int)centerRepository.count()+1);
+		Integer addressId = (int) centerAddressRepository.count()+1;
+		CenterAddress address = new CenterAddress(addressId, 0, 0, centerDTO.getStreet(),centerDTO.getHouseNumber(),
+				centerDTO.getCity(),centerDTO.getState(), centerDTO.getPostcode(), center);
+		center.setCenterAddress(address);
+		address.setCenter(center);
+		address = centerAddressRepository.save(address);
+		center.setCenterAddress(address);
+		center = centerRepository.save(center);
+		if(!centerDTO.getCenterAdmins().isEmpty()) {
+        	System.out.println("nije prazna lista sa adminima");
+			for(CenterAdministratorDTO adminDTO: centerDTO.getCenterAdmins()) {
+				centerAdministratorService.addAdmin(adminDTO, center);
+			}
+		}
+		return centerDTO;
 	}
 
 }

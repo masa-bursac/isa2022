@@ -13,12 +13,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.example.projectIsa.DTO.CentersDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "center")
 public class Center {
+	
+	@Transient
+    public static final String SEQUENCE_NAME = "post_sequence";
 
 	@Id
     @SequenceGenerator(name = "center_id_seq", sequenceName = "center_id_seq", allocationSize = 1)
@@ -51,6 +56,12 @@ public class Center {
 	}
 	public Center() {
 		super();
+	}
+	public Center(CentersDTO centerDTO) {
+		this.id = centerDTO.getId();
+		this.name = centerDTO.getName();
+		this.description = centerDTO.getDescription();
+		this.rating = centerDTO.getRating();
 	}
 	public Integer getId() {
 		return id;

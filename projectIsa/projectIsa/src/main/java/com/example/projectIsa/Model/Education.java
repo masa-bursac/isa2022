@@ -50,6 +50,10 @@ public class Education {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public Education() {
+		super();
+	}
 	public Education(Integer id, String education, String profession, User user) {
 		super();
 		this.id = id;
@@ -57,5 +61,9 @@ public class Education {
 		this.profession = profession;
 		this.user = user;
 	}
-	public Education() {}
+	
+	public Education(String education, String profession) {
+		this.education = education;
+		this.profession = profession;
+	}
 }

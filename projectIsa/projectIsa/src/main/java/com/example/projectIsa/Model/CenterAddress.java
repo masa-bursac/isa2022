@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "center_address")
 public class CenterAddress {
 
+	@Transient
+    public static final String SEQUENCE_NAME = "post_sequence";
 	@Id
     @SequenceGenerator(name = "center_address_id_seq", sequenceName = "center_address_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "center_address_id_seq")
@@ -48,6 +51,7 @@ public class CenterAddress {
 		this.postcode = postcode;
 		this.center = center;
 	}
+	
 	public Integer getId() {
 		return id;
 	}

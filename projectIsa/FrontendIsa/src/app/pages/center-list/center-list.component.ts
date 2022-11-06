@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CenterService } from 'src/app/services/center.service';
+import { RegisterCenterComponent } from '../register-center/register-center.component';
 
 @Component({
   selector: 'app-center-list',
@@ -11,6 +12,7 @@ export class CenterListComponent implements OnInit {
   public allCenters: any[] = [];
   public searchedCenters: any[] = [];
   public allFiltered: any[] = [];
+  public addForm: boolean = false;
   search : string = '';
   selectedValue : number = 0;
 
@@ -54,6 +56,13 @@ export class CenterListComponent implements OnInit {
     } else {
       this.allFiltered = this.searchedCenters.filter(center => center.rating === value);
     }
+  }
+
+  public showAddCenter(): void {
+      this.addForm = true;
+  }
+  public RegisterCenterClosed(isClosed: any): void{
+    this.addForm = false;
   }
 
 }

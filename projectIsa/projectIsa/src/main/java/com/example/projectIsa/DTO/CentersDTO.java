@@ -1,5 +1,8 @@
 package com.example.projectIsa.DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CentersDTO {
 
 	int id;
@@ -11,7 +14,7 @@ public class CentersDTO {
     String city;
     String state;
     String postcode;
-    
+    List<CenterAdministratorDTO> centerAdmins=new ArrayList<CenterAdministratorDTO>();
     
 	public CentersDTO() {
 		super();
@@ -69,6 +72,12 @@ public class CentersDTO {
 	}
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+	public List<CenterAdministratorDTO> getCenterAdmins() {
+		return centerAdmins;
+	}
+	public void setCenterAdmins(List<CenterAdministratorDTO> centerAdmins) {
+		this.centerAdmins = centerAdmins;
 	}
     
     

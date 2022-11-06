@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.example.projectIsa.DTO.CenterAdministratorDTO;
+import com.example.projectIsa.DTO.CentersDTO;
+
 @Entity
 @DiscriminatorValue("1")
 public class CenterAdministrator extends User{
@@ -15,9 +18,12 @@ public class CenterAdministrator extends User{
 	@ManyToOne
 	@JoinColumn(name="appointment_id")
 	private Appointment appointment;
-	private boolean hasToChangePass;	
+	private Boolean hasToChangePass;	
 		
 	
+	public CenterAdministrator() {
+		super();
+	}
 	public CenterAdministrator(Integer id, String name, String surname, String email, String password,
 			String phoneNumber, String jmbg, Gender gender, Role role, Address address, Education education,
 			Center center, Appointment appointment, boolean hasToChangePass) {
@@ -29,6 +35,15 @@ public class CenterAdministrator extends User{
 	public CenterAdministrator(Integer id, String name, String surname, String email, String password,
 			String phoneNumber, String jmbg, Gender gender, Role role, Address address, Education education) {
 		super(id, name, surname, email, password, phoneNumber, jmbg, gender, role, address, education);
+	}
+	public CenterAdministrator(CenterAdministratorDTO centerAdminDTO) {
+		this.setId(centerAdminDTO.getId());
+		this.setName(centerAdminDTO.getName());
+		this.setSurname(centerAdminDTO.getSurname());
+		this.setEmail(centerAdminDTO.getEmail());
+		this.setPhoneNumber(centerAdminDTO.getPhoneNumber());
+		this.setJmbg(centerAdminDTO.getJmbg());
+		this.setPassword(centerAdminDTO.getPassword());
 	}
 	public Center getCenter() {
 		return center;
@@ -42,10 +57,10 @@ public class CenterAdministrator extends User{
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
 	}
-	public boolean isHasToChangePass() {
+	public Boolean isHasToChangePass() {
 		return hasToChangePass;
 	}
-	public void setHasToChangePass(boolean hasToChangePass) {
+	public void setHasToChangePass(Boolean hasToChangePass) {
 		this.hasToChangePass = hasToChangePass;
 	}
 	

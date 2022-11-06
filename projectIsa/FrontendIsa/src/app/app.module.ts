@@ -19,6 +19,10 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { CenterListComponent } from './pages/center-list/center-list.component';
+import { RegisterCenterComponent } from './pages/register-center/register-center.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RegisterCenterAdministratorComponent } from './pages/register-center-administrator/register-center-administrator.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import { CenterListComponent } from './pages/center-list/center-list.component';
     RegistrationComponent,
     HomePageComponent,
     NavbarComponent,
-    CenterListComponent
+    CenterListComponent,
+    RegisterCenterComponent,
+    RegisterCenterAdministratorComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,9 @@ import { CenterListComponent } from './pages/center-list/center-list.component';
     MatToolbarModule,
     MatIconModule,
     BrowserAnimationsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

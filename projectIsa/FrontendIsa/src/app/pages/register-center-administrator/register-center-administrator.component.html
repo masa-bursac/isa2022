@@ -1,0 +1,56 @@
+<div class="login-wrapper" >
+    <mat-card class="box">
+        <form  class="example-card" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <mat-card-content>
+            <mat-card-title>Add new center administrator</mat-card-title>
+            <mat-form-field class="example-part-width">
+              <input matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Surname" formControlName="surname">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Email" formControlName="email">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Phone number" formControlName="phoneNumber">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Password" formControlName="password">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Repeat password" formControlName="repeatPassword">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="JMBG" formControlName="jmbg">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Gender" formControlName="gender">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Education" formControlName="education">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Profession" formControlName="profession">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="Street" formControlName="street">
+            </mat-form-field>
+            <mat-form-field class="example-small-width">
+                <input matInput placeholder="House number" formControlName="houseNumber">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="City" formControlName="city">
+            </mat-form-field>
+            <mat-form-field class="example-small-width">
+                <input matInput placeholder="Postcode" formControlName="postcode">
+            </mat-form-field>
+            <mat-form-field class="example-part-width">
+                <input matInput placeholder="State" formControlName="state">
+            </mat-form-field>
+          </mat-card-content>
+          <button mat-stroked-button color="accent" class="btn-block">Add center administrator </button>
+
+        </form>
+    </mat-card>
+</div>

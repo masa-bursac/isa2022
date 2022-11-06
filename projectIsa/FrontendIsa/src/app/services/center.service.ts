@@ -18,4 +18,9 @@ export class CenterService {
   public searchCenters(body:any): Observable<any>{
     return this.http.get(post_url+`/searchCenters/${body}`);
   }
+
+  public registerCenter(body:any): Observable<any>{
+    console.log(body);
+    return this.http.post(post_url+`/registerCenter`, body);
+  }
 }
