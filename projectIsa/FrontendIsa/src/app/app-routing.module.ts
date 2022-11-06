@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BloodInStockOverviewComponent } from './pages/blood-in-stock-overview/blood-in-stock-overview.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: 'userProfile', component: UserProfileComponent },
   { path: 'userProfileCentreAdmin', component: UserProfileCentreAdminComponent },
   { path: 'registration', component: RegistrationComponent},
-  { path: 'homePage', component: HomePageComponent}
+  { path: 'homePage', component: HomePageComponent},
+  { path: 'blood', component: BloodInStockOverviewComponent},
 ];
 
 @NgModule({

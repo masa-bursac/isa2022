@@ -4,7 +4,7 @@ import { MedicalEquipmentServiceService } from 'src/app/services/medical-equipme
 
 export interface Blood {
   id: number,
-  type: number,
+  type: string,
   quantity: number
 }
 
@@ -22,6 +22,7 @@ export class BloodInStockOverviewComponent implements OnInit{
 
   ngOnInit(): void {
     this.medicalEquipmentService.GetBlood().subscribe((data: any)=> {
+      console.log(data);
       this.dataSource = data;
     });
   }
