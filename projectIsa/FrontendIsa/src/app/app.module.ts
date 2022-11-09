@@ -21,6 +21,7 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
 import { BloodInStockOverviewComponent } from './pages/blood-in-stock-overview/blood-in-stock-overview.component';
 import { CenterAdminOverviewComponent } from './pages/center-admin-overview/center-admin-overview.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CenterAdminOverviewComponent } from './pages/center-admin-overview/cent
     BrowserAnimationsModule,
     MatMenuModule,
     MatTableModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

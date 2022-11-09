@@ -10,6 +10,9 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class CenterAdminOverviewComponent implements OnInit {
 
+  displayedColumns: string[] = ['id', 'name', 'surname', 'email'];
+  dataSource = [];
+
   adminId : number = 0;
 
   validateForm = new FormGroup({
@@ -40,7 +43,7 @@ export class CenterAdminOverviewComponent implements OnInit {
           description: [data.description,[Validators.required]],
           rating: [data.rating,[Validators.required]],
         });
-        console.log(data);
+        this.dataSource = data.staff;
       });
     })
   }

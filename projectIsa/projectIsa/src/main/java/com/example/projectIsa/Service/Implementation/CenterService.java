@@ -44,6 +44,11 @@ public class CenterService implements ICenterService{
 		}
 		
 		returnCentre.setStaff(center.getStaff());
+		for(CenterAdministrator admin: returnCentre.getStaff()) {
+			if(admin.getId().equals(user.getId())) {
+				returnCentre.getStaff().remove(admin);
+			}
+		}
 		
 		return returnCentre;
 	}
