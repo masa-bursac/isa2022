@@ -4,7 +4,7 @@
       <mat-card-header>
         <mat-card-title>Center</mat-card-title>
       </mat-card-header>
-      <form class="example-form" [formGroup]="validateForm">
+      <form class="example-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <mat-card-content>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Name" formControlName="name">

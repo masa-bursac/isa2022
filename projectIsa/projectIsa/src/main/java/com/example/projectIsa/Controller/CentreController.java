@@ -2,10 +2,13 @@ package com.example.projectIsa.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projectIsa.DTO.CentreDTO;
+import com.example.projectIsa.DTO.UpdateDTO;
 import com.example.projectIsa.Service.ICenterService;
 
 @RestController
@@ -24,5 +27,11 @@ public class CentreController {
         return centreService.getCenterByAdminId(id);
 	
     }
+	
+	@PutMapping("/update")
+	public Boolean edit(@RequestBody CentreDTO centerInfo) {
+
+    	return centreService.update(centerInfo);	      
+	}
 
 }

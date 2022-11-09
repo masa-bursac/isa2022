@@ -14,4 +14,8 @@ export class CenterService {
   getCenter(body:any) : Observable<any> {
     return this.http.get(center_url+`/getCentreByAdminId/${body}`);
   }
+
+  public editCenter(body: any): Observable<any>{
+    return this.http.put(center_url+`/update`, body);
+  }
 }

@@ -3,6 +3,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CenterService } from 'src/app/services/center.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
+interface address {
+  street?: string,
+  houseNumber?: string,
+  city?: string,
+  state?: string,
+  postcode?: string
+}
+
 @Component({
   selector: 'app-center-admin-overview',
   templateUrl: './center-admin-overview.component.html',
@@ -14,6 +22,9 @@ export class CenterAdminOverviewComponent implements OnInit {
   dataSource = [];
 
   adminId : number = 0;
+  centerid: number = 0;
+
+  centerAddress: address = {};
 
   validateForm = new FormGroup({
     name: new FormControl(),
@@ -44,31 +55,33 @@ export class CenterAdminOverviewComponent implements OnInit {
           rating: [data.rating,[Validators.required]],
         });
         this.dataSource = data.staff;
+
       });
     })
   }
 
-  /*submitForm(): void {
-    this.validateForm.markAllAsTouched();
+  submitForm(): void {
+    this.centreService.getCenter(this.adminId).subscribe((data : any)=> {
+      this.centerid = data.id;
+      this.validateForm.markAllAsTouched();
     if (this.validateForm.valid) {
+
+        this.centerAddress.street = this.validateForm.value.street;
+        this.centerAddress.houseNumber = this.validateForm.value.houseNumber;
+        this.centerAddress.city = this.validateForm.value.city;
+        this.centerAddress.state = this.validateForm.value.state;
+        this.centerAddress.postcode = this.validateForm.value.postcode;
 
       const body = {
         name: this.validateForm.value.name,
-        surname: this.validateForm.value.surname,
-        email: this.validateForm.value.email,
-        phoneNumber: this.validateForm.value.phoneNumber,      
-        jmbg: this.validateForm.value.jmbg, 
-        gender: this.validateForm.value.gender,
-        street: this.validateForm.value.street,
-        houseNumber: this.validateForm.value.houseNumber,
-        city: this.validateForm.value.city,
-        state: this.validateForm.value.state,
-        postcode: this.validateForm.value.postcode,
-        education: this.validateForm.value.education,
-        profession: this.validateForm.value.profession
+        centerAddress: this.centerAddress,
+        description: this.validateForm.value.description,
+        rating: this.validateForm.value.rating,
+        id: this.centerid,
       }
 
-      this.profileService.editProfile(body).subscribe(data => {
+      console.log(body);
+      this.centreService.editCenter(body).subscribe((data:any) => {
         if(data)
           alert("Profile successfully edited");
         else
@@ -77,6 +90,8 @@ export class CenterAdminOverviewComponent implements OnInit {
     } else {
       alert('Form is not valid');
     }
-  }*/
-
+  
+  });
+    
+  }
 }
