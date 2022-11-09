@@ -9,7 +9,7 @@ import com.example.projectIsa.DTO.CentreDTO;
 import com.example.projectIsa.Service.ICenterService;
 
 @RestController
-@RequestMapping("/centre")
+@RequestMapping("/center")
 public class CentreController {
 	
 	private final ICenterService centreService;

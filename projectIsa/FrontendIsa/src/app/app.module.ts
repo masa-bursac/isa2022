@@ -20,6 +20,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
 import { BloodInStockOverviewComponent } from './pages/blood-in-stock-overview/blood-in-stock-overview.component';
+import { CenterAdminOverviewComponent } from './pages/center-admin-overview/center-admin-overview.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BloodInStockOverviewComponent } from './pages/blood-in-stock-overview/b
     HomePageComponent,
     NavbarComponent,
     UserProfileCentreAdminComponent,
-    BloodInStockOverviewComponent
+    BloodInStockOverviewComponent,
+    CenterAdminOverviewComponent
   ],
   imports: [
     BrowserModule,

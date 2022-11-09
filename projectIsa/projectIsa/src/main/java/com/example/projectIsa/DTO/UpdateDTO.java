@@ -16,6 +16,7 @@ public class UpdateDTO {
     String postcode;
     String education;
     String profession;
+    Integer centerId;
     
     
 	public UpdateDTO() {
@@ -104,6 +105,12 @@ public class UpdateDTO {
 	}
 	public void setProfession(String profession) {
 		this.profession = profession;
+	}
+	public Integer getCenterId() {
+		return centerId;
+	}
+	public void setCenterId(Integer centerId) {
+		this.centerId = centerId;
 	}
 
 
