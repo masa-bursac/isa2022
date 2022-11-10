@@ -16,17 +16,24 @@
                 <input matInput placeholder="Phone number" formControlName="phoneNumber">
             </mat-form-field>
             <mat-form-field class="example-part-width">
-                <input matInput placeholder="Password" formControlName="password">
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
             <mat-form-field class="example-part-width">
-                <input matInput placeholder="Repeat password" formControlName="repeatPassword">
+                <input matInput [type]="hideRp ? 'password' : 'text'" placeholder="Repeat password" formControlName="repeatPassword">
+                <mat-icon matSuffix (click)="hideRp = !hideRp">{{hideRp ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
             <mat-form-field class="example-part-width">
                 <input matInput placeholder="JMBG" formControlName="jmbg">
             </mat-form-field>
-            <mat-form-field class="example-part-width">
-                <input matInput placeholder="Gender" formControlName="gender">
-            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Gender</mat-label>
+                <mat-select [(ngModel)] = "selectedValueGender" [ngModelOptions]="{standalone: true}">
+                  <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                    {{gender.value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             <mat-form-field class="example-part-width">
                 <input matInput placeholder="Education" formControlName="education">
             </mat-form-field>

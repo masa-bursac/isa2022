@@ -97,7 +97,6 @@ public class CenterService implements ICenterService{
 		center.setCenterAddress(address);
 		center = centerRepository.save(center);
 		if(!centerDTO.getCenterAdmins().isEmpty()) {
-        	System.out.println("nije prazna lista sa adminima");
 			for(CenterAdministratorDTO adminDTO: centerDTO.getCenterAdmins()) {
 				centerAdministratorService.addAdmin(adminDTO, center);
 			}

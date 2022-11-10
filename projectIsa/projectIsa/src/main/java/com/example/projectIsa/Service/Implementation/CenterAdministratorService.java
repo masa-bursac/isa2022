@@ -1,6 +1,7 @@
 package com.example.projectIsa.Service.Implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.CenterAdministratorDTO;
@@ -21,17 +22,20 @@ import com.example.projectIsa.Service.IEducationService;
 public class CenterAdministratorService implements ICenterAdministratorService {
 
 	private final CenterAdministratorRepository centerAdministratorRepository;
+    private final PasswordEncoder passwordEncoder;
 	private final IEducationService educationService;
 	private final IAddressService addressService;
 	private final UserRepository userRepository;
 	
 	@Autowired
 	public CenterAdministratorService(CenterAdministratorRepository centerAdministratorRepository,
-			IEducationService educationService, IAddressService addressService, UserRepository userRepository) {
+			IEducationService educationService, IAddressService addressService, UserRepository userRepository,
+			PasswordEncoder passwordEncoder) {
 		this.centerAdministratorRepository = centerAdministratorRepository;
 		this.educationService = educationService;
 		this.addressService = addressService;
 		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -41,12 +45,12 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 		centerAdmin.setCenter(center);
 		centerAdmin.setId((int) (userRepository.count()+1));
 		switch(adminDTO.getGender()) {
-			case "z": centerAdmin.setGender(Gender.FEMALE); break;
-			case "m": centerAdmin.setGender(Gender.MALE); break;
+			case "Female": centerAdmin.setGender(Gender.FEMALE); break;
+			case "Male": centerAdmin.setGender(Gender.MALE); break;
 			default: centerAdmin.setGender(Gender.NONBINARY); break;
 		}
 		centerAdmin.setRole(Role.CENTERADMIN);
-
+		centerAdmin.setPassword(passwordEncoder.encode(adminDTO.getPassword()));
 		Address address = addressService.addAddress(adminDTO, centerAdmin);
 		centerAdmin.setAddress(address);
 		Education education = educationService.addEducation(adminDTO.getEducation(), adminDTO.getProfession(), centerAdmin);

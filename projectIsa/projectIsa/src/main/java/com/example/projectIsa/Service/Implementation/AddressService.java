@@ -28,7 +28,7 @@ public class AddressService implements IAddressService {
 		address.setLatitude(0);
 		address.setLongitude(0);
 		address.setCity(adminDTO.getCity());
-		address.setHouseNumber(adminDTO.getCity());
+		address.setHouseNumber(adminDTO.getHouseNumber());
 		address.setPostcode(adminDTO.getPostcode());
 		address.setState(adminDTO.getState());
 		address.setStreet(adminDTO.getStreet());

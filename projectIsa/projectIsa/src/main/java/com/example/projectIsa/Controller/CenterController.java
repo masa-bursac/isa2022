@@ -42,7 +42,6 @@ public class CenterController {
     @PostMapping(value = "/registerCenter", consumes =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity registerCenter(@RequestBody CentersDTO center) {
         try {
-        	System.out.println("stigao sam");
         	return new ResponseEntity(centerService.registerCenter(center), HttpStatus.OK);
         } catch (Exception e) {
         	return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);

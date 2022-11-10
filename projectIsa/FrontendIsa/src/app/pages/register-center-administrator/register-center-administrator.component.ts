@@ -1,5 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+interface Gender {
+  value: string;
+}
 
 @Component({
   selector: 'app-register-center-administrator',
@@ -9,6 +13,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterCenterAdministratorComponent implements OnInit {
 
   validateForm!: FormGroup;
+  selectedValueGender = "Male";
+  hide: boolean = true;
+  hideRp: boolean = true; 
 
   @Output()
   onClose: EventEmitter<any> = new EventEmitter();
@@ -23,7 +30,7 @@ export class RegisterCenterAdministratorComponent implements OnInit {
       jmbg: ["", [Validators.required]],
       phoneNumber: ["", [Validators.required]],
       password: ["", [Validators.required]],
-      repeatPassword: ["", [Validators.required]],
+      repeatPassword: [null, [Validators.required, this.confirmationValidator]],
       street: ["", [Validators.required]],
       houseNumber: ["", [Validators.required]],
       city: ["", [Validators.required]],
@@ -34,6 +41,21 @@ export class RegisterCenterAdministratorComponent implements OnInit {
       profession: ["", [Validators.required]],
     });
   }
+  
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !== this.validateForm.controls['password'].value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  };
+
+  genders: Gender[] = [
+    {value: 'Male'},
+    {value: 'Female'},
+    {value: 'Non-Binary'},
+  ];
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
@@ -47,7 +69,7 @@ export class RegisterCenterAdministratorComponent implements OnInit {
       jmbg : this.validateForm.value.jmbg,
       phoneNumber : this.validateForm.value.phoneNumber,
       password : this.validateForm.value.password,
-      gender : this.validateForm.value.gender,
+      gender: this.selectedValueGender,   
       education : this.validateForm.value.education,
       profession : this.validateForm.value.profession,
 
@@ -57,9 +79,8 @@ export class RegisterCenterAdministratorComponent implements OnInit {
       state : this.validateForm.value.state,
       postcode : this.validateForm.value.postcode
     }
-    if(this.validateForm.valid){
-      this.onClose.emit(admin);
-    }
+    console.log("ovde sam")
+    this.onClose.emit(admin);
   }
 
 }

@@ -43,7 +43,6 @@ public class CenterAdministrator extends User{
 		this.setEmail(centerAdminDTO.getEmail());
 		this.setPhoneNumber(centerAdminDTO.getPhoneNumber());
 		this.setJmbg(centerAdminDTO.getJmbg());
-		this.setPassword(centerAdminDTO.getPassword());
 	}
 	public Center getCenter() {
 		return center;
