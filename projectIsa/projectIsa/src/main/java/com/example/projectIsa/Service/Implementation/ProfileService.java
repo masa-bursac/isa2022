@@ -52,7 +52,9 @@ public class ProfileService implements IProfileService{
 		getUser.setPostcode(address.getPostcode());
 		getUser.setEducation(education.getEducation());
 		getUser.setProfession(education.getProfession());
-		getUser.setCenterId(admin.getCenter().getId());
+		if(!(admin == null)) {
+			getUser.setCenterId(admin.getCenter().getId());
+		}
 		
 		return getUser;
 
