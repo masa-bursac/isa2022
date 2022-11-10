@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card [class.mat-elevation-z10]="true">
+      <mat-card-header>
+        <mat-card-title>Center</mat-card-title>
+      </mat-card-header>
+      <form class="example-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Name" formControlName="name">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('name')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('name')?.invalid &&
+                (validateForm.get('name')?.dirty || validateForm.get('name')?.touched)"class="alert">
+                Name must be at least 2 characters long with first upper case letter, no spaces, special characters or numbers
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Street" formControlName="street">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('street')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('street')?.invalid &&
+                (validateForm.get('street')?.dirty || validateForm.get('street')?.touched)"class="alert">
+                Street must be at least 2 characters long with first upper case letter, no special characters or numbers
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="House number" formControlName="houseNumber">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('houseNumber')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('houseNumber')?.invalid &&
+                (validateForm.get('houseNumber')?.dirty || validateForm.get('houseNumber')?.touched)"class="alert">
+                House number must have only numbers and letters
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="City" formControlName="city">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('city')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('city')?.invalid &&
+                (validateForm.get('city')?.dirty || validateForm.get('city')?.touched)"class="alert">
+                City must be at least 2 characters long with first upper case letter, no special characters or numbers
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="State" formControlName="state">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('state')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('state')?.invalid &&
+                (validateForm.get('state')?.dirty || validateForm.get('state')?.touched)"class="alert">
+                State must be at least 2 characters long with first upper case letter, no special characters or numbers
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Postcode" formControlName="postcode">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('postcode')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('postcode')?.invalid &&
+                (validateForm.get('postcode')?.dirty || validateForm.get('postcode')?.touched)"class="alert">
+                Postcode must have numbers only
+          </div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Description" formControlName="description">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('description')?.errors?.['required']" class="alert">Field is required</div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Rating" formControlName="rating">
+          </mat-form-field>
+          <div *ngIf="validateForm.get('rating')?.errors?.['required']" class="alert">Field is required</div>
+        </mat-card-content>
+        <button mat-stroked-button color="accent" class="btn-block">Update</button>
+        <b>Other admins:</b>
+        <table id="tableA" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            
+          </ng-container>
+      
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Name </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.name}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Surname </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.surname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Email </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.email}} </td>  
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </form>
+    </mat-card>
+</div>

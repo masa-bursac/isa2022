@@ -7,6 +7,7 @@ import com.example.projectIsa.Model.CenterAddress;
 
 @Repository
 public interface CenterAddressRepository extends JpaRepository<CenterAddress, Integer>{
+	CenterAddress findOneById(Integer id);
 
 	CenterAddress findOneById(int id);
 }
