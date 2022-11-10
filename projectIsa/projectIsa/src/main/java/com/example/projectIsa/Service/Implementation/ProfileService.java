@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.UpdateDTO;
 import com.example.projectIsa.Model.Address;
+import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.Education;
 import com.example.projectIsa.Model.Gender;
 import com.example.projectIsa.Model.User;
@@ -34,6 +35,7 @@ public class ProfileService implements IProfileService{
 	public UpdateDTO getProfile(String email) {
 		UpdateDTO getUser = new UpdateDTO();
 		User user = userRepository.findOneByEmail(email);
+		CenterAdministrator admin = userRepository.findOneById(user.getId());
 		Address address = addressRepository.findOneById(user.getId());
 		Education education = educationRepository.findOneById(user.getId());
 		getUser.setId(user.getId());
@@ -50,6 +52,7 @@ public class ProfileService implements IProfileService{
 		getUser.setPostcode(address.getPostcode());
 		getUser.setEducation(education.getEducation());
 		getUser.setProfession(education.getProfession());
+		getUser.setCenterId(admin.getCenter().getId());
 		
 		return getUser;
 

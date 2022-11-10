@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.util.MultiValueMap;
 
 import com.example.projectIsa.DTO.CentersDTO;
+import com.example.projectIsa.DTO.CentreDTO;
 
 public interface ICenterService {
-
-	List<CentersDTO> getAllCenters();
+	CentreDTO getCenterByAdminId(Integer id);
+	Boolean update(CentreDTO centerInfo);
+  List<CentersDTO> getAllCenters();
 	List<CentersDTO> searchByNameAndAddress(String search);
 	CentersDTO registerCenter(CentersDTO center);
 }

@@ -19,11 +19,11 @@ public class CenterAdministrator extends User{
 	@JoinColumn(name="appointment_id")
 	private Appointment appointment;
 	private Boolean hasToChangePass;	
-		
-	
+			
 	public CenterAdministrator() {
 		super();
 	}
+
 	public CenterAdministrator(Integer id, String name, String surname, String email, String password,
 			String phoneNumber, String jmbg, Gender gender, Role role, Address address, Education education,
 			Center center, Appointment appointment, boolean hasToChangePass) {
@@ -62,6 +62,7 @@ public class CenterAdministrator extends User{
 	public void setHasToChangePass(Boolean hasToChangePass) {
 		this.hasToChangePass = hasToChangePass;
 	}
-	
+	public CenterAdministrator() {
+	}
 	
 }

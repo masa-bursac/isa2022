@@ -1,0 +1,36 @@
+package com.example.projectIsa.Service.Implementation;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.projectIsa.Model.BloodType;
+import com.example.projectIsa.Model.MedicalEquipment;
+import com.example.projectIsa.Repository.MedicalEquipmentRepository;
+import com.example.projectIsa.Service.IMedicalEquipmentService;
+
+@Service
+public class MedicalEquipmentService implements IMedicalEquipmentService{
+
+	private final MedicalEquipmentRepository medicalEquipmentRepository;
+	
+	@Autowired
+	public MedicalEquipmentService(MedicalEquipmentRepository medicalEquipmentRepository)
+    {
+        this.medicalEquipmentRepository = medicalEquipmentRepository;
+    }
+
+	@Override
+	public List<MedicalEquipment> getBlood() {
+		List<MedicalEquipment> bloodInStock = medicalEquipmentRepository.findAll();
+		
+		for (MedicalEquipment me : medicalEquipmentRepository.findAll()) {
+			if(me.getBloodType().equals(BloodType.NOTBLOOD)) {
+				bloodInStock.remove(me);
+			}
+		}
+		
+		return bloodInStock;
+	}
+}
