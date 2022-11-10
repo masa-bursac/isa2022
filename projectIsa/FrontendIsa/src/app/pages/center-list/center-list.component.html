@@ -17,6 +17,44 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <div>
+          <mat-label class="label-sort">Sort:</mat-label>
+          <div class="sort-items">
+            <div class="div-holder">
+              <mat-form-field appearance="fill" class="mat-field-space">
+                <mat-label>Sort by name</mat-label>
+                <mat-select (selectionChange)="sortByName($event.value)">
+                  <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
+                    {{direction.viewValue}}
+                  </mat-option>
+                  <mat-option>None</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="div-holder">
+              <mat-form-field appearance="fill" class="mat-field-space">
+                <mat-label>Sort by city</mat-label>
+                <mat-select (selectionChange)="sortByCity($event.value)">
+                  <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
+                    {{direction.viewValue}}
+                  </mat-option>
+                  <mat-option>None</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="div-holder">
+              <mat-form-field appearance="fill" class="mat-field-space">
+                <mat-label>Sort by rating</mat-label>
+                <mat-select (selectionChange)="sortByRating($event.value)">
+                  <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
+                    {{direction.viewValue}}
+                  </mat-option>
+                  <mat-option>None</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+        </div>
+      </div>
       </form>
 </div>
 
