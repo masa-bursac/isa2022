@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 const center_url = 'http://localhost:8080/center';
+const post_url = 'http://localhost:8080/center';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,12 @@ export class CenterService {
 
   public editCenter(body: any): Observable<any>{
     return this.http.put(center_url+`/update`, body);
+    
+  public getAllCenters(): Observable<any>{
+    return this.http.get(post_url+`/getAllCenters`);
+  }
+
+  public searchCenters(body:any): Observable<any>{
+    return this.http.get(post_url+`/searchCenters/${body}`);
   }
 }
