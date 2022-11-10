@@ -33,7 +33,7 @@ import { CenterListComponent } from './pages/center-list/center-list.component';
     NavbarComponent,
     UserProfileCentreAdminComponent,
     BloodInStockOverviewComponent,
-    CenterAdminOverviewComponent
+    CenterAdminOverviewComponent,
     CenterListComponent
   ],
   imports: [
