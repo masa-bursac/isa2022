@@ -45,7 +45,7 @@ export class CenterAdminOverviewComponent implements OnInit {
       this.adminId = data.id;
       this.centreService.getCenter(this.adminId).subscribe((data : any)=> {
         this.validateForm = this.fb.group({
-          name: [data.name,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
+          name: [data.name,[Validators.required, Validators.pattern(/^[A-Z\s][A-Za-z\s]*$/)]],
           street: [data.centerAddress.street,[Validators.required, Validators.pattern(/^[A-Za-z\s]*$/)]],
           houseNumber: [data.centerAddress.houseNumber,[Validators.required, Validators.pattern(/^[A-Za-z0-9]*$/)]],
           city: [data.centerAddress.city,[Validators.required, Validators.pattern(/^[A-Za-z\s]*$/)]],
