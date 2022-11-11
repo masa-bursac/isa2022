@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 const center_url = 'http://localhost:8080/center';
-const post_url = 'http://localhost:8080/center';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +20,15 @@ export class CenterService {
   }
     
   public getAllCenters(): Observable<any>{
-    return this.http.get(post_url+`/getAllCenters`);
+    return this.http.get(center_url+`/getAllCenters`);
   }
 
   public searchCenters(body:any): Observable<any>{
-    return this.http.get(post_url+`/searchCenters/${body}`);
+    return this.http.get(center_url +`/searchCenters/${body}`);
   }
 
   public registerCenter(body:any): Observable<any>{
     console.log(body);
-    return this.http.post(post_url+`/registerCenter`, body);
+    return this.http.post(center_url +`/registerCenter`, body);
   }
 }

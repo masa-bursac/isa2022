@@ -62,7 +62,5 @@ public class CenterAdministrator extends User{
 	public void setHasToChangePass(Boolean hasToChangePass) {
 		this.hasToChangePass = hasToChangePass;
 	}
-	public CenterAdministrator() {
-	}
-	
+
 }

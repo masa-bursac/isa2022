@@ -14,9 +14,9 @@ insert into center_address (id,longitude,latitude,street,city,state,house_number
 insert into center (id,name,description,rating, center_address_id) values
 (1,'Centar Novi Sad','Centar za transfuziju krvi u Novom Sadu',5, 1);
 insert into center (id,name,description,rating) values
-(2,'Centar Novo Naselje','Centar za transfuziju krvi na Novom Naselju',3);
+(2,'Centar Novo Naselje','Centar za transfuziju krvi na Novom Naselju',2);
 insert into center (id,name,description,rating) values
-(3,'Centar Beograd','Centar za transfuziju krvi u Beogradu',5);
+(3,'Centar Beograd','Centar za transfuziju krvi u Beogradu',3);
 insert into center (id,name,description,rating) values
 (4,'Centar Novi Beograd','Centar za transfuziju krvi na Novom Beogradu',4);
 
