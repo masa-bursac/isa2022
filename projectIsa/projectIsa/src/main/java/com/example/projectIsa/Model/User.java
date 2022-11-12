@@ -13,12 +13,14 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.DiscriminatorType;
 
+import com.example.projectIsa.DTO.RegistrationDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
-import javax.persistence.CascadeType;
+import java.util.Locale;
 
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "users")
