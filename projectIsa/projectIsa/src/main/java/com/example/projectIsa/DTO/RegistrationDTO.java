@@ -5,11 +5,9 @@ public class RegistrationDTO {
     String surname;
     String email;
     String password;
-    String checkPassword;
     String phoneNumber;
     String jmbg;
     String gender;
-    String role;
     String street;
     String houseNumber;
     String city;
@@ -54,14 +52,6 @@ public class RegistrationDTO {
 		this.password = password;
 	}
 
-	public String getCheckPassword() {
-		return checkPassword;
-	}
-
-	public void setCheckPassword(String checkPassword) {
-		this.checkPassword = checkPassword;
-	}
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -84,14 +74,6 @@ public class RegistrationDTO {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public String getStreet() {

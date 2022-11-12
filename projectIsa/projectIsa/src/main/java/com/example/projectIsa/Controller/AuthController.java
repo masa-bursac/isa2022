@@ -1,7 +1,5 @@
 package com.example.projectIsa.Controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,15 +19,7 @@ public class AuthController {
     }
 	
 	@PostMapping("/registration")
-    public ResponseEntity registration(@RequestBody RegistrationDTO registrationDTO){
-    	
-        try{
-        	if(authService.registration(registrationDTO))
-        		return new ResponseEntity(HttpStatus.OK);
-        	else
-        		return new ResponseEntity(HttpStatus.CONFLICT);
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.FAILED_DEPENDENCY);
-        }
+    public Boolean registration(@RequestBody RegistrationDTO registrationDTO){
+    	return authService.registration(registrationDTO);
     }
 }

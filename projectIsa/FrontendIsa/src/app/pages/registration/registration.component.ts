@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
-import { RegistrationDTO } from './registrtion.dto';
 
 interface Gender {
   value: string;
+  viewValue: string;
 }
 
 @Component({
@@ -15,45 +14,52 @@ interface Gender {
 })
 export class RegistrationComponent implements OnInit {
   validateForm!: FormGroup;
-  email: string = "";
   name: string = "";
-  surname : string = "";
-  password : string = "";
-  confirmPassword : string = "";
+  surname: string = "";
+  email: string = "";
+  password: string = "";
+  confirmPassword: string = "";
   phoneNumber : string = "";
   jmbg : string = "";
-  selectedValueGender = "Male";
   street: string = "";
-  houseNumber: number = 0;
+  houseNumber: string = "";
   city: string = "";
   state: string = "";
   postcode: string = "";
   education: string = "";
-  profession: string = "";
+  profession: string = "";  
+
+  selectedValueGender = 'MALE';
+
+  genders: Gender[] = [
+    {value: 'MALE', viewValue: 'MALE'},
+    {value: 'FEMALE', viewValue: 'FEMALE'},
+    {value: 'NONBINARY', viewValue: 'NONBINARY'},
+    {value: 'OTHER', viewValue: 'OTHER'}
+  ];
 
   hide: boolean = true;
   hideRp: boolean = true;
 
-  public register: RegistrationDTO = new RegistrationDTO();
-
-  constructor(private fb: FormBuilder, private authService : AuthServiceService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService : AuthServiceService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      email: [null,[Validators.email, Validators.required]],
-      name: [null, [Validators.required]],
-      surname: [null, [Validators.required]],
+      name: [null,[Validators.required]],
+      surname: [null,[Validators.required]],
+      email: [null,[Validators.required]],
       password: [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required, this.confirmationValidator]],
-      phoneNumber: [null, [Validators.required]],
-      jmbg: [null, [Validators.required]],
-      street: [null, [Validators.required]], 
-      houseNumber: [null, [Validators.required]],
-      city: [null, [Validators.required]],
-      state: [null, [Validators.required]],
-      postcode: [null, [Validators.required]],
-      education: [null, [Validators.required]],
-      profession: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required]],
+      phoneNumber: [null,[Validators.required]],
+      jmbg: [null,[Validators.required]],
+      gender: [null,[Validators.required]],
+      street: [null,[Validators.required]],
+      houseNumber: [null,[Validators.required]],
+      city: [null,[Validators.required]],
+      state: [null,[Validators.required]],
+      postcode: [null,[Validators.required]],
+      education: [null,[Validators.required]],
+      profession: [null,[Validators.required]],
     });
   }
 
@@ -66,47 +72,36 @@ export class RegistrationComponent implements OnInit {
     return {};
   };
 
-  genders: Gender[] = [
-    {value: 'Male'},
-    {value: 'Female'},
-    {value: 'Non-Binary'},
-  ];
-
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.register.Name = this.validateForm.value.name;
-    this.register.Surname = this.validateForm.value.surname;
-    this.register.Email = this.validateForm.value.email;
-    this.register.Password = this.validateForm.value.password;
-    this.register.CheckPassword = this.validateForm.value.confirmPassword;
-    this.register.PhoneNumber = this.validateForm.value.phoneNumber;
-    this.register.Jmbg = this.validateForm.value.jmbg;
-    this.register.Street = this.validateForm.value.street;
-    this.register.HouseNumber = this.validateForm.value.houseNumber;
-    this.register.City = this.validateForm.value.city;
-    this.register.State = this.validateForm.value.state;
-    this.register.Postcode = this.validateForm.value.postcode;
-    this.register.Education = this.validateForm.value.education;
-    this.register.Profession = this.validateForm.value.profession;
-    this.register.Gender = this.selectedValueGender;
-
-    if(this.validateForm.valid){
-      this.authService.registration(this.register).subscribe(data => {
+    
+    const body = {
+      name: this.validateForm.value.name,
+      surname: this.validateForm.value.surname,
+      email: this.validateForm.value.email,
+      password: this.validateForm.value.password,
+      phoneNumber: this.validateForm.value.phoneNumber,      
+      jmbg: this.validateForm.value.jmbg, 
+      gender: this.validateForm.value.gender,
+      street: this.validateForm.value.street,
+      houseNumber: this.validateForm.value.houseNumber,
+      city: this.validateForm.value.city,
+      state: this.validateForm.value.state,
+      postcode: this.validateForm.value.postcode,
+      education: this.validateForm.value.education,
+      profession: this.validateForm.value.profession
+    }
+      console.log(body);
+      this.authService.registration(body).subscribe(data => {
         console.log(data);
-        console.log(this.register);
-        localStorage.setItem('Role', JSON.stringify(this.register.Role)); 
-          alert("Registration successfull");
-          this.router.navigate(['userProfile']);
-      }, error => {
-        console.log(error.status);
-        if(error.status == 409){
-          alert("Email already exists");
-        }
+        if(data)
+          alert("Successfully registered!");
+        else
+          alert("Something went wrong!");
       });
     }
   }
 
-}
