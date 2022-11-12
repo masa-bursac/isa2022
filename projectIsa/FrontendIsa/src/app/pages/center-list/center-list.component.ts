@@ -59,7 +59,7 @@ export class CenterListComponent implements OnInit {
   }
 
   public showAddCenter(): void {
-      this.addForm = true;
+      this.addForm = !this.addForm;
   }
   public RegisterCenterClosed(isClosed: any): void{
     this.addForm = false;

@@ -26,6 +26,7 @@ import { CenterListComponent } from './pages/center-list/center-list.component';
 import { RegisterCenterComponent } from './pages/register-center/register-center.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegisterCenterAdministratorComponent } from './pages/register-center-administrator/register-center-administrator.component';
+import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { RegisterCenterAdministratorComponent } from './pages/register-center-ad
     UserProfileCentreAdminComponent,
     BloodInStockOverviewComponent,
     CenterAdminOverviewComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

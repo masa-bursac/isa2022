@@ -29,6 +29,7 @@ insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
 (4,1,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0, false,1);
 
+
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (1,0,0,'Njegoseva','Novi Sad','Srbija','5','21000');
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
@@ -46,6 +47,13 @@ insert into education (id,education,profession) values
 (3,'ftn','student');
 insert into education (id,education,profession) values 
 (4,'ftn','assistant');
+
+
+UPDATE users SET address_id = 1, education_id = 1 WHERE users.id = 1;
+UPDATE users SET address_id = 2, education_id = 2 WHERE users.id = 2;
+UPDATE users SET address_id = 3, education_id = 3 WHERE users.id = 3;
+UPDATE users SET address_id = 4, education_id = 4 WHERE users.id = 4;
+
 
 insert into medical_equipment (id,quantity,blood_type) values 
 (1,500,0);
