@@ -34,6 +34,7 @@ public class Appointment {
 	@JoinColumn(name="center_id")
 	private Center center;
 	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinTable(
 			  name = "appointment_center_admin", 
 			  joinColumns = @JoinColumn(name = "appointment_id"), 

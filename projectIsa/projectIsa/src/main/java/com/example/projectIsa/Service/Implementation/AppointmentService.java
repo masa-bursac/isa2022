@@ -42,7 +42,7 @@ public class AppointmentService implements IAppointmentService{
 			staff.add(admin);
 		}
 		
-		//newAppointment.setCenterAdmin(staff);
+		newAppointment.setCenterAdmin(staff);
 		
 		Center center = centerRepository.findOneById(appointment.getCenterId());
 		newAppointment.setCenter(center);

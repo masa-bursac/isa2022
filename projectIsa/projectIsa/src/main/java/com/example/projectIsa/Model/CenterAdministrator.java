@@ -21,7 +21,6 @@ public class CenterAdministrator extends User{
 	@JoinColumn(name="center_id")
 	private Center center;
 	@ManyToMany(mappedBy = "centerAdmin", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private List<Appointment> appointment;
 	private Boolean hasToChangePass;	
 			
