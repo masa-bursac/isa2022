@@ -11,23 +11,26 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+
 import { UserProfileComponent } from './pages/user-profile/user-profile/user-profile.component';
-import { RegistrationComponent } from './pages/registration/registration.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { CenterListComponent } from './pages/center-list/center-list.component';
+import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
-    RegistrationComponent,
     HomePageComponent,
     NavbarComponent,
-    CenterListComponent
+    CenterListComponent,
+    SurveyForUserComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +39,10 @@ import { CenterListComponent } from './pages/center-list/center-list.component';
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
+    MatTableModule,
     MatInputModule,
     MatButtonModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
