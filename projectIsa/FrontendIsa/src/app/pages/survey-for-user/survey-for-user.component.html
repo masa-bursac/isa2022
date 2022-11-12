@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <span class="image">
+          <img class="img-responsive" src="assets/images/give-blood.png"/>
+        </span>
+      </mat-card-header>
+      <form class="example-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Name" formControlName="name" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Surname" formControlName="surname" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" formControlName="email" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Phone number" formControlName="phoneNumber" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="JMBG" formControlName="jmbg" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)] = "selectedValueGender" formControlName="gender">
+              <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                {{gender.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Street" formControlName="street" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="House number" formControlName="houseNumber" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="City" formControlName="city" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="State" formControlName="state" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Postcode" formControlName="postcode" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Education" formControlName="education" [readonly]="true">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Profession" formControlName="profession" [readonly]="true">
+          </mat-form-field>
+          <mat-card-title class="title">Take survey</mat-card-title>
+          <div *ngFor="let question of dataSource">
+            <div class="review-holder">
+            <mat-card class="example-card">
+                <mat-card-content class="mat-card-font">
+                  <h1>Odgovorite na pitanje:</h1>
+                  <p>{{ question.id }}</p>
+                  <p>{{ question.question }}</p>
+                  <mat-radio-group class="example-radio-group">
+                    <mat-radio-button [value]="true" (change)="radioChange($event,question)">Da</mat-radio-button>
+                    <mat-radio-button [value]="false" (change)="radioChange($event,question)">Ne</mat-radio-button>                
+                </mat-radio-group>
+                </mat-card-content>
+            </mat-card>
+            </div>
+            <br>
+            <br>
+        </div>
+        </mat-card-content>
+        <button mat-stroked-button color="accent" class="btn-block">Send survey</button>
+      </form>
+    </mat-card>
+</div>

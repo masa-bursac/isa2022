@@ -6,6 +6,7 @@ import { CenterListComponent } from './pages/center-list/center-list.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
+import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile/user-profile.component';
 import { UsersComponent } from './pages/users/users.component';
 
@@ -18,7 +19,9 @@ const routes: Routes = [
   { path: 'blood', component: BloodInStockOverviewComponent},
   { path: 'center', component: CenterAdminOverviewComponent},
   { path: 'centerList', component: CenterListComponent},
-  { path: 'users', component: UsersComponent }
+  { path: 'users', component: UsersComponent },
+  { path: 'centerList', component: CenterListComponent},
+  { path: 'takeSurvey', component: SurveyForUserComponent}
 ];
 
 @NgModule({

@@ -1,7 +1,5 @@
 package com.example.projectIsa.Model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +21,6 @@ public class AnsweredSurvey {
 	private Integer surveyId;
 	private Integer regUserId;
 	
-		
 	public AnsweredSurvey() {
 		super();
 	}

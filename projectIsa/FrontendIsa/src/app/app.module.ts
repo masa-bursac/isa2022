@@ -11,11 +11,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { UserProfileComponent } from './pages/user-profile/user-profile/user-profile.component';
-import { RegistrationComponent } from './pages/registration/registration.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
@@ -27,12 +28,12 @@ import { RegisterCenterComponent } from './pages/register-center/register-center
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegisterCenterAdministratorComponent } from './pages/register-center-administrator/register-center-administrator.component';
 import { UsersComponent } from './pages/users/users.component';
+import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
-    RegistrationComponent,
     HomePageComponent,
     NavbarComponent,
     CenterListComponent,
@@ -42,6 +43,7 @@ import { UsersComponent } from './pages/users/users.component';
     BloodInStockOverviewComponent,
     CenterAdminOverviewComponent,
     UsersComponent,
+    SurveyForUserComponent
   ],
   imports: [
     BrowserModule,
@@ -50,8 +52,10 @@ import { UsersComponent } from './pages/users/users.component';
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
+    MatTableModule,
     MatInputModule,
     MatButtonModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -62,7 +66,6 @@ import { UsersComponent } from './pages/users/users.component';
     BrowserAnimationsModule,
     MatMenuModule,
     MatSnackBarModule,
-    MatTableModule,
     MatDividerModule,
   ],
   providers: [],
