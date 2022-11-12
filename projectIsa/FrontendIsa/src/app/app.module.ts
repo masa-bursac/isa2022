@@ -31,6 +31,7 @@ import { RegisterCenterAdministratorComponent } from './pages/register-center-ad
 import { UsersComponent } from './pages/users/users.component';
 import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     BloodInStockOverviewComponent,
     CenterAdminOverviewComponent,
     UsersComponent,
-    SurveyForUserComponent
+    SurveyForUserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
