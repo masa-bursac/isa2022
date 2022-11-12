@@ -3,6 +3,7 @@
       <img title="Home" class="img-responsive" src="assets/images/pod-blood-icon.png" routerLink="/homePage"/>
     </span>
     <span>
+        <button mat-button routerLink="/users" >Users</button>
         <button mat-button [matMenuTriggerFor]="menu">Medical center</button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="/centerList">List of medical center</button>

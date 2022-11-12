@@ -32,5 +32,10 @@ public class ProfileController {
 	public Boolean edit(@RequestBody UpdateDTO userInfo) {
     	return profileService.update(userInfo);	      
 	}
+    
+    @GetMapping("/getUsers")
+    public ResponseEntity getUsers() {
+    	return new ResponseEntity(profileService.getUsers(), HttpStatus.OK);
+    }
 
 }
