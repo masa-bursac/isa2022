@@ -3,16 +3,22 @@ package com.example.projectIsa.Model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "appointment")
@@ -24,15 +30,20 @@ public class Appointment {
     @Column(name = "id")
 	private Integer id;
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="center_id")
 	private Center center;
-	@OneToMany(mappedBy="appointment")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+			  name = "appointment_center_admin", 
+			  joinColumns = @JoinColumn(name = "appointment_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<CenterAdministrator> centerAdmin;
 	private LocalDateTime date;
 	private Integer duration;
 	private boolean taken;
 	@ManyToOne
-	@JoinColumn(name="registered_user_id")
+	@JoinColumn(name="registered_user_id", nullable = true)
 	private RegisteredUser regUser;
 	
 	

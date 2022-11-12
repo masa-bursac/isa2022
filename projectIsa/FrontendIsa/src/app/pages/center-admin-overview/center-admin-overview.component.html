@@ -12,7 +12,7 @@
           <div *ngIf="validateForm.get('name')?.errors?.['required']" class="alert">Field is required</div>
           <div *ngIf="validateForm.get('name')?.invalid &&
                 (validateForm.get('name')?.dirty || validateForm.get('name')?.touched)"class="alert">
-                Name must be at least 2 characters long with first upper case letter, no spaces, special characters or numbers
+                Name must start with capital letter
           </div>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Street" formControlName="street">

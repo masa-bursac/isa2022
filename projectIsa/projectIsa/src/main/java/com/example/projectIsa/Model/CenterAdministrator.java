@@ -1,12 +1,17 @@
 package com.example.projectIsa.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.List;
 
 import com.example.projectIsa.DTO.CenterAdministratorDTO;
 import com.example.projectIsa.DTO.CentersDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @DiscriminatorValue("1")
@@ -15,9 +20,9 @@ public class CenterAdministrator extends User{
 	@ManyToOne
 	@JoinColumn(name="center_id")
 	private Center center;
-	@ManyToOne
-	@JoinColumn(name="appointment_id")
-	private Appointment appointment;
+	@ManyToMany(mappedBy = "centerAdmin", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Appointment> appointment;
 	private Boolean hasToChangePass;	
 			
 	public CenterAdministrator() {
@@ -26,7 +31,7 @@ public class CenterAdministrator extends User{
 
 	public CenterAdministrator(Integer id, String name, String surname, String email, String password,
 			String phoneNumber, String jmbg, Gender gender, Role role, Address address, Education education,
-			Center center, Appointment appointment, boolean hasToChangePass) {
+			Center center, List<Appointment> appointment, boolean hasToChangePass) {
 		super(id, name, surname, email, password, phoneNumber, jmbg, gender, role, address, education);
 		this.center = center;
 		this.appointment = appointment;
@@ -50,10 +55,10 @@ public class CenterAdministrator extends User{
 	public void setCenter(Center center) {
 		this.center = center;
 	}
-	public Appointment getAppointment() {
+	public List<Appointment> getAppointment() {
 		return appointment;
 	}
-	public void setAppointment(Appointment appointment) {
+	public void setAppointment(List<Appointment> appointment) {
 		this.appointment = appointment;
 	}
 	public Boolean isHasToChangePass() {
