@@ -15,6 +15,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { UserProfileComponent } from './pages/user-profile/user-profile/user-profile.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -29,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegisterCenterAdministratorComponent } from './pages/register-center-administrator/register-center-administrator.component';
 import { UsersComponent } from './pages/users/users.component';
 import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.
     CenterListComponent,
     RegisterCenterComponent,
     RegisterCenterAdministratorComponent,
+    RegistrationComponent,
     UserProfileCentreAdminComponent,
     BloodInStockOverviewComponent,
     CenterAdminOverviewComponent,
@@ -64,6 +67,7 @@ import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.
     MatToolbarModule,
     MatIconModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
     MatMenuModule,
     MatSnackBarModule,
     MatDividerModule,
