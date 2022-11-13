@@ -54,11 +54,16 @@ public class WebSecurity {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		System.out.println("ovde filter");
-		http.cors().and().csrf().disable()
+		
+		System.out.println("Ovde filter");
+
+		http
+		.cors().disable()
+		.csrf().disable()
       .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests().antMatchers("/auth/login").permitAll()
+      .antMatchers("/auth/registration").permitAll()
       .anyRequest().authenticated();
   
 	  http.authenticationProvider(authenticationProvider());

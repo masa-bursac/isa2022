@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projectIsa.Config.JwtUtils;
+import com.example.projectIsa.Config.MessageResponse;
 import com.example.projectIsa.Config.UserDetailsImpl;
 import com.example.projectIsa.DTO.AuthDTO;
 import com.example.projectIsa.DTO.JwtResponse;
@@ -26,7 +27,7 @@ import com.example.projectIsa.DTO.RegistrationDTO;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.Service.IAuthService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -51,7 +52,6 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthDTO loginRequest) {
-		System.out.println("ovde kontroler");
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
@@ -72,7 +72,16 @@ public class AuthController {
 	}
 	
 	@PostMapping("/registration")
-    public Boolean registration(@RequestBody RegistrationDTO registrationDTO){
-    	return authService.registration(registrationDTO);
-    }
+	public ResponseEntity<?> registerUser(@Valid @RequestBody RegistrationDTO signUpRequest) {
+		
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Email already exist!"));
+		}
+
+		authService.registration(signUpRequest);
+
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
 }

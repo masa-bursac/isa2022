@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 interface Gender {
@@ -41,7 +42,7 @@ export class RegistrationComponent implements OnInit {
   hide: boolean = true;
   hideRp: boolean = true;
 
-  constructor(private fb: FormBuilder, private authService : AuthServiceService) { }
+  constructor(private fb: FormBuilder, private authService : AuthServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -97,8 +98,10 @@ export class RegistrationComponent implements OnInit {
       console.log(body);
       this.authService.registration(body).subscribe(data => {
         console.log(data);
-        if(data)
+        if(data){
           alert("Successfully registered!");
+          this.router.navigate(['/login']);
+        }
         else
           alert("Something went wrong!");
       });

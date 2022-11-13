@@ -44,6 +44,7 @@ public class AuthService implements IAuthService{
 		regUser.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
 		regUser.setPhoneNumber(registrationDTO.getPhoneNumber());
 		regUser.setJmbg(registrationDTO.getJmbg());
+		regUser.setRole(Role.REGISTERED);
 		
 		if(registrationDTO.getGender().toLowerCase().equals(Gender.MALE.toString().toLowerCase(Locale.ROOT)))
 			regUser.setGender(Gender.MALE);

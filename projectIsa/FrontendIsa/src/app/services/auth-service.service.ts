@@ -21,18 +21,10 @@ export class AuthServiceService {
       password: password
   };
 
-// {
-//   headers : {
-//       "Authorization" : `Bearer ${token}`,
-//       'Content-Type': 'application/json',
-//       "Access-Control-Allow-Origin": "*",
-//   }
-// }
-
     return this.http.post(auth_url + '/login', data, httpOptions);
   }
 
   public registration(body: any) : Observable<any>{ 
-    return this.http.post(auth_url + `/registration`, body);
+    return this.http.post(auth_url + '/registration', body, httpOptions);
   }
 }
