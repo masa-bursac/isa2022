@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -8,22 +10,28 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  token: any;
-  errorLogin: boolean = false;
+
   validateForm!: FormGroup;
-  username: any;
+  email: any;
   password: any;
-  usernameBool: boolean = true;
 
   hide: boolean = true;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { }
+  isLoggedIn = false;
+  //roles: string[] = [];
+
+  constructor(private authService: AuthServiceService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
+      email: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
+
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      //this.roles = this.tokenStorage.getUser().roles;
+    }
   }
 
   submitForm(): void {
@@ -31,6 +39,21 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
+
+    console.log(this.validateForm.value.email);
+
+    this.authService.login(this.validateForm.value.email, this.validateForm.value.password).subscribe(data => {
+      if(data){
+        console.log(data);
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+
+        this.isLoggedIn = true;
+        this.router.navigate(['/homePage']);
+      }
+      else
+        alert("Something went wrong!");
+    });
   }
 
 }

@@ -1,13 +1,32 @@
 package com.example.projectIsa.Controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.projectIsa.Config.JwtUtils;
+import com.example.projectIsa.Config.UserDetailsImpl;
+import com.example.projectIsa.DTO.AuthDTO;
+import com.example.projectIsa.DTO.JwtResponse;
 import com.example.projectIsa.DTO.RegistrationDTO;
+import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.Service.IAuthService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -17,6 +36,40 @@ public class AuthController {
 	public AuthController(IAuthService authService) {
         this.authService = authService;
     }
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
+
+	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
+	PasswordEncoder encoder;
+
+	@Autowired
+	JwtUtils jwtUtils;
+
+	@PostMapping("/login")
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthDTO loginRequest) {
+		System.out.println("ovde kontroler");
+
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+		
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
+		List<String> roles = userDetails.getAuthorities().stream()
+				.map(item -> item.getAuthority())
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok(new JwtResponse(jwt, 
+												 userDetails.getId(), 
+												 userDetails.getUsername(), 
+												 userDetails.getEmail(), 
+												 roles));
+	}
 	
 	@PostMapping("/registration")
     public Boolean registration(@RequestBody RegistrationDTO registrationDTO){

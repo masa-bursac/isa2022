@@ -18,6 +18,8 @@ public class SimpleCorsFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
+        
+        System.out.println("ovde");
 
 
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
