@@ -110,6 +110,14 @@
             <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.duration}} min</td>
           </ng-container>
 
+          <ng-container matColumnDef="staff">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Staff: </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+              <div *ngFor="let category of element.staff">
+                {{category.name}} {{category.surname}}, 
+             </div></td>
+          </ng-container>
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
         </table>

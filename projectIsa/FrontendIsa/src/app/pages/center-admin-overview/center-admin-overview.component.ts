@@ -20,7 +20,7 @@ interface address {
 export class CenterAdminOverviewComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'surname', 'email'];
-  displayedColumns1: string[] = ['id', 'date', 'duration'];
+  displayedColumns1: string[] = ['id', 'date', 'duration', 'staff'];
   dataSource = [];
   dataSource1= [];
 

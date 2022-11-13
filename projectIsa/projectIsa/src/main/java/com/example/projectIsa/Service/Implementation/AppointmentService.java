@@ -6,6 +6,8 @@ import com.example.projectIsa.DTO.FreeAppointmentDTO;
 import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.Model.Center;
 import com.example.projectIsa.Model.CenterAdministrator;
+import com.example.projectIsa.Model.Role;
+import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AppointmentsRepository;
 import com.example.projectIsa.Repository.CenterRepository;
 import com.example.projectIsa.Repository.UserRepository;
@@ -56,15 +58,33 @@ public class AppointmentService implements IAppointmentService{
 	@Override
 	public List<AppointmentDTO> getAllAppointments(Integer centerId) {
 		List<AppointmentDTO> returnAppointments = new ArrayList<AppointmentDTO>();
+		
 		for(Appointment a: appointmentRepository.findAllByCenterId(centerId)) {
-			if(a.getCenter().getId().equals(centerId)) {
+			if(!a.isTaken()) {
 				AppointmentDTO appointment = new AppointmentDTO();
 				appointment.setDate(a.getDate());
 				appointment.setDuration(a.getDuration());
 				appointment.setId(a.getId());
+				appointment.setStaff(new ArrayList<CenterAdministrator>());
+				for(Integer i = 1; i<=userRepository.count(); i++) {
+						CenterAdministrator ca = userRepository.findOneById(i);
+						
+						if(ca!=null)
+						{
+							for(Appointment ap: ca.getAppointment()) {	
+								if(ap.getId().equals(a.getId())) {
+									appointment.getStaff().add(ca);
+								}
+							}
+						}
+				}			
+				for(CenterAdministrator cen: appointment.getStaff()) {
+					cen.setCenter(null);
+				}
 				returnAppointments.add(appointment);
 			}
-		}
+			}
+	
 		return returnAppointments;
 	}
 
