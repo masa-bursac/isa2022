@@ -9,6 +9,7 @@ import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Repository.AppointmentsRepository;
 import com.example.projectIsa.Repository.CenterRepository;
 import com.example.projectIsa.Repository.UserRepository;
+import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.Service.IAppointmentService;
 
 import java.util.ArrayList;
@@ -50,6 +51,21 @@ public class AppointmentService implements IAppointmentService{
 		appointmentRepository.save(newAppointment);
 	
 		return newAppointment;
+	}
+
+	@Override
+	public List<AppointmentDTO> getAllAppointments(Integer centerId) {
+		List<AppointmentDTO> returnAppointments = new ArrayList<AppointmentDTO>();
+		for(Appointment a: appointmentRepository.findAllByCenterId(centerId)) {
+			if(a.getCenter().getId().equals(centerId)) {
+				AppointmentDTO appointment = new AppointmentDTO();
+				appointment.setDate(a.getDate());
+				appointment.setDuration(a.getDuration());
+				appointment.setId(a.getId());
+				returnAppointments.add(appointment);
+			}
+		}
+		return returnAppointments;
 	}
 
 }

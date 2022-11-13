@@ -91,6 +91,28 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <b>Free appointments:</b>
+        <table id="tableA" mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            
+          </ng-container>
+      
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Date: </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.date[2]}}/{{element.date[1]}}/{{element.date[0]}} {{element.date[3]}}:{{element.date[4]}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Duration: </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.duration}} min</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+        </table>
       </form>
     </mat-card>
 </div>

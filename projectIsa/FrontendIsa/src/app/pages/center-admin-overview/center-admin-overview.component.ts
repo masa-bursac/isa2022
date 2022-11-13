@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AppointmentsService } from 'src/app/services/appointments.service';
 import { CenterService } from 'src/app/services/center.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -19,7 +20,9 @@ interface address {
 export class CenterAdminOverviewComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'surname', 'email'];
+  displayedColumns1: string[] = ['id', 'date', 'duration'];
   dataSource = [];
+  dataSource1= [];
 
   adminId : number = 0;
   centerid: number = 0;
@@ -37,7 +40,7 @@ export class CenterAdminOverviewComponent implements OnInit {
     rating: new FormControl(),  
   }); 
   
-  constructor(private fb: FormBuilder, private centreService : CenterService, private profileService: ProfileService) { }
+  constructor(private fb: FormBuilder, private centreService : CenterService, private profileService: ProfileService, private appointmentService: AppointmentsService) { }
 
   ngOnInit(): void {
     //this.decoded_token = this.authService.getDataFromToken();
@@ -55,7 +58,10 @@ export class CenterAdminOverviewComponent implements OnInit {
           rating: [data.rating,[Validators.required]],
         });
         this.dataSource = data.staff;
-
+        this.appointmentService.getAllCenters(data.id).subscribe((data : any)=> {
+          this.dataSource1 = data;
+          console.log(data);
+        });
       });
     })
   }
