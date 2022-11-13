@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 interface Gender {
   value: string;
@@ -40,11 +42,18 @@ export class UserProfileComponent implements OnInit {
   ];
 
 
-  constructor(private fb: FormBuilder, private profileService : ProfileService) { }
+  constructor(private fb: FormBuilder, private profileService : ProfileService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    //this.decoded_token = this.authService.getDataFromToken();
-    this.profileService.getProfile('vlada@gmail.com').subscribe(data=> {
+    if(Object.keys(this.tokenStorage.getUser()).length === 0){
+      alert("Unauthorized!");
+      this.router.navigate(['/landingPage']);
+    }else if(this.tokenStorage.getUser().roles[0] !== "ROLE_REGISTERED"){
+      alert("Unauthorized!");
+      this.router.navigate(['/homePage']);
+    }
+
+    this.profileService.getProfile(this.tokenStorage.getUser().email).subscribe(data=> {
       this.validateForm = this.fb.group({
         name: [data.name,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
         surname: [data.surname,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],

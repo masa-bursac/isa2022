@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
+import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SurveyService } from 'src/app/services/survey.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 interface Gender {
   value: string;
@@ -45,10 +47,18 @@ export class SurveyForUserComponent implements OnInit {
   finalArray: any[] = [];
   answeredArray: any[] = [];
 
-  constructor(private fb: FormBuilder, private profileService : ProfileService, private surveyService : SurveyService) { }
+  constructor(private fb: FormBuilder, private profileService : ProfileService, private surveyService : SurveyService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.profileService.getProfile('vlada@gmail.com').subscribe(data=> {
+    if(Object.keys(this.tokenStorage.getUser()).length === 0){
+      alert("Unauthorized!");
+      this.router.navigate(['/landingPage']);
+    }else if(this.tokenStorage.getUser().roles[0] !== "ROLE_REGISTERED"){
+      alert("Unauthorized!");
+      this.router.navigate(['/homePage']);
+    }
+
+    this.profileService.getProfile(this.tokenStorage.getUser().email).subscribe(data=> {
       this.validateForm = this.fb.group({
         name: [data.name,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
         surname: [data.surname,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],

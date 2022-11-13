@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   hide: boolean = true;
 
   isLoggedIn = false;
-  //roles: string[] = [];
 
   constructor(private authService: AuthServiceService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private tokenStorage: TokenStorageService) { }
 
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit {
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      //this.roles = this.tokenStorage.getUser().roles;
     }
   }
 
@@ -40,14 +38,10 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
 
-    console.log(this.validateForm.value.email);
-
     this.authService.login(this.validateForm.value.email, this.validateForm.value.password).subscribe(data => {
       if(data){
-        console.log(data);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
-        console.log(this.tokenStorage.getUser().roles[0]);
 
         this.isLoggedIn = true;
         this.router.navigate(['/homePage']);

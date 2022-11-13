@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CenterService } from 'src/app/services/center.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 @Component({
@@ -20,10 +21,17 @@ export class RegisterCenterComponent implements OnInit {
   onClose: EventEmitter<boolean> = new EventEmitter();
   
   constructor(private fb: FormBuilder, private centerService: CenterService,
-    private _snackBar: MatSnackBar, private router: Router) { 
+    private _snackBar: MatSnackBar, private router: Router, private tokenStorage: TokenStorageService) { 
     }
 
   ngOnInit(): void {
+    if(Object.keys(this.tokenStorage.getUser()).length === 0){
+      alert("Unauthorized!");
+      this.router.navigate(['/landingPage']);
+    }else if(this.tokenStorage.getUser().roles[0] !== "ROLE_CENTERADMIN"){
+      alert("Unauthorized!");
+      this.router.navigate(['/homePage']);
+    }
     this.validateForm = this.fb.group({
       name: ["", [Validators.required]],
       description: ["", [Validators.required]],

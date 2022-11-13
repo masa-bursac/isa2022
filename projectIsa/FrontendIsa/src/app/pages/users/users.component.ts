@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 @Component({
@@ -15,9 +17,16 @@ export class UsersComponent implements OnInit {
   searchUsersOn: boolean = false;
   public searchedUsers: any[] = [];
   users: any[] = [];
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    if(Object.keys(this.tokenStorage.getUser()).length === 0){
+      alert("Unauthorized!");
+      this.router.navigate(['/landingPage']);
+    }else if(this.tokenStorage.getUser().roles[0] === "ROLE_REGISTERED"){
+      alert("Unauthorized!");
+      this.router.navigate(['/homePage']);
+    }
     this.getAllUsers();
   }
 

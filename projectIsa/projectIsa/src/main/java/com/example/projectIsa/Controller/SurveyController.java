@@ -2,6 +2,7 @@ package com.example.projectIsa.Controller;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,11 +24,13 @@ public class SurveyController {
 	}
 	 
 	@GetMapping("/getQuestions")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
 	public List<SurveyDTO> getAllSurveys() {
 		return surveyService.getAllSurveys();
 	}
 	
 	@PostMapping("/addAnswer")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
 	public Boolean addInterest(@RequestBody List<AnswerDTO> answerDTO) {
 		return surveyService.post(answerDTO);
     }

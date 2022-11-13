@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +27,13 @@ public class CenterController {
     }
     
     @GetMapping("/getAllCenters")
+    @PreAuthorize("!hasRole('ROLE_CENTERADMIN')")
     public List<CentersDTO> getAllCenters() {
         return centerService.getAllCenters();
     }
     
     @GetMapping("/searchCenters/{search}")
+    @PreAuthorize("!hasRole('ROLE_CENTERADMIN')")
     public ResponseEntity getByUsername(@PathVariable String search) {
         try {
         	return new ResponseEntity(centerService.searchByNameAndAddress(search), HttpStatus.OK);
@@ -40,6 +43,7 @@ public class CenterController {
     }
     
     @PostMapping(value = "/registerCenter", consumes =  MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_SYSTEMADMIN')")
     public ResponseEntity registerCenter(@RequestBody CentersDTO center) {
         try {
         	return new ResponseEntity(centerService.registerCenter(center), HttpStatus.OK);

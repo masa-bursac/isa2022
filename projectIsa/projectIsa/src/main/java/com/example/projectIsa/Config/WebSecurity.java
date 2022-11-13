@@ -68,6 +68,9 @@ public class WebSecurity {
       .authorizeRequests().antMatchers("/auth/login").permitAll()
       .antMatchers("/auth/registration").permitAll()
       .antMatchers("/profile/**").permitAll()
+      .antMatchers("/center/**").permitAll()
+      .antMatchers("/medicalEquipment/**").permitAll()
+      .antMatchers("/survey/**").permitAll()
       .anyRequest().authenticated();
   
 	  http.authenticationProvider(authenticationProvider());

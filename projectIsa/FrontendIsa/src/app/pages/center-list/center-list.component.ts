@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CenterService } from 'src/app/services/center.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { RegisterCenterComponent } from '../register-center/register-center.component';
 
 @Component({
@@ -16,9 +18,15 @@ export class CenterListComponent implements OnInit {
   search : string = '';
   selectedValue : number = 0;
 
-  constructor(private centerService : CenterService) { }
+  constructor(private centerService : CenterService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    if(Object.keys(this.tokenStorage.getUser()).length !== 0){
+      if(this.tokenStorage.getUser().roles[0] === "ROLE_CENTERADMIN"){
+        alert("Unauthorized!");
+        this.router.navigate(['/homePage']);
+      }
+    }
     this.showAllCenters();
   }
 

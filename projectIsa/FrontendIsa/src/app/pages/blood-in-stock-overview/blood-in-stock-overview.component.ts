@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MedicalEquipmentServiceService } from 'src/app/services/medical-equipment-service.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 export interface Blood {
   id: number,
@@ -18,9 +19,17 @@ export class BloodInStockOverviewComponent implements OnInit{
   displayedColumns: string[] = ['id', 'type', 'quantity'];
   dataSource = [];
 
-  constructor(private medicalEquipmentService: MedicalEquipmentServiceService, private router: Router) { }
+  constructor(private medicalEquipmentService: MedicalEquipmentServiceService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    if(Object.keys(this.tokenStorage.getUser()).length === 0){
+      alert("Unauthorized!");
+      this.router.navigate(['/landingPage']);
+    }else if(this.tokenStorage.getUser().roles[0] !== "ROLE_CENTERADMIN"){
+      alert("Unauthorized!");
+      this.router.navigate(['/homePage']);
+    }
+
     this.medicalEquipmentService.GetBlood().subscribe((data: any)=> {
       console.log(data);
       this.dataSource = data;

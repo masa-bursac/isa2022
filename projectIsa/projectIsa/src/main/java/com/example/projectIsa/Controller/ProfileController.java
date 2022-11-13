@@ -26,17 +26,19 @@ public class ProfileController {
     }
 
     @GetMapping("/getProfile/{email}")
-    @PreAuthorize("hasRole('ROLE_REGISTERED')")
+    @PreAuthorize("hasRole('ROLE_REGISTERED') or hasRole('ROLE_CENTERADMIN')")
     public UpdateDTO getProfile(@PathVariable String email){
         return profileService.getProfile(email);
     }
     
     @PutMapping("/update")
+    @PreAuthorize("hasRole('ROLE_REGISTERED') or hasRole('ROLE_CENTERADMIN')")
 	public Boolean edit(@RequestBody UpdateDTO userInfo) {
     	return profileService.update(userInfo);	      
 	}
     
     @GetMapping("/getUsers")
+    @PreAuthorize("hasRole('ROLE_SYSTEMADMIN') or hasRole('ROLE_CENTERADMIN')")
     public ResponseEntity getUsers() {
     	return new ResponseEntity(profileService.getUsers(), HttpStatus.OK);
     }
