@@ -32,10 +32,13 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	public static UserDetailsImpl build(User user) {
-		GrantedAuthority authorities = new SimpleGrantedAuthority(user.getRole().toString());
+		GrantedAuthority authorities = new SimpleGrantedAuthority(user.getRole().name());
+		System.out.println("UserDetailImpl authorities" + authorities);
 		
 		Collection<GrantedAuthority> col = new HashSet<GrantedAuthority>();
 		col.add(authorities);
+		
+		System.out.println("UserDetailImpl authorities" + col);
 
 		return new UserDetailsImpl(
 				user.getId(),  

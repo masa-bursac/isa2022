@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
+        console.log(this.tokenStorage.getUser().roles[0]);
 
         this.isLoggedIn = true;
         this.router.navigate(['/homePage']);

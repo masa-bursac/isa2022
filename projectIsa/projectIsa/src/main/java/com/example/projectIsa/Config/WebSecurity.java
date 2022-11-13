@@ -20,7 +20,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(
+		  prePostEnabled = true, 
+		  securedEnabled = true, 
+		  jsr250Enabled = true)
 public class WebSecurity {
 	
 	@Autowired
@@ -64,6 +67,7 @@ public class WebSecurity {
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests().antMatchers("/auth/login").permitAll()
       .antMatchers("/auth/registration").permitAll()
+      .antMatchers("/profile/**").permitAll()
       .anyRequest().authenticated();
   
 	  http.authenticationProvider(authenticationProvider());
