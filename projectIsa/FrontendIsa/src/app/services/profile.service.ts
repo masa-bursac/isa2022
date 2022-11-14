@@ -21,6 +21,7 @@ export class ProfileService {
   
   public changeCenterAdminPassword(body: any): Observable<any>{
     return this.http.put(profile_url+`/changeCenterAdminPassword`, body);
+  }
 
   public getAllUsers(): Observable<any>{
     return this.http.get(profile_url+`/getUsers`);
