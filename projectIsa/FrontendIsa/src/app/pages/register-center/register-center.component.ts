@@ -43,7 +43,7 @@ export class RegisterCenterComponent implements OnInit {
       id: 1,
       name : this.validateForm.value.name,
       description : this.validateForm.value.description,
-      rating: 0.1,
+      rating: 0,
       street : this.validateForm.value.street,
       houseNumber : this.validateForm.value.houseNumber,
       city : this.validateForm.value.city,
@@ -66,8 +66,8 @@ export class RegisterCenterComponent implements OnInit {
     this.showRegisterAdminForm = !this.showRegisterAdminForm;
   }
   public RegisterAdminClosed(newAdmin: any): void{
-    console.log(newAdmin);
     this.centerAdmins.push(newAdmin);
+    this.centerAdmins = [...this.centerAdmins];
     this.showRegisterAdminForm = false;
   }
 }

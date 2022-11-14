@@ -39,4 +39,10 @@ public class ProfileController {
     	return profileService.changeCenterAdminPassword(admin);	      
 	}
 
+    @GetMapping("/getUsers")
+    public ResponseEntity getUsers() {
+    	return new ResponseEntity(profileService.getUsers(), HttpStatus.OK);
+    }
+
+
 }

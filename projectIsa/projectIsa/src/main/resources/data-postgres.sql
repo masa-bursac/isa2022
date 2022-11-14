@@ -29,6 +29,7 @@ insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
 (4,1,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0, false,1);
 
+
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (1,0,0,'Njegoseva','Novi Sad','Srbija','5','21000');
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
@@ -47,6 +48,13 @@ insert into education (id,education,profession) values
 insert into education (id,education,profession) values 
 (4,'ftn','assistant');
 
+
+UPDATE users SET address_id = 1, education_id = 1 WHERE users.id = 1;
+UPDATE users SET address_id = 2, education_id = 2 WHERE users.id = 2;
+UPDATE users SET address_id = 3, education_id = 3 WHERE users.id = 3;
+UPDATE users SET address_id = 4, education_id = 4 WHERE users.id = 4;
+
+
 insert into medical_equipment (id,quantity,blood_type) values 
 (1,500,0);
 insert into medical_equipment (id,quantity,blood_type) values 
@@ -56,6 +64,27 @@ insert into medical_equipment (id,quantity,blood_type) values
 insert into medical_equipment (id,quantity,blood_type) values 
 (4,300,3);
 
+
+insert into survey (id,question) values
+(1,'Да ли сте до сада добровољно давали крв или компоненте крви?');
+insert into survey (id,question) values
+(2,'Да ли сте икада били одбијени као давалац крви или компоненте крви?');
+insert into survey (id,question) values
+(3,'Да ли се тренутно осећате здравим, способним и одморним да дате крв или компоненте крви?');
+insert into survey (id,question) values
+(4,'Да ли сте нешто јели пре доласка на давање крви или компоненте крви?');
+insert into survey (id,question) values
+(5,'Да ли се бавите опасним занимањем или хобијем?');
+insert into survey (id,question) values
+(6,'Да ли редовно (свакодневно) узимате било какве лекове?');
+insert into survey (id,question) values
+(7,'Да ли сте последња 2-3 дана узимали било какве лекове (нпр. Бруфен, Кафетин, Аналгин...)?');
+insert into survey (id,question) values
+(8,'Да ли стално узимате Аспирин (Cardiopirin)? Да ли сте га узимали у последњих 5 дана?');
+insert into survey (id,question) values
+(9,'Да ли сте до сада испитивани или лечени у болници или сте тренутно на испитивању или боловању?');
+insert into survey (id,question) values
+(10,'Да ли сте вадили зуб у протеклих 7 дана?');
 
 alter sequence user_entity_id_seq restart with 5;
 alter sequence user_address_id_seq restart with 5;

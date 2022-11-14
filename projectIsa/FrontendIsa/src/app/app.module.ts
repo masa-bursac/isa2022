@@ -11,11 +11,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 import { UserProfileComponent } from './pages/user-profile/user-profile/user-profile.component';
-import { RegistrationComponent } from './pages/registration/registration.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
@@ -29,21 +31,26 @@ import { RegisterCenterAdministratorComponent } from './pages/register-center-ad
 import { ChangeCenterAdminPasswordComponent } from './pages/change-center-admin-password/change-center-admin-password.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
+import { UsersComponent } from './pages/users/users.component';
+import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
-    RegistrationComponent,
     HomePageComponent,
     NavbarComponent,
     CenterListComponent,
     RegisterCenterComponent,
     RegisterCenterAdministratorComponent,
+    RegistrationComponent,
     UserProfileCentreAdminComponent,
     BloodInStockOverviewComponent,
     CenterAdminOverviewComponent,
     ChangeCenterAdminPasswordComponent,
+    UsersComponent,
+    SurveyForUserComponent
   ],
   imports: [
     BrowserModule,
@@ -52,8 +59,10 @@ import { NgxMatDatetimePickerModule } from '@angular-material-components/datetim
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
+    MatTableModule,
     MatInputModule,
     MatButtonModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -62,9 +71,9 @@ import { NgxMatDatetimePickerModule } from '@angular-material-components/datetim
     MatToolbarModule,
     MatIconModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
     MatMenuModule,
     MatSnackBarModule,
-    MatTableModule,
     MatDividerModule,
     MatDatepickerModule,
     NgxMatDatetimePickerModule

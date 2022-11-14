@@ -1,5 +1,7 @@
 package com.example.projectIsa.Service.Implementation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.CenterAdminPasswordDTO;
 import com.example.projectIsa.DTO.UpdateDTO;
+import com.example.projectIsa.DTO.UserDTO;
 import com.example.projectIsa.Model.Address;
 import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.Education;
@@ -120,4 +123,15 @@ public class ProfileService implements IProfileService{
 		}
 	}
 	
+  @Override
+	public List<UserDTO> getUsers() {
+		List<User> users = userRepository.findAll();
+		List<UserDTO> usersDTO = new ArrayList<UserDTO>();
+		for(User user: users) {
+			UserDTO userDTO = new UserDTO(user);
+			usersDTO.add(userDTO);
+		}
+		return usersDTO;
+	}
+
 }

@@ -1,0 +1,70 @@
+.example-card{
+    width: 90%;
+    height: 90%;
+    background-color:#DCDCDC;
+    border-radius: 2.5%;
+    margin-left: 3%;
+    margin-right: 3%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.review-holder {
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-card-font {
+    font-size:18px;
+}
+.div-search {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.div-inline {
+    display: inline;
+    height: 50%;
+    width: 25%;
+    margin: 2% 2.5%;
+    padding: 1% 10px;
+    float: left;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+table {
+    width:98%;
+    margin: 1%;
+    padding: 20px;
+}
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+table th:first-child {
+    border-top-left-radius: 5px;
+}
+table th:last-child {
+    border-top-right-radius: 5px;
+}
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+th {
+    background-color: rgb(255, 120, 130);
+    font-size:14px;
+    color: white;
+}
+tr.mat-header-row {
+    height: 50px;
+}
+
+tr.mat-row:nth-child(even){
+    background-color: rgb(255, 230, 235) ;
+}
+
+tr.mat-row {
+    height: 45px;
+}
+td.mat-cell {
+    border-bottom: 1px solid rgb(255, 210, 220);
+}

@@ -2,7 +2,7 @@ package com.example.projectIsa.DTO;
 
 import com.example.projectIsa.Model.User;
 
-public class UpdateDTO {
+public class UserDTO {
 
 	int id;
     String name;
@@ -18,33 +18,8 @@ public class UpdateDTO {
     String postcode;
     String education;
     String profession;
-    Integer centerId;
-    
-    
-	public UpdateDTO() {
-		super();
-	}
-	public UpdateDTO(User user) {
-		this.id = user.getId();
-		this.name = user.getName();
-		this.surname = user.getSurname();
-		this.email = user.getEmail();
-		this.phoneNumber = user.getPhoneNumber();
-		this.jmbg = user.getJmbg();
-		this.gender = user.getGender().toString();
-		if(user.getAddress()!=null) {
-			this.street = user.getAddress().getStreet();
-			this.houseNumber = user.getAddress().getHouseNumber();
-			this.city = user.getAddress().getCity();
-			this.state = user.getAddress().getState();
-			this.postcode = user.getAddress().getPostcode();
-		}
-		if(user.getEducation()!=null) {
-			this.education = user.getEducation().getEducation();
-			this.profession = user.getEducation().getProfession();
-		}
-		this.centerId=0;
-	}
+    String role;
+
 	public int getId() {
 		return id;
 	}
@@ -129,12 +104,35 @@ public class UpdateDTO {
 	public void setProfession(String profession) {
 		this.profession = profession;
 	}
-	public Integer getCenterId() {
-		return centerId;
+	public String getRole() {
+		return role;
 	}
-	public void setCenterId(Integer centerId) {
-		this.centerId = centerId;
+	public void setRole(String role) {
+		this.role = role;
 	}
-
+	public UserDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	public UserDTO(User user) {
+		this.id = user.getId();
+		this.name = user.getName();
+		this.surname = user.getSurname();
+		this.email = user.getEmail();
+		this.phoneNumber = user.getPhoneNumber();
+		this.jmbg = user.getJmbg();
+		this.gender = user.getGender().toString();
+		this.role = user.getRole().toString();
+		if(user.getAddress()!=null) {
+			this.street = user.getAddress().getStreet();
+			this.houseNumber = user.getAddress().getHouseNumber();
+			this.city = user.getAddress().getCity();
+			this.state = user.getAddress().getState();
+			this.postcode = user.getAddress().getPostcode();
+		}
+		if(user.getEducation()!=null) {
+			this.education = user.getEducation().getEducation();
+			this.profession = user.getEducation().getProfession();
+		}
+	}
 
 }
