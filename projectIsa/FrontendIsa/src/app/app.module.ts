@@ -27,6 +27,8 @@ import { RegisterCenterComponent } from './pages/register-center/register-center
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegisterCenterAdministratorComponent } from './pages/register-center-administrator/register-center-administrator.component';
 import { ChangeCenterAdminPasswordComponent } from './pages/change-center-admin-password/change-center-admin-password.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { ChangeCenterAdminPasswordComponent } from './pages/change-center-admin-
     MatSnackBarModule,
     MatTableModule,
     MatDividerModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

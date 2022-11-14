@@ -15,4 +15,10 @@ export class AppointmentsService {
     return this.http.get(appointments_url+`/getAllFreeAppointments/${body}`);
   }
 
+  public addAppointment(body:any): Observable<any>{
+    console.log(body);
+    return this.http.post(appointments_url+`/addFreeAppointment`, body);
+  
+  }
+
 }
