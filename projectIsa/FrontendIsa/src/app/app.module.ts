@@ -28,6 +28,9 @@ import { CenterListComponent } from './pages/center-list/center-list.component';
 import { RegisterCenterComponent } from './pages/register-center/register-center.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegisterCenterAdministratorComponent } from './pages/register-center-administrator/register-center-administrator.component';
+import { ChangeCenterAdminPasswordComponent } from './pages/change-center-admin-password/change-center-admin-password.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 import { UsersComponent } from './pages/users/users.component';
 import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
@@ -45,6 +48,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     UserProfileCentreAdminComponent,
     BloodInStockOverviewComponent,
     CenterAdminOverviewComponent,
+    ChangeCenterAdminPasswordComponent,
     UsersComponent,
     SurveyForUserComponent
   ],
@@ -71,6 +75,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     MatMenuModule,
     MatSnackBarModule,
     MatDividerModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

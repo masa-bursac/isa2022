@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BloodInStockOverviewComponent } from './pages/blood-in-stock-overview/blood-in-stock-overview.component';
 import { CenterAdminOverviewComponent } from './pages/center-admin-overview/center-admin-overview.component';
 import { CenterListComponent } from './pages/center-list/center-list.component';
+import { ChangeCenterAdminPasswordComponent } from './pages/change-center-admin-password/change-center-admin-password.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-admin/user-profile-centre-admin.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'blood', component: BloodInStockOverviewComponent},
   { path: 'center', component: CenterAdminOverviewComponent},
   { path: 'centerList', component: CenterListComponent},
+  { path: 'changeCenterAdminPassword', component: ChangeCenterAdminPasswordComponent},
   { path: 'users', component: UsersComponent },
   { path: 'centerList', component: CenterListComponent},
   { path: 'takeSurvey', component: SurveyForUserComponent}

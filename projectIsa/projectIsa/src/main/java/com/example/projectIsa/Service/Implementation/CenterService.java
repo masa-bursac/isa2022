@@ -62,7 +62,7 @@ public class CenterService implements ICenterService{
 				returnCentre.getStaff().remove(admin);
 			}
 		}
-		
+
 		return returnCentre;
 	}
 

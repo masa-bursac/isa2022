@@ -1,5 +1,9 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppointmentsService } from 'src/app/services/appointments.service';
+import { CenterAdminService } from 'src/app/services/center-admin.service';
 import { CenterService } from 'src/app/services/center.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -11,6 +15,22 @@ interface address {
   postcode?: string
 }
 
+interface staff {
+  id?: number,
+  name?: string,
+  surname?: string
+}
+
+interface hour {
+  id?: number,
+  name?: string
+}
+
+interface minute {
+  id?: number,
+  name?: string
+}
+
 @Component({
   selector: 'app-center-admin-overview',
   templateUrl: './center-admin-overview.component.html',
@@ -19,10 +39,28 @@ interface address {
 export class CenterAdminOverviewComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'surname', 'email'];
+  displayedColumns1: string[] = ['id', 'date', 'duration', 'staff'];
   dataSource = [];
+  dataSource1= [];
+  staffs?: staff[];
+  hours : hour[] = [{id: 1, name:"08"},
+  {id: 2, name:"09"},
+  {id: 3, name:"10"},
+  {id: 4, name:"11"},
+  {id: 5, name:"12"},
+  {id: 6, name:"13"},
+  {id: 7, name:"14"},
+  {id: 8, name:"15"},
+  {id: 9, name:"16"}];
+
+  minutes : minute[] = [{id: 1, name:"00"},
+  {id: 2, name:"30"}];
 
   adminId : number = 0;
   centerid: number = 0;
+
+  selectedHour?: hour;
+  selectedMinute?: minute;
 
   centerAddress: address = {};
 
@@ -34,10 +72,18 @@ export class CenterAdminOverviewComponent implements OnInit {
     state: new FormControl(),
     postcode: new FormControl(),
     description: new FormControl(),
-    rating: new FormControl(),  
+    rating: new FormControl()
   }); 
+
+  validateForm1 = new FormGroup({
+    duration: new FormControl(),
+    date: new FormControl(),
+    staff: new FormControl(),
+    hours: new FormControl(),
+    minutes: new FormControl()
+  })
   
-  constructor(private fb: FormBuilder, private centreService : CenterService, private profileService: ProfileService) { }
+  constructor(private fb: FormBuilder,private adminService: CenterAdminService,private _snackBar: MatSnackBar, private centreService : CenterService, private profileService: ProfileService, private appointmentService: AppointmentsService) { }
 
   ngOnInit(): void {
     //this.decoded_token = this.authService.getDataFromToken();
@@ -45,7 +91,7 @@ export class CenterAdminOverviewComponent implements OnInit {
       this.adminId = data.id;
       this.centreService.getCenter(this.adminId).subscribe((data : any)=> {
         this.validateForm = this.fb.group({
-          name: [data.name,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
+          name: [data.name,[Validators.required, Validators.pattern(/^[A-Z\s][A-Za-z\s]*$/)]],
           street: [data.centerAddress.street,[Validators.required, Validators.pattern(/^[A-Za-z\s]*$/)]],
           houseNumber: [data.centerAddress.houseNumber,[Validators.required, Validators.pattern(/^[A-Za-z0-9]*$/)]],
           city: [data.centerAddress.city,[Validators.required, Validators.pattern(/^[A-Za-z\s]*$/)]],
@@ -55,7 +101,13 @@ export class CenterAdminOverviewComponent implements OnInit {
           rating: [data.rating,[Validators.required]],
         });
         this.dataSource = data.staff;
-
+        this.appointmentService.getAllCenters(data.id).subscribe((data : any)=> {
+          this.dataSource1 = data;
+        });
+        this.adminService.getAdmins(data.id).subscribe((data : any)=> {
+          this.staffs = data;
+          console.log(this.staffs);
+        });
       });
     })
   }
@@ -93,5 +145,63 @@ export class CenterAdminOverviewComponent implements OnInit {
   
   });
     
+  }
+  addAppointment():void{
+    const format = "yyyy-MM-ddTHH:mm:ss";
+    console.log(this.validateForm1.value.date)
+    const date = new Date(this.validateForm1.value.date);
+    switch ( this.selectedHour ) {
+      case "08":
+          date.setHours(8);
+          break;
+      case "09":
+          date.setHours(9);
+          break;
+      case "10":
+            date.setHours(10);
+            break;
+      case "11":
+            date.setHours(11);
+            break;
+      case "12":
+            date.setHours(12);
+            break;
+      case "13":
+            date.setHours(13);
+            break;
+      case "14":
+            date.setHours(14);
+            break;
+      case "15":
+            date.setHours(15);
+            break;
+      case "16":
+            date.setHours(16);
+            break;
+      default: 
+            break;
+   }
+    if(this.selectedMinute == "00"){
+      date.setMinutes(0);
+    }else if(this.selectedMinute == "30"){
+      date.setMinutes(30);
+    }
+
+    this.centreService.getCenter(this.adminId).subscribe((data : any)=> {
+    
+      const body = {
+        centerId: data.id,
+        duration: this.validateForm1.value.duration,
+        date: formatDate(date,format, "en-US"),
+        staffIds: this.validateForm1.value.staff
+      }
+      if(this.validateForm1.valid){
+        this.appointmentService.addAppointment(body).subscribe(data=>{
+          this._snackBar.open('Appointment added successfully', 'Close',{
+            duration: 3000
+          });
+        });
+     }
+    });
   }
 }

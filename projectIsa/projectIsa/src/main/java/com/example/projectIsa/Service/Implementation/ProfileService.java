@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.projectIsa.DTO.CenterAdminPasswordDTO;
 import com.example.projectIsa.DTO.UpdateDTO;
 import com.example.projectIsa.DTO.UserDTO;
 import com.example.projectIsa.Model.Address;
@@ -25,13 +27,16 @@ public class ProfileService implements IProfileService{
 	private final UserRepository userRepository;
 	private final AddressRepository addressRepository;
 	private final EducationRepository educationRepository;
+	private final PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public ProfileService(UserRepository userRepository, AddressRepository addressRepository, EducationRepository educationRepository)
+	public ProfileService(UserRepository userRepository, AddressRepository addressRepository,
+			EducationRepository educationRepository,PasswordEncoder passwordEncoder)
     {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.educationRepository = educationRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 	
 	@Override
@@ -103,6 +108,22 @@ public class ProfileService implements IProfileService{
 	}
 
 	@Override
+	public Boolean changeCenterAdminPassword(CenterAdminPasswordDTO admin) {
+		CenterAdministrator administrator = userRepository.findOneById(admin.getId());
+		if(administrator != null) {
+			administrator.setPassword(passwordEncoder.encode(admin.getPassword()));
+			if (userRepository.save(administrator) != null) {
+				return true;
+	        }        
+	        else
+	            return false;
+		}
+		else {
+			return false;
+		}
+	}
+	
+  @Override
 	public List<UserDTO> getUsers() {
 		List<User> users = userRepository.findAll();
 		List<UserDTO> usersDTO = new ArrayList<UserDTO>();
@@ -112,4 +133,5 @@ public class ProfileService implements IProfileService{
 		}
 		return usersDTO;
 	}
+
 }

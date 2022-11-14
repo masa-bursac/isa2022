@@ -1,5 +1,8 @@
 package com.example.projectIsa.Service.Implementation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -60,6 +63,21 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 		centerAdmin.setHasToChangePass(true);
 		centerAdministratorRepository.save(centerAdmin);
 		return true;
+	}
+
+	@Override
+	public List<CenterAdministrator> getAllCentreAdminByCenterId(Integer id) {
+		List<CenterAdministrator> returnAdmin = new ArrayList<CenterAdministrator>();
+		for(Integer i = 1; i<=userRepository.count(); i++) {
+			CenterAdministrator ca = userRepository.findOneById(i);
+			
+			if(ca!=null && ca.getCenter().getId().equals(id))
+			{
+				ca.setCenter(null);
+				returnAdmin.add(ca);
+			}
+		}	
+		return returnAdmin;
 	}
 
 }

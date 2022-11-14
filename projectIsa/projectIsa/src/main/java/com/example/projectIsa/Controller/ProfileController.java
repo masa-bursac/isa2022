@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.projectIsa.DTO.CenterAdminPasswordDTO;
 import com.example.projectIsa.DTO.UpdateDTO;
 import com.example.projectIsa.Service.IProfileService;
 
@@ -33,9 +34,15 @@ public class ProfileController {
     	return profileService.update(userInfo);	      
 	}
     
+    @PutMapping("/changeCenterAdminPassword")
+	public Boolean changeCenterAdminPassword(@RequestBody CenterAdminPasswordDTO admin) {
+    	return profileService.changeCenterAdminPassword(admin);	      
+	}
+
     @GetMapping("/getUsers")
     public ResponseEntity getUsers() {
     	return new ResponseEntity(profileService.getUsers(), HttpStatus.OK);
     }
+
 
 }
