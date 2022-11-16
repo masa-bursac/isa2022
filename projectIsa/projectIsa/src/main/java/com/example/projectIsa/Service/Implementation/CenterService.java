@@ -1,6 +1,7 @@
 package com.example.projectIsa.Service.Implementation;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +58,13 @@ public class CenterService implements ICenterService{
 		}
 		
 		returnCentre.setStaff(center.getStaff());
-		for(CenterAdministrator admin: returnCentre.getStaff()) {
+		/*for(CenterAdministrator admin: returnCentre.getStaff()) {
 			if(admin.getId().equals(user.getId())) {
 				returnCentre.getStaff().remove(admin);
 			}
-		}
-
+		}*/
+		returnCentre.getStaff().removeIf((CenterAdministrator a) -> a.getId() == user.getId());
+	
 		return returnCentre;
 	}
 
