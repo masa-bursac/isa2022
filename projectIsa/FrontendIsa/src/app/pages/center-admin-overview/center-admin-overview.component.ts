@@ -128,7 +128,7 @@ export class CenterAdminOverviewComponent implements OnInit {
         name: this.validateForm.value.name,
         centerAddress: this.centerAddress,
         description: this.validateForm.value.description,
-        rating: this.validateForm.value.rating,
+        rating: Number(this.validateForm.value.rating),
         id: this.centerid,
       }
 
