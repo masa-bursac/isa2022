@@ -202,6 +202,11 @@ export class CenterAdminOverviewComponent implements OnInit {
           });
         });
      }
+     else{
+      this._snackBar.open('Error! All feilds are required!', 'Close',{
+        duration: 3000
+      });
+     }
     });
   }
 }
