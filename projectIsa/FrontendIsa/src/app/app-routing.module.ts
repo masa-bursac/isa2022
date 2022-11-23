@@ -10,9 +10,11 @@ import { UserProfileCentreAdminComponent } from './pages/user-profile-centre-adm
 import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile/user-profile.component';
 import { UsersComponent } from './pages/users/users.component';
+import { LoginComponent } from './pages/login/login.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', pathMatch:'full', redirectTo:'homePage'},
+  { path: '', pathMatch:'full', redirectTo:'landingPage'},
   { path: 'userProfile', component: UserProfileComponent },
   { path: 'userProfileCentreAdmin', component: UserProfileCentreAdminComponent },
   { path: 'registration', component: RegistrationComponent},
@@ -22,8 +24,9 @@ const routes: Routes = [
   { path: 'centerList', component: CenterListComponent},
   { path: 'changeCenterAdminPassword', component: ChangeCenterAdminPasswordComponent},
   { path: 'users', component: UsersComponent },
-  { path: 'centerList', component: CenterListComponent},
-  { path: 'takeSurvey', component: SurveyForUserComponent}
+  { path: 'takeSurvey', component: SurveyForUserComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'landingPage', component: LandingPageComponent}
 ];
 
 @NgModule({

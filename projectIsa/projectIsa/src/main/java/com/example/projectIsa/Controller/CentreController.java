@@ -1,5 +1,6 @@
 package com.example.projectIsa.Controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,6 +23,7 @@ public class CentreController {
 	}
 	
 	@GetMapping("/getCentreByAdminId/{id}")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
     public CentreDTO getCentreByAdminId(@PathVariable Integer id){
 			
         return centreService.getCenterByAdminId(id);
@@ -29,6 +31,7 @@ public class CentreController {
     }
 	
 	@PutMapping("/update")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
 	public Boolean edit(@RequestBody CentreDTO centerInfo) {
 
     	return centreService.update(centerInfo);	      

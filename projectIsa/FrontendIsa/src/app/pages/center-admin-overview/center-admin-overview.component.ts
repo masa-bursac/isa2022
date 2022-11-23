@@ -4,8 +4,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { CenterAdminService } from 'src/app/services/center-admin.service';
+import { Router } from '@angular/router';
 import { CenterService } from 'src/app/services/center.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 interface address {
   street?: string,
@@ -83,10 +85,17 @@ export class CenterAdminOverviewComponent implements OnInit {
     minutes: new FormControl()
   })
   
-  constructor(private fb: FormBuilder,private adminService: CenterAdminService,private _snackBar: MatSnackBar, private centreService : CenterService, private profileService: ProfileService, private appointmentService: AppointmentsService) { }
+  constructor(private fb: FormBuilder,private adminService: CenterAdminService,private _snackBar: MatSnackBar, private centreService : CenterService, private profileService: ProfileService, private appointmentService: AppointmentsService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    //this.decoded_token = this.authService.getDataFromToken();
+    if(Object.keys(this.tokenStorage.getUser()).length === 0){
+      alert("Unauthorized!");
+      this.router.navigate(['/landingPage']);
+    }else if(this.tokenStorage.getUser().roles[0] !== "ROLE_CENTERADMIN"){
+      alert("Unauthorized!");
+      this.router.navigate(['/homePage']);
+    }
+
     this.profileService.getProfile('mila@gmail.com').subscribe(data=>{
       this.adminId = data.id;
       this.centreService.getCenter(this.adminId).subscribe((data : any)=> {

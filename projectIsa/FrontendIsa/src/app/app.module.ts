@@ -34,6 +34,9 @@ import { NgxMatDatetimePickerModule } from '@angular-material-components/datetim
 import { UsersComponent } from './pages/users/users.component';
 import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { LoginComponent } from './pages/login/login.component';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     CenterAdminOverviewComponent,
     ChangeCenterAdminPasswordComponent,
     UsersComponent,
-    SurveyForUserComponent
+    SurveyForUserComponent,
+    LoginComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +83,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     MatDatepickerModule,
     NgxMatDatetimePickerModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

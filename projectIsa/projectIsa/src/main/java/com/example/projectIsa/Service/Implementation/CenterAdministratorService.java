@@ -52,7 +52,7 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 			case "Male": centerAdmin.setGender(Gender.MALE); break;
 			default: centerAdmin.setGender(Gender.NONBINARY); break;
 		}
-		centerAdmin.setRole(Role.CENTERADMIN);
+		centerAdmin.setRole(Role.ROLE_CENTERADMIN);
 		centerAdmin.setPassword(passwordEncoder.encode(adminDTO.getPassword()));
 		Address address = addressService.addAddress(adminDTO, centerAdmin);
 		centerAdmin.setAddress(address);
