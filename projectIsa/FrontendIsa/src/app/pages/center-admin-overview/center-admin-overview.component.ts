@@ -96,7 +96,7 @@ export class CenterAdminOverviewComponent implements OnInit {
       this.router.navigate(['/homePage']);
     }
 
-    this.profileService.getProfile('mila@gmail.com').subscribe(data=>{
+    this.profileService.getProfile(this.tokenStorage.getUser().email).subscribe(data=>{
       this.adminId = data.id;
       this.centreService.getCenter(this.adminId).subscribe((data : any)=> {
         this.validateForm = this.fb.group({

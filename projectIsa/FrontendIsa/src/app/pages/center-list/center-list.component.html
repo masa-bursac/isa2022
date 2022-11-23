@@ -58,7 +58,7 @@
       </form>
 </div>
 
-<div class="review-holder"><button mat-mini-fab (click)="showAddCenter()">+</button></div>
+<div class="review-holder" *ngIf="role === 'ROLE_SYSTEMADMIN'"><button mat-mini-fab (click)="showAddCenter()">+</button></div>
 <app-register-center *ngIf="addForm == true" (onClose)="RegisterCenterClosed($event)"></app-register-center>
 
 

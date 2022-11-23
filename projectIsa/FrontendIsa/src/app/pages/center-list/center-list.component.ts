@@ -17,6 +17,7 @@ export class CenterListComponent implements OnInit {
   public addForm: boolean = false;
   search : string = '';
   selectedValue : number = 0;
+  role: any;
 
   constructor(private centerService : CenterService, private router: Router, private tokenStorage: TokenStorageService) { }
 
@@ -25,6 +26,11 @@ export class CenterListComponent implements OnInit {
       if(this.tokenStorage.getUser().roles[0] === "ROLE_CENTERADMIN"){
         alert("Unauthorized!");
         this.router.navigate(['/homePage']);
+      }else if(Object.keys(this.tokenStorage.getUser()).length === 0){
+        this.role = "ROLE_UNREGISTERED"
+      }else{
+        this.role = this.tokenStorage.getUser().roles[0];
+        console.log(this.role);
       }
     }
     this.showAllCenters();
