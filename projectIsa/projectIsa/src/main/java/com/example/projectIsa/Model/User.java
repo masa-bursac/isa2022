@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import javax.persistence.DiscriminatorType;
 
 import com.example.projectIsa.DTO.RegistrationDTO;
@@ -32,11 +33,16 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_entity_id_seq")
     @Column(name = "id")
 	private Integer id;
+	@Pattern(regexp = "^[A-Z][A-Za-z\\s]{1,25}$")
 	private String name;
+	@Pattern(regexp = "^[A-Z][A-Za-z\\s]{1,25}$")
 	private String surname;
+	@Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")
 	private String email;
 	private String password;
+	@Pattern(regexp = "^(\\s*[0-9]+)+$")
 	private String phoneNumber;
+	@Pattern(regexp = "^[0-9]{13,13}$")
 	private String jmbg;
 	private Gender gender;
 	@Column(insertable = false, updatable = false)

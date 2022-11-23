@@ -55,19 +55,19 @@ export class UserProfileComponent implements OnInit {
 
     this.profileService.getProfile(this.tokenStorage.getUser().email).subscribe(data=> {
       this.validateForm = this.fb.group({
-        name: [data.name,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
-        surname: [data.surname,[Validators.required, Validators.pattern(/^[A-Z][a-z]{1,15}$/)]],
+        name: [data.name,[Validators.required, Validators.pattern(/^[A-Z][A-Za-z\s]{1,25}$/)]],
+        surname: [data.surname,[Validators.required, Validators.pattern(/^[A-Z][A-Za-z\s]{1,25}$/)]],
         email: [data.email,[Validators.required]],
-        phoneNumber : [data.phoneNumber,[Validators.required]],
+        phoneNumber : [data.phoneNumber,[Validators.required, Validators.pattern(/^(\s*[0-9]+)+$/)]],
         jmbg: [data.jmbg,[Validators.required, Validators.pattern(/^[0-9]{13,13}$/)]],
         gender: [data.gender,[Validators.required]],
-        street: [data.street,[Validators.required, Validators.pattern(/^[A-Za-z\s]*$/)]],
+        street: [data.street,[Validators.required, Validators.pattern(/^[A-Z][A-Za-z\s]*$/)]],
         houseNumber: [data.houseNumber,[Validators.required, Validators.pattern(/^[A-Za-z0-9]*$/)]],
-        city: [data.city,[Validators.required, Validators.pattern(/^[A-Za-z\s]*$/)]],
-        state: [data.state,[Validators.required, Validators.pattern(/^[A-Za-z\s]*$/)]],
+        city: [data.city,[Validators.required, Validators.pattern(/^[A-Z][A-Za-z\s]*$/)]],
+        state: [data.state,[Validators.required, Validators.pattern(/^[A-Z][A-Za-z\s]*$/)]],
         postcode: [data.postcode,[Validators.required, Validators.pattern(/^[0-9]{1,13}$/)]],
-        education: [data.education,[Validators.required]],
-        profession: [data.profession,[Validators.required]],
+        education: [data.education,[Validators.required, Validators.pattern(/^(?:[A-Za-z]+)(?:[A-Za-z0-9 _]*)$/)]],
+        profession: [data.profession,[Validators.required, Validators.pattern(/^(?:[A-Za-z]+)(?:[A-Za-z0-9 _]*)$/)]],
       });
       this.selectedValueGender = data.gender;
     });

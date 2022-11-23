@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,10 +22,15 @@ public class Address {
 	private Integer id;
 	private double longitude;
 	private double latitude;
+	@Pattern(regexp = "^[A-Z][A-Za-z\\s]*$")
 	private String street;
+	@Pattern(regexp = "^[A-Za-z0-9]*$")
 	private String houseNumber;
+	@Pattern(regexp = "^[A-Z][A-Za-z\\s]*$")
 	private String city;
+	@Pattern(regexp = "^[A-Z][A-Za-z\\s]*$")
 	private String state;
+	@Pattern(regexp = "^[0-9]{1,13}$")
 	private String postcode;
 	@JsonIgnore
 	@OneToOne(mappedBy = "address")

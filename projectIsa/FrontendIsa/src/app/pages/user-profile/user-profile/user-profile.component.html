@@ -29,6 +29,10 @@
             <input matInput placeholder="Phone number" formControlName="phoneNumber">
           </mat-form-field>
           <div *ngIf="validateForm.get('phoneNumber')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('phoneNumber')?.invalid &&
+                (validateForm.get('phoneNumber')?.dirty || validateForm.get('phoneNumber')?.touched)"class="alert">
+                Phone number must have only numbers and spaces
+          </div>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="JMBG" formControlName="jmbg">
           </mat-form-field>
@@ -89,10 +93,18 @@
             <input matInput placeholder="Education" formControlName="education">
           </mat-form-field>
           <div *ngIf="validateForm.get('education')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('education')?.invalid &&
+                (validateForm.get('education')?.dirty || validateForm.get('education')?.touched)"class="alert">
+                Education can only have letters, numbers and spaces
+          </div>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Profession" formControlName="profession">
           </mat-form-field>
           <div *ngIf="validateForm.get('profession')?.errors?.['required']" class="alert">Field is required</div>
+          <div *ngIf="validateForm.get('profession')?.invalid &&
+                (validateForm.get('profession')?.dirty || validateForm.get('profession')?.touched)"class="alert">
+                Profession can only have letters, numbers and spaces
+          </div>
         </mat-card-content>
         <button mat-stroked-button color="accent" class="btn-block">Update</button>
       </form>

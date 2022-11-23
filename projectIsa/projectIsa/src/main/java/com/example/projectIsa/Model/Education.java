@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,7 +21,9 @@ public class Education {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_education_id_seq")
     @Column(name = "id")
 	private Integer id;
+	@Pattern(regexp = "^(?:[A-Za-z]+)(?:[A-Za-z0-9 _]*)$")
 	private String education;
+	@Pattern(regexp = "^(?:[A-Za-z]+)(?:[A-Za-z0-9 _]*)$")
 	private String profession;
 	@JsonIgnore
 	@OneToOne(mappedBy = "education")
