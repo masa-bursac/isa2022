@@ -12,8 +12,7 @@ import { RegisterCenterComponent } from '../register-center/register-center.comp
 export class CenterListComponent implements OnInit {
 
   public allCenters: any[] = [];
-  public searchedCenters: any[] = [];
-  public allFiltered: any[] = [];
+  public allFilteredAndSorted: any[] = [];
   public addForm: boolean = false;
   search : string = '';
   selectedValue : number = 0;
@@ -43,13 +42,51 @@ export class CenterListComponent implements OnInit {
   }
 
   public searchCenters(): any {
-      this.centerService.searchCenters(this.search).subscribe(data => {
-        this.searchedCenters = data;
-        if(this.selectedValue !== 0){
-          this.allFiltered = this.searchedCenters.filter(center => center.rating === this.selectedValue);
-        }
+    this.centerService.searchCenters(this.search).subscribe(data => {
+      if(this.selectedValue === undefined){
+        this.allFilteredAndSorted = data;
+      }else if(this.allFilteredAndSorted.length !== 0 && this.selectedValue !== 0){
+        this.allFilteredAndSorted = data;
+        this.allFilteredAndSorted = this.allFilteredAndSorted.filter(center => center.rating === this.selectedValue);
+      }else if(this.search === '' && this.selectedValue === undefined && this.allFilteredAndSorted.length !==0){
+        this.allFilteredAndSorted = [];
+      }else {
+        this.allFilteredAndSorted = data;
       }
-    );
+    });
+  }
+
+  public filterRating(value: number): void {
+    this.selectedValue = value;
+    console.log(this.search);
+    console.log(this.selectedValue);
+    console.log(this.allFilteredAndSorted.length);
+    if(this.allFilteredAndSorted.length === 0){
+      this.allFilteredAndSorted = this.allCenters.filter(center => center.rating === value);
+    }else if(this.selectedValue === undefined && this.allFilteredAndSorted.length === 0){
+      this.searchCenters();
+    }else if(this.search !== '' && this.selectedValue === undefined && this.allFilteredAndSorted.length !== 0){
+      this.searchCenters();
+    }else if(this.search !== '' && this.selectedValue !== 0 && this.allFilteredAndSorted.length !== 0){
+      this.searchCenters();
+    }else if(this.search !== ''){
+      this.allFilteredAndSorted = this.allFilteredAndSorted.filter(center => center.rating === value);
+    }else if(this.search === '' && this.selectedValue === undefined && this.allFilteredAndSorted.length !==0){
+      this.allFilteredAndSorted = [];
+    }else {
+      this.allFilteredAndSorted = this.allCenters.filter(center => center.rating === value);
+    }
+  }
+
+  public setCenters(): any {
+    console.log(this.search);
+    console.log(this.selectedValue);
+    console.log(this.allFilteredAndSorted.length);
+    if(this.search === '' && this.selectedValue !== 0){
+      this.allFilteredAndSorted = this.allCenters.filter(center => center.rating === this.selectedValue);
+    }else if(this.search === '' && (this.selectedValue === 0 || this.selectedValue === undefined) && this.allFilteredAndSorted.length !==0){
+      this.allFilteredAndSorted = [];
+    }
   }
 
   ratings: any[] = [
@@ -59,18 +96,6 @@ export class CenterListComponent implements OnInit {
     {value: 2, viewValue: '2'},
     {value: 1, viewValue: '1'}
   ];
-
-  public filterRating(value: number): void {
-    this.selectedValue = value;
-    if(this.search===''){
-      this.searchedCenters = [];
-    }
-    if(this.searchedCenters.length === 0) {
-      this.allFiltered = this.allCenters.filter(center => center.rating === value);
-    } else {
-      this.allFiltered = this.searchedCenters.filter(center => center.rating === value);
-    }
-  }
 
   public showAddCenter(): void {
       this.addForm = !this.addForm;
@@ -86,36 +111,30 @@ export class CenterListComponent implements OnInit {
   public sortByName(value: string) {
     if (value === 'ascending') {
       this.allCenters.sort((a,b) => a.name > b.name ? 1 : -1);
-      this.allFiltered.sort((a,b) => a.name > b.name ? 1 : -1);
-      this.searchedCenters.sort((a,b) => a.name > b.name ? 1 : -1);
+      this.allFilteredAndSorted.sort((a,b) => a.name > b.name ? 1 : -1);
     } else if (value === 'descending') {
       this.allCenters.sort((a,b) => a.name < b.name ? 1 : -1);
-      this.allFiltered.sort((a,b) => a.name < b.name ? 1 : -1);
-      this.searchedCenters.sort((a,b) => a.name < b.name ? 1 : -1);
+      this.allFilteredAndSorted.sort((a,b) => a.name < b.name ? 1 : -1);
     }
   }
 
   public sortByCity(value: string) {
     if (value === 'ascending') {
       this.allCenters.sort((a,b) => a.city > b.city ? 1 : -1);
-      this.allFiltered.sort((a,b) => a.city > b.city ? 1 : -1);
-      this.searchedCenters.sort((a,b) => a.city > b.city ? 1 : -1);
+      this.allFilteredAndSorted.sort((a,b) => a.city > b.city ? 1 : -1);
     } else if (value === 'descending') {
       this.allCenters.sort((a,b) => a.city < b.city ? 1 : -1);
-      this.allFiltered.sort((a,b) => a.city < b.city ? 1 : -1);
-      this.searchedCenters.sort((a,b) => a.city < b.city ? 1 : -1);
+      this.allFilteredAndSorted.sort((a,b) => a.city < b.city ? 1 : -1);
     }
   }
 
   public sortByRating(value: string) {
     if (value === 'ascending') {
       this.allCenters.sort((a,b) => a.rating > b.rating ? 1 : -1);
-      this.allFiltered.sort((a,b) => a.rating > b.rating ? 1 : -1);
-      this.searchedCenters.sort((a,b) => a.rating > b.rating ? 1 : -1);
+      this.allFilteredAndSorted.sort((a,b) => a.rating > b.rating ? 1 : -1);
     } else if (value === 'descending') {
       this.allCenters.sort((a,b) => a.rating < b.rating ? 1 : -1);
-      this.allFiltered.sort((a,b) => a.rating < b.rating ? 1 : -1);
-      this.searchedCenters.sort((a,b) => a.rating < b.rating ? 1 : -1);
+      this.allFilteredAndSorted.sort((a,b) => a.rating < b.rating ? 1 : -1);
     }
   }
 

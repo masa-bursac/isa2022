@@ -10,6 +10,10 @@ insert into center_address (id,longitude,latitude,street,city,state,house_number
 (3,0,0,'Beogradska','Beograd','Srbija','21','21000');
 insert into center_address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (4,0,0,'Bulevar Vojvode Putnika','Beograd','Srbija','4','21000');
+insert into center_address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(5,0,0,'Vojvode Putnika','Beograd','Srbija','4','21000');
+insert into center_address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(6,0,0,'Putnikova','Beograd','Srbija','4','21000');
 
 insert into center (id,name,description,rating, center_address_id) values
 (1,'Centar Novi Sad','Centar za transfuziju krvi u Novom Sadu',5, 1);
@@ -19,6 +23,10 @@ insert into center (id,name,description,rating) values
 (3,'Centar Beograd','Centar za transfuziju krvi u Beogradu',3);
 insert into center (id,name,description,rating) values
 (4,'Centar Novi Beograd','Centar za transfuziju krvi na Novom Beogradu',4);
+insert into center (id,name,description,rating) values
+(5,'Beograd Centar','Centar za transfuziju krvi na Novom Beogradu',4);
+insert into center (id,name,description,rating) values
+(6,'Novi Beograd centar','Centar za transfuziju krvi na Novom Beogradu',5);
 
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
 (1,2,'Pera','Perovic','pera@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','3012457898654', 0, false);
@@ -89,5 +97,5 @@ insert into survey (id,question) values
 alter sequence user_entity_id_seq restart with 5;
 alter sequence user_address_id_seq restart with 5;
 alter sequence user_education_id_seq restart with 5;
-alter sequence center_id_seq restart with 5;
-alter sequence center_address_id_seq restart with 5;
+alter sequence center_id_seq restart with 7;
+alter sequence center_address_id_seq restart with 7;
