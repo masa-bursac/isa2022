@@ -58,9 +58,6 @@ export class CenterListComponent implements OnInit {
 
   public filterRating(value: number): void {
     this.selectedValue = value;
-    console.log(this.search);
-    console.log(this.selectedValue);
-    console.log(this.allFilteredAndSorted.length);
     if(this.allFilteredAndSorted.length === 0){
       this.allFilteredAndSorted = this.allCenters.filter(center => center.rating === value);
     }else if(this.selectedValue === undefined && this.allFilteredAndSorted.length === 0){
@@ -79,9 +76,6 @@ export class CenterListComponent implements OnInit {
   }
 
   public setCenters(): any {
-    console.log(this.search);
-    console.log(this.selectedValue);
-    console.log(this.allFilteredAndSorted.length);
     if(this.search === '' && this.selectedValue !== 0){
       this.allFilteredAndSorted = this.allCenters.filter(center => center.rating === this.selectedValue);
     }else if(this.search === '' && (this.selectedValue === 0 || this.selectedValue === undefined) && this.allFilteredAndSorted.length !==0){
