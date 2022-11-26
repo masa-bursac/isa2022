@@ -79,7 +79,7 @@ public class AuthController {
 					.badRequest()
 					.body(new MessageResponse("Error: Email already exist!"));
 		}
-
+		
 		authService.registration(signUpRequest);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

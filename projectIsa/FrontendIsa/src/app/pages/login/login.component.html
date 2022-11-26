@@ -9,6 +9,10 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Email" formControlName="email">
           </mat-form-field>
+          <div *ngIf="validateForm.get('email')?.invalid &&
+                (validateForm.get('email')?.dirty || validateForm.get('email')?.touched)"class="alert">
+                Email must be with combination of letters, numers, special character @, no spaces
+          </div>
           <mat-form-field class="example-full-width">
             <input [type]="hide ? 'password' : 'text'" matInput placeholder="Password" formControlName="password">
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

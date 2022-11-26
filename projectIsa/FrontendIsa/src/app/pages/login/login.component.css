@@ -80,3 +80,6 @@ body {
 .btn-block {
   color:rgb(216, 30, 5);
 }
+.alert {
+  color: red;
+}
