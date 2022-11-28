@@ -78,6 +78,10 @@ export class CenterAdminOverviewComponent implements OnInit {
   ];
   selectedDuration?: duration;
 
+  format = "yyyy-MM-ddTHH:mm:ss";
+  date = new Date(new Date().setDate(new Date().getDate() + 1));
+  todayDate = formatDate(this.date, this.format, "en-US");
+
   validateForm = new FormGroup({
     name: new FormControl(),
     street: new FormControl(),
