@@ -1,5 +1,7 @@
 package com.example.projectIsa.Service.Implementation;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
@@ -34,6 +36,19 @@ public class AppointmentService implements IAppointmentService{
 	@Override
 	public Appointment addFreeAppointment(FreeAppointmentDTO appointment) {
 		Appointment newAppointment = new Appointment();
+		
+		for(Appointment a: appointmentRepository.findAllByCenterId(appointment.getCenterId())) {
+			if(a.getDate().equals(appointment.getDate())) {
+				for(CenterAdministrator ca: a.getCenterAdmin()) {
+					for(Integer ids: appointment.getStaffIds()) {
+						if(ca.getId().equals(ids)) {
+							return newAppointment;
+						}
+					}
+				}
+			}
+		}
+		
 		newAppointment.setId((int)(appointmentRepository.count() + 1));
 		newAppointment.setDate(appointment.getDate());
 		newAppointment.setDuration(appointment.getDuration());

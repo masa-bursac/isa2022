@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ public class AppointmentController {
 	}
 	
 	@PostMapping(value = "/addFreeAppointment")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
     public ResponseEntity registerCenter(@RequestBody FreeAppointmentDTO appointment) {
         try {
         	return new ResponseEntity(appointmentService.addFreeAppointment(appointment), HttpStatus.OK);
@@ -36,8 +38,9 @@ public class AppointmentController {
         }
     }
 	
-	 @GetMapping("/getAllFreeAppointments/{centerId}")
-	    public List<AppointmentDTO> getAllAppointments(@PathVariable Integer centerId) {
-	        return appointmentService.getAllAppointments(centerId);
-	    }
+	@GetMapping("/getAllFreeAppointments/{centerId}")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
+    public List<AppointmentDTO> getAllAppointments(@PathVariable Integer centerId) {
+        return appointmentService.getAllAppointments(centerId);
+    }
 }

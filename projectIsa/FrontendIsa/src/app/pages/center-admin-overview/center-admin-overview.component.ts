@@ -33,6 +33,11 @@ interface minute {
   name?: string
 }
 
+interface duration {
+  id?: number,
+  name?: string
+}
+
 @Component({
   selector: 'app-center-admin-overview',
   templateUrl: './center-admin-overview.component.html',
@@ -66,6 +71,13 @@ export class CenterAdminOverviewComponent implements OnInit {
 
   centerAddress: address = {};
 
+  durations : duration[] = [
+    {id: 1, name:"10"},
+    {id: 2, name:"20"},
+    {id: 2, name:"30"}
+  ];
+  selectedDuration?: duration;
+
   validateForm = new FormGroup({
     name: new FormControl(),
     street: new FormControl(),
@@ -78,7 +90,7 @@ export class CenterAdminOverviewComponent implements OnInit {
   }); 
 
   validateForm1 = new FormGroup({
-    duration: new FormControl(),
+    durations: new FormControl(),
     date: new FormControl(),
     staff: new FormControl(),
     hours: new FormControl(),
@@ -115,7 +127,6 @@ export class CenterAdminOverviewComponent implements OnInit {
         });
         this.adminService.getAdmins(data.id).subscribe((data : any)=> {
           this.staffs = data;
-          console.log(this.staffs);
         });
       });
     })
@@ -141,7 +152,6 @@ export class CenterAdminOverviewComponent implements OnInit {
         id: this.centerid,
       }
 
-      console.log(body);
       this.centreService.editCenter(body).subscribe((data:any) => {
         if(data)
           alert("Profile successfully edited");
@@ -157,7 +167,6 @@ export class CenterAdminOverviewComponent implements OnInit {
   }
   addAppointment():void{
     const format = "yyyy-MM-ddTHH:mm:ss";
-    console.log(this.validateForm1.value.date)
     const date = new Date(this.validateForm1.value.date);
     switch ( this.selectedHour ) {
       case "08":
@@ -197,18 +206,24 @@ export class CenterAdminOverviewComponent implements OnInit {
     }
 
     this.centreService.getCenter(this.adminId).subscribe((data : any)=> {
-    
       const body = {
         centerId: data.id,
-        duration: this.validateForm1.value.duration,
+        duration: this.validateForm1.value.durations,
         date: formatDate(date,format, "en-US"),
         staffIds: this.validateForm1.value.staff
       }
       if(this.validateForm1.valid){
         this.appointmentService.addAppointment(body).subscribe(data=>{
-          this._snackBar.open('Appointment added successfully', 'Close',{
-            duration: 3000
-          });
+          if(data.id===null){
+            this._snackBar.open('Appointment already exist', 'Close',{
+              duration: 3000
+            });
+          }else {
+            this._snackBar.open('Appointment added successfully', 'Close',{
+              duration: 3000
+            });
+            window.location.reload();
+          }
         });
      }
      else{

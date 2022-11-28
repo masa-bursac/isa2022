@@ -64,67 +64,78 @@
           <div *ngIf="validateForm.get('rating')?.errors?.['required']" class="alert">Field is required</div>
         </mat-card-content>
         <button mat-stroked-button color="accent" class="btn-block">Update</button>
-        <b>Other admins:</b>
-        <table id="tableA" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            
-          </ng-container>
-      
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Name </th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.name}} </td>
-          </ng-container>
-      
-          <ng-container matColumnDef="surname">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Surname </th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.surname}} </td>
-          </ng-container>
+        <div style="margin-top: 10%">
+          <h3><b>Other admins:</b></h3>
+          <table id="tableA" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Email </th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.email}} </td>  
-          </ng-container>
-      
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <b>Free appointments:</b>
-        <table id="tableA" mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>             
+            </ng-container>
+        
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;">Name </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.name}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="surname">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Surname </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.surname}} </td>
+            </ng-container>
 
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            
-          </ng-container>
-      
-          <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Date: </th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.date[2]}}/{{element.date[1]}}/{{element.date[0]}} {{element.date[3]}}:{{element.date[4]}}</td>
-          </ng-container>
-      
-          <ng-container matColumnDef="duration">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Duration: </th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.duration}} min</td>
-          </ng-container>
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Email </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.email}} </td>  
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
 
-          <ng-container matColumnDef="staff">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Staff: </th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;">
-              <div *ngFor="let category of element.staff">
-                {{category.name}} {{category.surname}}, 
-             </div></td>
-          </ng-container>
+        <div style="margin-top: 10%; margin-bottom: 10%;">
+          <h3><b>Free appointments:</b></h3>
+          <table id="tableA" mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
-        </table>
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              
+            </ng-container>
+        
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;">Date: </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.date[2]}}/{{element.date[1]}}/{{element.date[0]}} {{element.date[3]}}:{{element.date[4]}} h</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="duration">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Duration: </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.duration}} min</td>
+            </ng-container>
+
+            <ng-container matColumnDef="staff">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Staff: </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <div *ngFor="let category of element.staff">
+                  {{category.name}} {{category.surname}}
+              </div></td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          </table>
+        </div>
+
         <form class="example-form" [formGroup]="validateForm1" (ngSubmit)="addAppointment()">
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Duration" formControlName="duration" required>
+            <mat-label>Duration</mat-label>
+            <mat-select formControlName="durations" [(value)]="selectedDuration" required>
+                <mat-option *ngFor="let duration of durations" [value]="duration.name" >
+                  {{duration.name}} min
+                </mat-option>
+              </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Choose a date</mat-label>
