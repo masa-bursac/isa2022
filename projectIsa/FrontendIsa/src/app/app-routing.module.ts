@@ -12,6 +12,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile/user-pro
 import { UsersComponent } from './pages/users/users.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointment-reg-user/schedule-appointment-reg-user.component';
 
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo:'landingPage'},
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'takeSurvey', component: SurveyForUserComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'landingPage', component: LandingPageComponent}
+  { path: 'landingPage', component: LandingPageComponent},
+  { path: 'scheduleAppointment', component: ScheduleAppointmentRegUserComponent}
 ];
 
 @NgModule({

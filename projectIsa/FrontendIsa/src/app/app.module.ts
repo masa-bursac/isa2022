@@ -37,6 +37,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { LoginComponent } from './pages/login/login.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointment-reg-user/schedule-appointment-reg-user.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
     UsersComponent,
     SurveyForUserComponent,
     LoginComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    ScheduleAppointmentRegUserComponent
   ],
   imports: [
     BrowserModule,

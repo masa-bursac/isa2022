@@ -1,5 +1,6 @@
 package com.example.projectIsa.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,11 @@ public class AppointmentController {
 	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
     public List<AppointmentDTO> getAllAppointments(@PathVariable Integer centerId) {
         return appointmentService.getAllAppointments(centerId);
+    }
+	
+	@GetMapping("/findAppointment/{date}")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
+    public List<CentersDTO> findAppointment(@PathVariable String date) {
+        return appointmentService.findAppointment(date);
     }
 }

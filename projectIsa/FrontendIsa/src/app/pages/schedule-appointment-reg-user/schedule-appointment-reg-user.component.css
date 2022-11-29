@@ -1,0 +1,125 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+  background: #e2e2e2;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.login-wrapper .example-form {
+  min-width: 100%;
+  max-width: 500px;
+  width: 100%;
+}
+
+.login-wrapper .example-full-width,
+.login-wrapper .btn-block{
+  width: 100%;
+}
+
+.login-wrapper mat-card-header {
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-weight: 700;
+  margin-bottom: 15%;
+}
+
+.login-wrapper mat-card-header mat-card-title {
+  font-size: 30px;
+  margin: 0;
+}
+
+.login-wrapper mat-form-field {
+  margin-bottom: 1%;
+  margin-top: 3%;
+}
+
+.login-wrapper .mat-card {
+  padding: 40px 70px 50px;
+  margin-bottom: 70px;
+}
+
+.login-wrapper .mat-stroked-button {
+  border: 1px solid currentColor;
+  line-height: 54px;
+  background: #FFF7FA;
+}
+
+.alert {
+  color: red;
+}
+
+table {
+  width: 100%;
+}
+
+.example-card{
+  width: 50%;
+  max-height: 700px;
+  background-color:#DCDCDC;
+  border-radius: 2.5%;
+  margin-left: 3%;
+  margin-right: 3%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.review-holder {
+  margin-top: 1%;
+  display: flex;
+  justify-content: center;
+}
+
+.mat-card-font {
+  font-size:18px;
+}
+
+.div-search {
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+}
+
+.div-inline {
+  display: flex;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background: rgb(255, 136, 136);
+}
+
+.example-full {
+  width: 300px;
+}
+
+.mat-field-space {
+  width: 100%;
+  padding: 2%;
+}
+
+.div-holder {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.label-sort {
+  font-size: large;
+}
+
+.sort-items {
+  display: flex;
+  align-items: inline;
+  justify-content: space-between;
+}
+
+
+

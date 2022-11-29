@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card [class.mat-elevation-z10]="true">
+        <mat-card-header>
+            <mat-card-title>Find appointment</mat-card-title>
+        </mat-card-header>
+    <form class="example-form" [formGroup]="validateForm1" (ngSubmit)="findAppointment()">
+    <mat-card-content>
+        <mat-form-field class="example-full-width">
+            <mat-label>Choose a date</mat-label>
+            <input [min]="todayDate" matInput [matDatepicker]="picker" formControlName="date" required>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Hour</mat-label>
+            <mat-select formControlName="hours" [(value)]="selectedHour"required >
+                <mat-option *ngFor="let hour of hours" [value]="hour.name">
+                    {{hour.name}}
+                </mat-option>
+                </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Minutes</mat-label>
+            <mat-select formControlName="minutes" [(value)]="selectedMinute" required>
+                <mat-option *ngFor="let minute of minutes" [value]="minute.name" >
+                    {{minute.name}}
+                </mat-option>
+                </mat-select>
+        </mat-form-field>
+    </mat-card-content>
+    <button mat-stroked-button color="accent" class="btn-block" [disabled]="validateForm1.invalid">Find appointment</button>
+    </form>
+    </mat-card>
+</div>
+
+<div *ngIf="allCenters.length !== 0" class="div-search">
+    <form class="example-form">
+    <div class="sort-items">
+        <div class="div-holder">
+        <mat-form-field appearance="fill" class="mat-field-space">
+            <mat-label>Sort by rating</mat-label>
+            <mat-select (selectionChange)="sortByRating($event.value)">
+            <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
+                {{direction.viewValue}}
+            </mat-option>
+            <mat-option>None</mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+    </div>
+ </form>
+</div>
+
+<div *ngIf="allCenters.length !== 0">
+<div *ngFor="let center of allCenters">
+    <div class="review-holder">
+    <mat-card class="example-card">
+        <mat-card-content class="mat-card-font">
+          <h1>{{ center.name }}</h1>
+          <p>{{ center.city }}, {{ center.street }} {{ center.houseNumber }}</p>
+          <p>{{ center.description }}</p>
+          <p>Rating: {{ center.rating }}</p>
+        </mat-card-content>
+    </mat-card>
+    </div>
+    <br>
+    <br>
+</div>
+</div>
+

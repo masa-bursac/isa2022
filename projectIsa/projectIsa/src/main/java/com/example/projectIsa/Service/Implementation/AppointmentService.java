@@ -1,21 +1,21 @@
 package com.example.projectIsa.Service.Implementation;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
 import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.Model.Center;
+import com.example.projectIsa.Model.CenterAddress;
 import com.example.projectIsa.Model.CenterAdministrator;
-import com.example.projectIsa.Model.Role;
-import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AppointmentsRepository;
+import com.example.projectIsa.Repository.CenterAddressRepository;
 import com.example.projectIsa.Repository.CenterRepository;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.DTO.AppointmentDTO;
+import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.Service.IAppointmentService;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +25,15 @@ public class AppointmentService implements IAppointmentService{
 	private final AppointmentsRepository appointmentRepository;
 	private final UserRepository userRepository;
 	private final CenterRepository centerRepository;
+	private final CenterAddressRepository centerAddressRepository;
 	
 	public AppointmentService(AppointmentsRepository appointmentRepository, 
-			UserRepository userRepository, CenterRepository centerRepository) {
+			UserRepository userRepository, CenterRepository centerRepository,
+			CenterAddressRepository centerAddressRepository) {
 		this.appointmentRepository = appointmentRepository;
 		this.userRepository = userRepository;
 		this.centerRepository = centerRepository;
+		this.centerAddressRepository = centerAddressRepository;
 	}
 	
 	@Override
@@ -101,6 +104,41 @@ public class AppointmentService implements IAppointmentService{
 			}
 	
 		return returnAppointments;
+	}
+
+	@Override
+	public List<CentersDTO> findAppointment(String date) {
+		LocalDateTime dateTime = LocalDateTime.parse(date);
+		List<CentersDTO> allCenters = new ArrayList<>();
+		List<Appointment> allAppointmnets = appointmentRepository.findAllByDate(dateTime);
+		
+		if(allAppointmnets.isEmpty()) {
+			return allCenters;
+		}else {
+			for(Appointment appointment: allAppointmnets) {
+				if(!appointment.isTaken()) {
+					List<Center> centers = centerRepository.findAllById(appointment.getCenter().getId());
+					CentersDTO centersDTO = new CentersDTO();
+					for(int i = 0; i < centers.size(); i++) {
+						CenterAddress address = centerAddressRepository.findOneById(centers.get(i).getId());
+						centersDTO = new CentersDTO();
+						centersDTO.setId(centers.get(i).getId());
+						centersDTO.setName(centers.get(i).getName());
+						centersDTO.setDescription(centers.get(i).getDescription());
+						centersDTO.setRating(centers.get(i).getRating());
+						centersDTO.setStreet(address.getStreet());
+						centersDTO.setHouseNumber(address.getHouseNumber());
+						centersDTO.setCity(address.getCity());
+						centersDTO.setState(address.getState());
+						centersDTO.setPostcode(address.getPostcode());
+						allCenters.add(centersDTO);
+					}
+				}
+		}
+		
+		return allCenters;
+		
+	  }
 	}
 
 }
