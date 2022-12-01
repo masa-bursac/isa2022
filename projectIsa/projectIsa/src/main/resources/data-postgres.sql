@@ -1,6 +1,7 @@
 --password 123
 --role REGISTERED 0 CENTERADMIN 1 SYSTEMADMIN 2 UNREGISTERED 3
 --gender MALE 0 FEMALE 1 NONBINARY 2 OTHER 3
+--complaint_type CENTER 0 STAFF 1
 
 insert into center_address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (1,0,0,'Bulevar Oslobodjenja','Novi Sad','Srbija','5','21000');
@@ -36,6 +37,10 @@ insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,
 (3,0,'Vladimir','Vladic','vlada@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','4567894561234', 2, false);
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
 (4,1,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0, false,1);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
+(5,0,'Biljana','Brankovic','bilja@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
+(6,0,'Marica','Maric','mara@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false);
 
 
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
@@ -46,6 +51,10 @@ insert into address (id,longitude,latitude,street,city,state,house_number,postco
 (3,0,0,'Radnicka','Novi Sad','Srbija','21','21000');
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (4,0,0,'Danila Kisa','Novi Sad','Srbija','4','21000');
+insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(5,0,0,'Zmaj Jovina','Novi Sad','Srbija','8','21000');
+insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(6,0,0,'Rumenacka','Novi Sad','Srbija','110','21000');
 
 insert into education (id,education,profession) values 
 (1,'ftn','assistant');
@@ -55,12 +64,18 @@ insert into education (id,education,profession) values
 (3,'ftn','student');
 insert into education (id,education,profession) values 
 (4,'ftn','assistant');
+insert into education (id,education,profession) values 
+(5,'ftn','student');
+insert into education (id,education,profession) values 
+(6,'Srednja ekonomska skola, Novi Sad','penzioner');
 
 
 UPDATE users SET address_id = 1, education_id = 1 WHERE users.id = 1;
 UPDATE users SET address_id = 2, education_id = 2 WHERE users.id = 2;
 UPDATE users SET address_id = 3, education_id = 3 WHERE users.id = 3;
 UPDATE users SET address_id = 4, education_id = 4 WHERE users.id = 4;
+UPDATE users SET address_id = 5, education_id = 5 WHERE users.id = 5;
+UPDATE users SET address_id = 6, education_id = 6 WHERE users.id = 6;
 
 
 insert into medical_equipment (id,quantity,blood_type) values 
@@ -94,8 +109,30 @@ insert into survey (id,question) values
 insert into survey (id,question) values
 (10,'Да ли сте вадили зуб у протеклих 7 дана?');
 
-alter sequence user_entity_id_seq restart with 5;
-alter sequence user_address_id_seq restart with 5;
-alter sequence user_education_id_seq restart with 5;
+
+insert into complaints(id,complaint_type, complaint,answer,registered_user_id, complaint_date, answer_date) values
+(1,0,'Nemaju potrebnu opremu','Hvala Vam na utisku. Potrudicemo se da to popravimo.', 3, '2021-10-10 18:30:12', '2021-10-12 16:30:18');
+insert into complaints(id,complaint_type, complaint,answer,registered_user_id, complaint_date, answer_date) values
+(2,1,'Nestucni','Hvala Vam na utisku. Potrudicemo se da to popravimo.', 3, '2022-11-10 22:11:35', '2021-11-11 10:30:12');
+insert into complaints(id,complaint_type, complaint,registered_user_id, complaint_date) values
+(3,0,'Manjak opreme', 5, '2022-04-08 10:05:23');
+insert into complaints(id,complaint_type, complaint,registered_user_id, complaint_date) values
+(4,1,'Neljubazni', 5, '2022-09-04 12:21:09');
+insert into complaints(id,complaint_type, complaint,registered_user_id, complaint_date) values
+(5,0,'Raspada se zgrada', 6, '2022-11-15 19:43:03');
+insert into complaints(id,complaint_type, complaint,registered_user_id, complaint_date) values
+(6,1,'Cela ruka mi je u podlivima, ne zna da nadje venu.', 6, '2022-09-10 10:15:35');
+
+UPDATE complaints SET user_id = 2 WHERE complaints.id = 2;
+UPDATE complaints SET user_id = 2 WHERE complaints.id = 4;
+UPDATE complaints SET user_id = 4 WHERE complaints.id = 6;
+UPDATE complaints SET center_id = 1 WHERE complaints.id = 1;
+UPDATE complaints SET center_id = 1 WHERE complaints.id = 3;
+UPDATE complaints SET center_id = 2 WHERE complaints.id = 5;
+
+alter sequence user_entity_id_seq restart with 7;
+alter sequence user_address_id_seq restart with 7;
+alter sequence user_education_id_seq restart with 7;
 alter sequence center_id_seq restart with 7;
 alter sequence center_address_id_seq restart with 7;
+alter sequence complaint_id_seq restart with 7;

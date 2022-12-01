@@ -13,6 +13,9 @@ public class RegisteredUser extends User{
 	@OneToMany(mappedBy="regUser")
 	private List<Appointment> appointments;
 	
+	@OneToMany(mappedBy="regUser")
+	private List<Complaint> complaints;
+	
 	public RegisteredUser() {}
 	
 	public RegisteredUser(Integer id, String name, String surname, String email, String password, String phoneNumber,
@@ -33,6 +36,14 @@ public class RegisteredUser extends User{
 
 	public void setAppointments(List<Appointment> appointments) {
 		this.appointments = appointments;
+	}
+
+	public List<Complaint> getComplaints() {
+		return complaints;
+	}
+
+	public void setComplaints(List<Complaint> complaints) {
+		this.complaints = complaints;
 	}
 	
 	

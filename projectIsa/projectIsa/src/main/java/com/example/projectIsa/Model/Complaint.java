@@ -1,16 +1,27 @@
 package com.example.projectIsa.Model;
 
+import static javax.persistence.InheritanceType.SINGLE_TABLE;
+
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "complaint")
-public class Complaint {
+@Table(name = "complaints")
+@Inheritance(strategy=SINGLE_TABLE)
+@DiscriminatorColumn(name="complaint_type", discriminatorType = DiscriminatorType.INTEGER)
+public abstract class Complaint {
 
 	@Id
     @SequenceGenerator(name = "complaint_id_seq", sequenceName = "complaint_id_seq", allocationSize = 1)
@@ -19,19 +30,22 @@ public class Complaint {
 	private Integer id;
 	private String complaint;
 	private String answer;
-	private Integer regUserId;
+	private LocalDateTime complaintDate;
+	private LocalDateTime answerDate;
+	@ManyToOne
+	@JoinColumn(name="registered_user_id", nullable = true)
+	private RegisteredUser regUser;
 	
-	
+	@Column(name="complaint_type", insertable = false, updatable = false)
+	private ComplaintType complaintType;
 	
 	public Complaint() {
-		super();
 	}
-	public Complaint(Integer id, String complaint, String answer, Integer regUserId) {
+	public Complaint(Integer id, String complaint, String answer) {
 		super();
 		this.id = id;
 		this.complaint = complaint;
 		this.answer = answer;
-		this.regUserId = regUserId;
 	}
 	public Integer getId() {
 		return id;
@@ -51,11 +65,35 @@ public class Complaint {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public Integer getRegUserId() {
-		return regUserId;
+	public ComplaintType getType() {
+		return complaintType;
 	}
-	public void setRegUserId(Integer regUserId) {
-		this.regUserId = regUserId;
+	public void setType(ComplaintType type) {
+		this.complaintType = type;
+	}
+	public RegisteredUser getRegUser() {
+		return regUser;
+	}
+	public void setRegUser(RegisteredUser regUser) {
+		this.regUser = regUser;
+	}
+	public ComplaintType getComplaintType() {
+		return complaintType;
+	}
+	public void setComplaintType(ComplaintType complaintType) {
+		this.complaintType = complaintType;
+	}
+	public LocalDateTime getComplaintDate() {
+		return complaintDate;
+	}
+	public void setComplaintDate(LocalDateTime complaintDate) {
+		this.complaintDate = complaintDate;
+	}
+	public LocalDateTime getAnswerDate() {
+		return answerDate;
+	}
+	public void setAnswerDate(LocalDateTime answerDate) {
+		this.answerDate = answerDate;
 	}
 	
 	

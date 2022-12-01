@@ -73,6 +73,7 @@ public class WebSecurity {
       .antMatchers("/survey/**").permitAll()
       .antMatchers("/appointment/**").permitAll()
       .antMatchers("/centerAdmin/**").permitAll()
+      .antMatchers("/complaint/**").permitAll()
       .anyRequest().authenticated();
   
 	  http.authenticationProvider(authenticationProvider());

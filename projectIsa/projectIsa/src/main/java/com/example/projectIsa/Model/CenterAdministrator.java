@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import java.util.List;
 
 import com.example.projectIsa.DTO.CenterAdministratorDTO;
@@ -23,6 +25,8 @@ public class CenterAdministrator extends User{
 	@ManyToMany(mappedBy = "centerAdmin", fetch = FetchType.LAZY)
 	private List<Appointment> appointment;
 	private Boolean hasToChangePass;	
+	@OneToMany(mappedBy="centerAdministrator")
+	private List<ComplaintStaff> complaints;
 			
 	public CenterAdministrator() {
 		super();
@@ -65,5 +69,13 @@ public class CenterAdministrator extends User{
 	}
 	public void setHasToChangePass(Boolean hasToChangePass) {
 		this.hasToChangePass = hasToChangePass;
+	}
+
+	public List<ComplaintStaff> getComplaints() {
+		return complaints;
+	}
+
+	public void setComplaints(List<ComplaintStaff> complaints) {
+		this.complaints = complaints;
 	}
 }

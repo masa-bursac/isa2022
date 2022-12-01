@@ -37,6 +37,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { LoginComponent } from './pages/login/login.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { ComplaintsComponent } from './pages/complaints/complaints.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
     UsersComponent,
     SurveyForUserComponent,
     LoginComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    ComplaintsComponent
   ],
   imports: [
     BrowserModule,

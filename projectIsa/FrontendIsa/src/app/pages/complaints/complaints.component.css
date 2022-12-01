@@ -1,0 +1,51 @@
+.review-holder {
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+}
+.example-card{
+    width: 70%;
+    max-height: 700px;
+    background-color:rgb(255, 236, 236);
+    border-radius: 2.5%;
+    margin-left: 3%;
+    margin-right: 3%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.mat-card-font {
+    font-size:18px;
+}
+.example-part-width{
+    background-color: white;
+    border-radius: 5px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    width: 90%;
+    padding-right: 5%;
+  }
+
+.input-answer{
+    width: 88%;
+    border: 0;
+    padding: 1%;
+    margin: 1%;
+    font-size: medium;
+}
+.complaint{
+    padding: 1%;
+    margin: 1%;
+    border-radius: 2px;
+    background-color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+.align-div{
+    border-radius: 2px;
+    padding: 2px;
+    background-color: white;
+    border-bottom: 3px solid rgb(255, 136, 136);
+    float:left;
+}
+.align-div-right{
+    float:right;
+}

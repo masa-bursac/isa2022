@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div *ngFor="let complaint of sortBy()">
+    <div class="review-holder" >
+    <mat-card class="example-card"  >
+        <mat-card-content class="mat-card-font">
+            
+          <div class="align-div">{{ complaint.userName }} {{ complaint.userSurname }} </div> 
+          <div class="align-div-right">{{complaint.complaintDate | date:"dd/MM/yy HH:mm"}}</div>
+          <div>
+            <br>
+            <br>
+          <p *ngIf="complaint.complaintType == 'CENTER'">Žalba na <i>{{ complaint.centerName }} </i></p>
+          <p *ngIf="complaint.complaintType == 'STAFF'">Žalba na <i>{{ complaint.staffName }} {{complaint.staffSurname}} </i> ,
+             <i>{{ complaint.centerName }}</i></p>
+            
+          <p class="complaint">{{ complaint.complaint }}</p>
+          <p>Odgovor administratora:</p>
+          <div class="example-part-width" *ngIf="complaint.answer != null">
+            <p class="input-answer">{{ complaint.answer }} &nbsp; &nbsp; &nbsp; &nbsp; {{complaint.answerDate| date:"dd/MM/yy HH:mm"}}</p></div>
+            <div *ngIf="complaint.answer == null"><input matInput class="input-answer"/>
+                <button mat-button><mat-icon>send</mat-icon></button>
+             </div>
+        </div>
+        </mat-card-content>
+    </mat-card>
+    </div>
+    <br>
+    <br>
+</div>

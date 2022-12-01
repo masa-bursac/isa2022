@@ -42,8 +42,9 @@ public class Center {
 	private List<Appointment> appointments;
 	@OneToMany(mappedBy="center")
 	private List<CenterAdministrator> staff;
+	@OneToMany(mappedBy="center")
+	private List<ComplaintCenter> complaints;
 	
-		
 	public Center(Integer id, String name, CenterAddress centerAddress, String description, Double rating,
 			List<Appointment> appointments, List<CenterAdministrator> staff) {
 		super();
@@ -105,6 +106,12 @@ public class Center {
 	}
 	public void setStaff(List<CenterAdministrator> staff) {
 		this.staff = staff;
+	}
+	public List<ComplaintCenter> getComplaints() {
+		return complaints;
+	}
+	public void setComplaints(List<ComplaintCenter> complaints) {
+		this.complaints = complaints;
 	}
 	
 	
