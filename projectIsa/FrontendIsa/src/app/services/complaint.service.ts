@@ -8,10 +8,14 @@ const complaint_url = 'http://localhost:8080/complaint';
   providedIn: 'root'
 })
 export class ComplaintService {
-
+  
   constructor(private http: HttpClient) { }
 
   public getComplaints(): Observable<any>{
     return this.http.get(complaint_url+`/getComplaints`);
+  }
+  public sendAnswer(body: any): Observable<any> {
+    return this.http.put(complaint_url+`/sendAnswer`, body);
+
   }
 }

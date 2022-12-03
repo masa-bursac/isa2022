@@ -16,9 +16,12 @@
           <p class="complaint">{{ complaint.complaint }}</p>
           <p>Odgovor administratora:</p>
           <div class="example-part-width" *ngIf="complaint.answer != null">
+            <div class = "answername-div">
+            <p>{{complaint.adminWhoAnsweredName}}  {{complaint.adminWhoAnsweredSurname}}</p></div>
+            <br><br>
             <p class="input-answer">{{ complaint.answer }} &nbsp; &nbsp; &nbsp; &nbsp; {{complaint.answerDate| date:"dd/MM/yy HH:mm"}}</p></div>
-            <div *ngIf="complaint.answer == null"><input matInput class="input-answer"/>
-                <button mat-button><mat-icon>send</mat-icon></button>
+            <div *ngIf="complaint.answer == null"><input matInput [(ngModel)]="complaint.currentAnswer" class="input-answer"/>
+                <button mat-button (click)="sendAnswer(complaint)"><mat-icon>send</mat-icon></button>
              </div>
         </div>
         </mat-card-content>

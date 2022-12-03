@@ -39,6 +39,10 @@ public abstract class Complaint {
 	@Column(name="complaint_type", insertable = false, updatable = false)
 	private ComplaintType complaintType;
 	
+	@ManyToOne
+	@JoinColumn(name="system_adminstrator_id", nullable = true)
+	private SystemAdminstrator systemAdminAnswer;
+	
 	public Complaint() {
 	}
 	public Complaint(Integer id, String complaint, String answer) {
@@ -95,6 +99,11 @@ public abstract class Complaint {
 	public void setAnswerDate(LocalDateTime answerDate) {
 		this.answerDate = answerDate;
 	}
-	
+	public SystemAdminstrator getSystemAdminAnswer() {
+		return systemAdminAnswer;
+	}
+	public void setSystemAdminAnswer(SystemAdminstrator systemAdminAnswer) {
+		this.systemAdminAnswer = systemAdminAnswer;
+	}
 	
 }

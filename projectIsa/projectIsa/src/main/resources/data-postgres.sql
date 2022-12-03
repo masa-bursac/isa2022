@@ -110,10 +110,10 @@ insert into survey (id,question) values
 (10,'Да ли сте вадили зуб у протеклих 7 дана?');
 
 
-insert into complaints(id,complaint_type, complaint,answer,registered_user_id, complaint_date, answer_date) values
-(1,0,'Nemaju potrebnu opremu','Hvala Vam na utisku. Potrudicemo se da to popravimo.', 3, '2021-10-10 18:30:12', '2021-10-12 16:30:18');
-insert into complaints(id,complaint_type, complaint,answer,registered_user_id, complaint_date, answer_date) values
-(2,1,'Nestucni','Hvala Vam na utisku. Potrudicemo se da to popravimo.', 3, '2022-11-10 22:11:35', '2021-11-11 10:30:12');
+insert into complaints(id,complaint_type, complaint,answer,registered_user_id, complaint_date, answer_date, system_adminstrator_id) values
+(1,0,'Nemaju potrebnu opremu','Hvala Vam na utisku. Potrudicemo se da to popravimo.', 3, '2021-10-10 18:30:12', '2021-10-12 16:30:18', 1);
+insert into complaints(id,complaint_type, complaint,answer,registered_user_id, complaint_date, answer_date, system_adminstrator_id) values
+(2,1,'Nestucni','Hvala Vam na utisku. Potrudicemo se da to popravimo.', 3, '2022-11-10 22:11:35', '2021-11-11 10:30:12', 1);
 insert into complaints(id,complaint_type, complaint,registered_user_id, complaint_date) values
 (3,0,'Manjak opreme', 5, '2022-04-08 10:05:23');
 insert into complaints(id,complaint_type, complaint,registered_user_id, complaint_date) values

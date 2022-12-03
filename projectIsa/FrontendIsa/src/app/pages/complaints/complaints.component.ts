@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ComplaintService } from 'src/app/services/complaint.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -9,8 +10,14 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class ComplaintsComponent implements OnInit {
 
+  currentAnswer : any = "";
   complaints : any[] = [];
-  constructor(private complaintService: ComplaintService, private tokenStorage: TokenStorageService) { }
+
+  @Output()
+  onClose: EventEmitter<boolean> = new EventEmitter();
+  
+  constructor(private complaintService: ComplaintService, private tokenStorage: TokenStorageService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getComplaints();
@@ -26,5 +33,20 @@ export class ComplaintsComponent implements OnInit {
 
   sortBy() {
     return this.complaints.sort((a,b) => ( a.answer == null ) && ( b.answer !=null )? -1 : 1);
+  }
+
+  public sendAnswer(complaint: any){
+    const body = {
+      id: complaint.id,
+      answer: complaint.currentAnswer,
+      adminAnswerId : this.tokenStorage.getUser().id
+    }
+    this.complaintService.sendAnswer(body).subscribe(data => { 
+      this._snackBar.open('Answer sent successfully', 'Close',{
+        duration: 3000
+      });
+      
+      this.onClose.emit(true);
+    })
   }
 }

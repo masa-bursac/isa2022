@@ -18,6 +18,8 @@ public class ComplaintDTO {
 	String CenterName;
 	String complaintDate;
 	String answerDate;
+	String adminWhoAnsweredName;
+	String adminWhoAnsweredSurname;
 	
 	int centerId;
 	
@@ -39,6 +41,10 @@ public class ComplaintDTO {
 		}
 		if(complaint.getAnswerDate()!=null) {
 		this.answerDate = complaint.getAnswerDate().toString();
+		}
+		if(complaint.getSystemAdminAnswer()!=null) {
+			this.adminWhoAnsweredName = complaint.getSystemAdminAnswer().getName();
+			this.adminWhoAnsweredSurname = complaint.getSystemAdminAnswer().getSurname();
 		}
 	}
 
@@ -152,6 +158,22 @@ public class ComplaintDTO {
 
 	public void setAnswerDate(String answerDate) {
 		this.answerDate = answerDate;
+	}
+
+	public String getAdminWhoAnsweredName() {
+		return adminWhoAnsweredName;
+	}
+
+	public void setAdminWhoAnsweredName(String adminWhoAnsweredName) {
+		this.adminWhoAnsweredName = adminWhoAnsweredName;
+	}
+
+	public String getAdminWhoAnsweredSurname() {
+		return adminWhoAnsweredSurname;
+	}
+
+	public void setAdminWhoAnsweredSurname(String adminWhoAnsweredSurname) {
+		this.adminWhoAnsweredSurname = adminWhoAnsweredSurname;
 	}
 
 }
