@@ -14,4 +14,7 @@ export class CenterAdminService {
   public getAdmins(body:any): Observable<any>{
     return this.http.get(admin_url+`/getAllCentreAdminByCenterId/${body}`);
   }
+  public registerAdmin(body:any): Observable<any>{
+    return this.http.post(admin_url+`/registerSystemAdmin`, body);
+  }
 }

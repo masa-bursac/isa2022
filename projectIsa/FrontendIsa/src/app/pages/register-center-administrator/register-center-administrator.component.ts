@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CenterAdminService } from 'src/app/services/center-admin.service';
 
 interface Gender {
   value: string;
@@ -17,10 +19,14 @@ export class RegisterCenterAdministratorComponent implements OnInit {
   hide: boolean = true;
   hideRp: boolean = true; 
 
+  @Input()
+  adminType: string = "";
+
   @Output()
   onClose: EventEmitter<any> = new EventEmitter();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private centerAdminService: CenterAdminService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -57,6 +63,15 @@ export class RegisterCenterAdministratorComponent implements OnInit {
     {value: 'Non-Binary'},
   ];
   submitForm(): void {
+    if(this.adminType !="systemAdmin"){
+      this.registerCenterAdmin();
+    }
+    else{
+      this.registerSystemAdmin();
+    }
+  }
+
+  public registerCenterAdmin(){
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
@@ -79,8 +94,38 @@ export class RegisterCenterAdministratorComponent implements OnInit {
       state : this.validateForm.value.state,
       postcode : this.validateForm.value.postcode
     }
-    console.log("ovde sam")
     this.onClose.emit(admin);
   }
+  public registerSystemAdmin(){
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+    const admin = {
+      id: 1,
+      name : this.validateForm.value.name,
+      surname : this.validateForm.value.surname,
+      email : this.validateForm.value.email,
+      jmbg : this.validateForm.value.jmbg,
+      phoneNumber : this.validateForm.value.phoneNumber,
+      password : this.validateForm.value.password,
+      gender: this.selectedValueGender,   
+      education : this.validateForm.value.education,
+      profession : this.validateForm.value.profession,
 
+      street : this.validateForm.value.street,
+      houseNumber : this.validateForm.value.houseNumber,
+      city : this.validateForm.value.city,
+      state : this.validateForm.value.state,
+      postcode : this.validateForm.value.postcode
+    }
+    this.centerAdminService.registerAdmin(admin).subscribe(data => { 
+      this._snackBar.open('Admin registration successful', 'Close',{
+        duration: 3000
+      });
+      this.onClose.emit(true);
+    })
+
+    this.onClose.emit(admin);
+  }
 }

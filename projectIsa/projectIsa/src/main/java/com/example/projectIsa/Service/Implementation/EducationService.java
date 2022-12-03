@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.Education;
+import com.example.projectIsa.Model.SystemAdminstrator;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.EducationRepository;
 import com.example.projectIsa.Service.IEducationService;
@@ -25,6 +26,17 @@ public class EducationService implements IEducationService {
 		newEducation.setId((int) educationRepository.count()+1);
 		centerAdmin.setEducation(newEducation);
 		newEducation.setUser(centerAdmin);
+		educationRepository.save(newEducation);
+
+		return newEducation;
+	}
+
+	@Override
+	public Education addEducation(String education, String profession, SystemAdminstrator systemAdmin) {
+		Education newEducation = new Education(education, profession);
+		newEducation.setId((int) educationRepository.count()+1);
+		systemAdmin.setEducation(newEducation);
+		newEducation.setUser(systemAdmin);
 		educationRepository.save(newEducation);
 
 		return newEducation;

@@ -16,7 +16,9 @@ export class UsersComponent implements OnInit {
   search: string = '';
   searchUsersOn: boolean = false;
   public searchedUsers: any[] = [];
+  addForm: boolean = false;
   users: any[] = [];
+  type: string = "systemAdmin"
   constructor(private profileService: ProfileService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
@@ -51,4 +53,10 @@ export class UsersComponent implements OnInit {
     this.searchedUsers = [];
   }
 
+  public ShowRegisterAdminForm(): void {
+    this.addForm = !this.addForm;
+}
+public RegisterAdminClosed(newAdmin: any): void{
+  this.addForm = false;
+}
 }

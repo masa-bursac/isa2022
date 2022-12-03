@@ -8,6 +8,9 @@
         </mat-form-field>
     </form>
 </div>
+<div class="div-search">
+  <button mat-mini-fab type="button" (click)="ShowRegisterAdminForm()">+</button>
+<app-register-center-administrator *ngIf="addForm" [adminType]="type" (onClose)="RegisterAdminClosed($event)"></app-register-center-administrator></div>
 <div *ngIf="searchUsersOn">
 <table *ngIf="searchedUsers.length!=0" mat-table [dataSource]="searchedUsers">
   <ng-container matColumnDef="name" class="column-one">

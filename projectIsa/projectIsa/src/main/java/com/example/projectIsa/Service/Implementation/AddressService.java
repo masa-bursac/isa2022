@@ -7,6 +7,7 @@ import com.example.projectIsa.DTO.CenterAdministratorDTO;
 import com.example.projectIsa.Model.Address;
 import com.example.projectIsa.Model.CenterAddress;
 import com.example.projectIsa.Model.CenterAdministrator;
+import com.example.projectIsa.Model.SystemAdminstrator;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AddressRepository;
 import com.example.projectIsa.Service.IAddressService;
@@ -35,6 +36,24 @@ public class AddressService implements IAddressService {
 		address.setUser(admin);
 		admin.setAddress(address);
 		address.setUser(admin);
+		return addressRepository.save(address);
+	}
+
+	@Override
+	public Address addAddress(CenterAdministratorDTO adminDTO, SystemAdminstrator systemAdmin) {
+		Address address = new Address();
+		address.setId((int) (addressRepository.count()+1));
+		address.setLatitude(0);
+		address.setLongitude(0);
+		address.setCity(adminDTO.getCity());
+		address.setHouseNumber(adminDTO.getHouseNumber());
+		address.setPostcode(adminDTO.getPostcode());
+		address.setState(adminDTO.getState());
+		address.setStreet(adminDTO.getStreet());
+		address.setUser(systemAdmin);
+		systemAdmin.setAddress(address);
+		address.setUser(systemAdmin);
+
 		return addressRepository.save(address);
 	}
 

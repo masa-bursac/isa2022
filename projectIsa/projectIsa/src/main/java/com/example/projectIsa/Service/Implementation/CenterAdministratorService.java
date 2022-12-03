@@ -15,7 +15,9 @@ import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.Education;
 import com.example.projectIsa.Model.Gender;
 import com.example.projectIsa.Model.Role;
+import com.example.projectIsa.Model.SystemAdminstrator;
 import com.example.projectIsa.Repository.CenterAdministratorRepository;
+import com.example.projectIsa.Repository.SystemAdministratorRepository;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.Service.IAddressService;
 import com.example.projectIsa.Service.ICenterAdministratorService;
@@ -29,16 +31,18 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 	private final IEducationService educationService;
 	private final IAddressService addressService;
 	private final UserRepository userRepository;
+	private final SystemAdministratorRepository systemAdministratorRepository;
 	
 	@Autowired
 	public CenterAdministratorService(CenterAdministratorRepository centerAdministratorRepository,
 			IEducationService educationService, IAddressService addressService, UserRepository userRepository,
-			PasswordEncoder passwordEncoder) {
+			PasswordEncoder passwordEncoder, SystemAdministratorRepository systemAdminisstratorRepository) {
 		this.centerAdministratorRepository = centerAdministratorRepository;
 		this.educationService = educationService;
 		this.addressService = addressService;
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.systemAdministratorRepository = systemAdminisstratorRepository;
 	}
 
 	@Override
@@ -78,6 +82,27 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 			}
 		}	
 		return returnAdmin;
+	}
+
+	@Override
+	public SystemAdminstrator registerSystemAdmin(CenterAdministratorDTO adminDTO) {
+		SystemAdminstrator systemAdmin = new SystemAdminstrator(adminDTO);
+		systemAdmin.setId((int) (userRepository.count()+1));
+		switch(adminDTO.getGender()) {
+			case "Female": systemAdmin.setGender(Gender.FEMALE); break;
+			case "Male": systemAdmin.setGender(Gender.MALE); break;
+			default: systemAdmin.setGender(Gender.NONBINARY); break;
+		}
+		systemAdmin.setRole(Role.ROLE_SYSTEMADMIN);
+		systemAdmin.setPassword(passwordEncoder.encode(adminDTO.getPassword()));
+		Address address = addressService.addAddress(adminDTO, systemAdmin);
+		systemAdmin.setAddress(address);
+		Education education = educationService.addEducation(adminDTO.getEducation(), adminDTO.getProfession(), systemAdmin);
+		systemAdmin.setEducation(education);
+		education.setUser(systemAdmin);
+		systemAdmin.setEducation(education);
+		systemAdmin.setHasToChangePass(true);
+		return systemAdministratorRepository.save(systemAdmin);
 	}
 
 }

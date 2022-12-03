@@ -6,6 +6,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.example.projectIsa.DTO.CenterAdministratorDTO;
+
 @Entity
 @DiscriminatorValue("2")
 public class SystemAdminstrator extends User {
@@ -17,6 +19,15 @@ public class SystemAdminstrator extends User {
 	
 	public SystemAdminstrator() {
 		super();
+	}
+
+	public SystemAdminstrator(CenterAdministratorDTO adminDTO) {
+		this.setId(adminDTO.getId());
+		this.setName(adminDTO.getName());
+		this.setSurname(adminDTO.getSurname());
+		this.setEmail(adminDTO.getEmail());
+		this.setPhoneNumber(adminDTO.getPhoneNumber());
+		this.setJmbg(adminDTO.getJmbg());
 	}
 
 	public Boolean getHasToChangePass() {
