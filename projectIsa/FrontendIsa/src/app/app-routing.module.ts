@@ -13,6 +13,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { ComplaintsComponent } from './pages/complaints/complaints.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo:'landingPage'},
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'takeSurvey', component: SurveyForUserComponent},
   { path: 'login', component: LoginComponent},
   { path: 'landingPage', component: LandingPageComponent},
-  { path: 'complaints', component: ComplaintsComponent}
+  { path: 'complaints', component: ComplaintsComponent},
+  { path: 'changePassword', component: ChangePasswordComponent}
 ];
 
 @NgModule({

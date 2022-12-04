@@ -44,7 +44,12 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveUser(data);
 
         this.isLoggedIn = true;
+        if(data.hasToChangePass == true){
+          this.router.navigate(['/changePassword']);
+        }
+        else{
         this.router.navigate(['/homePage']);
+        }
       }
       else
         alert("Something went wrong!");

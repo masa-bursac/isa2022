@@ -38,6 +38,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { ComplaintsComponent } from './pages/complaints/complaints.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ComplaintsComponent } from './pages/complaints/complaints.component';
     SurveyForUserComponent,
     LoginComponent,
     LandingPageComponent,
-    ComplaintsComponent
+    ComplaintsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

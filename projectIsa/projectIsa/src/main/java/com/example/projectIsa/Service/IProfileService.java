@@ -11,4 +11,5 @@ public interface IProfileService {
 	Boolean update(UpdateDTO userInfo);
 	Boolean changeCenterAdminPassword(CenterAdminPasswordDTO admin);
 	List<UserDTO> getUsers();
+	Boolean changeSystemAdminPassword(CenterAdminPasswordDTO admin);
 }

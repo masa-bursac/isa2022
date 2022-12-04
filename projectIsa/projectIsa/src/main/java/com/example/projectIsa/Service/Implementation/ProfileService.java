@@ -15,9 +15,11 @@ import com.example.projectIsa.Model.Address;
 import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.Education;
 import com.example.projectIsa.Model.Gender;
+import com.example.projectIsa.Model.SystemAdminstrator;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AddressRepository;
 import com.example.projectIsa.Repository.EducationRepository;
+import com.example.projectIsa.Repository.SystemAdministratorRepository;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.Service.IProfileService;
 
@@ -28,15 +30,17 @@ public class ProfileService implements IProfileService{
 	private final AddressRepository addressRepository;
 	private final EducationRepository educationRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final SystemAdministratorRepository systemAdministratorRepository;
 	
 	@Autowired
 	public ProfileService(UserRepository userRepository, AddressRepository addressRepository,
-			EducationRepository educationRepository,PasswordEncoder passwordEncoder)
+			EducationRepository educationRepository,PasswordEncoder passwordEncoder, SystemAdministratorRepository systemAdministratorRepository)
     {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.educationRepository = educationRepository;
         this.passwordEncoder = passwordEncoder;
+		this.systemAdministratorRepository = systemAdministratorRepository;
     }
 	
 	@Override
@@ -133,5 +137,22 @@ public class ProfileService implements IProfileService{
 		}
 		return usersDTO;
 	}
+
+@Override
+public Boolean changeSystemAdminPassword(CenterAdminPasswordDTO admin) {
+	SystemAdminstrator administrator = systemAdministratorRepository.findById(admin.getId()).get();
+	if(administrator != null) {
+		administrator.setPassword(passwordEncoder.encode(admin.getPassword()));
+		administrator.setHasToChangePass(false);
+		if (systemAdministratorRepository.save(administrator) != null) {
+			return true;
+        }        
+        else
+            return false;
+	}
+	else {
+		return false;
+	}
+}
 
 }

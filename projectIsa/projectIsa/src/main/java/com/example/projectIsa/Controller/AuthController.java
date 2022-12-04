@@ -63,12 +63,12 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-
+		Boolean hasToChangePass = authService.HasToChangePass(loginRequest);
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
 												 userDetails.getEmail(), 
-												 roles));
+												 roles, hasToChangePass));
 	}
 	
 	@PostMapping("/registration")

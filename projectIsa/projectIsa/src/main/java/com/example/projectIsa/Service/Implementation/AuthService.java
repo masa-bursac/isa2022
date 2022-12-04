@@ -2,19 +2,26 @@ package com.example.projectIsa.Service.Implementation;
 
 import java.util.Locale;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.example.projectIsa.DTO.AuthDTO;
 import com.example.projectIsa.DTO.RegistrationDTO;
 import com.example.projectIsa.Model.Address;
+import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.Education;
 import com.example.projectIsa.Model.Gender;
 import com.example.projectIsa.Model.RegisteredUser;
 import com.example.projectIsa.Model.Role;
+import com.example.projectIsa.Model.SystemAdminstrator;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AddressRepository;
+import com.example.projectIsa.Repository.CenterAdministratorRepository;
 import com.example.projectIsa.Repository.EducationRepository;
+import com.example.projectIsa.Repository.SystemAdministratorRepository;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.Service.IAuthService;
 
@@ -24,15 +31,20 @@ public class AuthService implements IAuthService{
 	private final AddressRepository addressRepository;
 	private final EducationRepository educationRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final CenterAdministratorRepository centerAdministratorRepository;
+	private final SystemAdministratorRepository systemAdministratorRepository;
 	
 	@Autowired
 	public AuthService(UserRepository userRepository, AddressRepository addressRepository,
-			EducationRepository educationRepository, PasswordEncoder passwordEncoder)
+			EducationRepository educationRepository, PasswordEncoder passwordEncoder, CenterAdministratorRepository centerAdministratorRepository,
+			SystemAdministratorRepository systemAdministratorRepository)
     {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.educationRepository = educationRepository;
         this.passwordEncoder = passwordEncoder;
+        this.centerAdministratorRepository = centerAdministratorRepository;
+        this.systemAdministratorRepository = systemAdministratorRepository;
     }
 	
 	@Override
@@ -76,5 +88,23 @@ public class AuthService implements IAuthService{
         }        
         else
             return false;
+	}
+
+	@Override
+	public Boolean HasToChangePass(@Valid AuthDTO loginRequest) {
+		User user = userRepository.findOneByEmail(loginRequest.getEmail());
+		Role role = user.getRole();
+	
+		if(role.equals(Role.ROLE_CENTERADMIN)) {
+			if(centerAdministratorRepository.findById(user.getId()).get().isHasToChangePass()) {
+				return true;
+			}
+		}
+		else if(role.equals(Role.ROLE_SYSTEMADMIN)) {
+			if(systemAdministratorRepository.findById(user.getId()).get().getHasToChangePass()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

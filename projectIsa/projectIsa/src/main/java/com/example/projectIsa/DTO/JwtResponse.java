@@ -9,13 +9,15 @@ public class JwtResponse {
 	private String username;
 	private String email;
 	private List<String> roles;
+	private Boolean hasToChangePass;
 
-	public JwtResponse(String accessToken, Integer id, String username, String email, List<String> roles) {
+	public JwtResponse(String accessToken, Integer id, String username, String email, List<String> roles, Boolean hasToChangePass) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.roles = roles;
+		this.hasToChangePass = hasToChangePass;
 	}
 
 	public String getAccessToken() {
@@ -60,5 +62,13 @@ public class JwtResponse {
 
 	public List<String> getRoles() {
 		return roles;
+	}
+
+	public boolean isHasToChangePass() {
+		return hasToChangePass;
+	}
+
+	public void setHasToChangePass(boolean hasToChangePass) {
+		this.hasToChangePass = hasToChangePass;
 	}
 }

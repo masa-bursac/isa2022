@@ -48,6 +48,11 @@ public class ProfileController {
 	public Boolean changeCenterAdminPassword(@RequestBody CenterAdminPasswordDTO admin) {
     	return profileService.changeCenterAdminPassword(admin);	      
 	}
+    
+    @PutMapping("/changeSystemAdminPassword")
+	public Boolean changeSystemAdminPassword(@RequestBody CenterAdminPasswordDTO admin) {
+    	return profileService.changeSystemAdminPassword(admin);	      
+	}
 
     @GetMapping("/getUsers")
     @PreAuthorize("hasRole('ROLE_SYSTEMADMIN') or hasRole('ROLE_CENTERADMIN')")
