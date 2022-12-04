@@ -8,6 +8,7 @@
         <button *ngIf="role === 'ROLE_UNREGISTERED'" mat-button routerLink="/registration">Registration</button>
         <button *ngIf="role === 'ROLE_SYSTEMADMIN' || role === 'ROLE_CENTERADMIN'" mat-button routerLink="/users">Users</button>
         <button *ngIf="role !== 'ROLE_CENTERADMIN'" mat-button routerLink="/centerList">List of medical center</button>
+        <button *ngIf="role === 'ROLE_CENTERADMIN'" mat-button routerLink="/appointments">Appointments</button>
         <button *ngIf="role === 'ROLE_SYSTEMADMIN'" mat-button routerLink="/complaints">Complaints</button>
         <button *ngIf="role === 'ROLE_REGISTERED'" mat-button [matMenuTriggerFor]="menu">Medical center</button>
         <mat-menu #menu="matMenu">

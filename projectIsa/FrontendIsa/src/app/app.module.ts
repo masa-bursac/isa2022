@@ -39,6 +39,10 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { ComplaintsComponent } from './pages/complaints/complaints.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 
 @NgModule({
   declarations: [
@@ -59,7 +63,9 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
     LoginComponent,
     LandingPageComponent,
     ComplaintsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AppointmentsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -85,7 +91,11 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
     MatSnackBarModule,
     MatDividerModule,
     MatDatepickerModule,
-    NgxMatDatetimePickerModule
+    NgxMatDatetimePickerModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

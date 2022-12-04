@@ -22,7 +22,10 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@material/form-field": "^14.0.0",
+    "add-subtract-date": "^1.0.15",
+    "angular-calendar": "^0.30.1",
     "angular-material": "^1.1.24",
+    "date-fns": "^2.29.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

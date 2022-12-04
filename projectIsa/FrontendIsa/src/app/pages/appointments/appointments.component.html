@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="optionView">
+  <mat-radio-button class="example-radio-button"  value="weekly">Nedeljni prikaz </mat-radio-button>
+  <mat-radio-button class="example-radio-button"  value="monthly">Mesečni prikaz </mat-radio-button>
+  <mat-radio-button class="example-radio-button"  value="annuallsy">Godišnji prikaz </mat-radio-button>
+</mat-radio-group>
+<div *ngIf="optionView=='weekly'">
+    <div class="center">
+        <button mat-button (click)="weekBefore()"> <mat-icon>keyboard_arrow_left</mat-icon></button>
+        <button mat-button (click)="weekAfter()"> <mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+    <br>
+  <mwl-calendar-week-view 
+      [viewDate]="viewDate" 
+      [weekStartsOn]="weekStartsOn"
+      [dayStartHour]="dayStartsHour"
+      [excludeDays]="daysExcluded"
+      [dayEndHour]="dayEndsHour"
+      [events]="events">
+  </mwl-calendar-week-view>
+</div>
+  

@@ -3,6 +3,7 @@ package com.example.projectIsa.DTO;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.Model.CenterAdministrator;
 
 public class AppointmentDTO {
@@ -21,6 +22,7 @@ public class AppointmentDTO {
 		this.date = date;
 		this.staff = staff;
 	}
+	
 	public Integer getId() {
 		return id;
 	}

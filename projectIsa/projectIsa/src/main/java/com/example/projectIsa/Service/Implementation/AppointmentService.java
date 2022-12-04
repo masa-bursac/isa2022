@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.TakenAppointmentDTO;
 import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.Model.Center;
 import com.example.projectIsa.Model.CenterAdministrator;
@@ -25,6 +26,7 @@ public class AppointmentService implements IAppointmentService{
 	private final AppointmentsRepository appointmentRepository;
 	private final UserRepository userRepository;
 	private final CenterRepository centerRepository;
+
 	
 	public AppointmentService(AppointmentsRepository appointmentRepository, 
 			UserRepository userRepository, CenterRepository centerRepository) {
@@ -101,6 +103,22 @@ public class AppointmentService implements IAppointmentService{
 			}
 	
 		return returnAppointments;
+	}
+
+	@Override
+	public List<TakenAppointmentDTO> getTakenAppointments(Integer adminId) {
+
+		CenterAdministrator user = userRepository.findOneById(adminId);
+		Center center = centerRepository.findOneById(user.getCenter().getId());
+		List<Appointment> appointments = appointmentRepository.findAllByCenterId(center.getId());
+		List<TakenAppointmentDTO> appointmentDTOs = new ArrayList<TakenAppointmentDTO>();
+		for(Appointment appointment: appointments) {
+			if(appointment.isTaken()) {
+				TakenAppointmentDTO appointmentDTO = new TakenAppointmentDTO(appointment);
+				appointmentDTOs.add(appointmentDTO);
+			}
+		}
+		return appointmentDTOs;
 	}
 
 }

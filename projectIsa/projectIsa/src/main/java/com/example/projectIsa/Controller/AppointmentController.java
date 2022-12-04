@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.TakenAppointmentDTO;
 import com.example.projectIsa.Service.IAppointmentService;
 
 @RestController
@@ -42,5 +43,11 @@ public class AppointmentController {
 	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
     public List<AppointmentDTO> getAllAppointments(@PathVariable Integer centerId) {
         return appointmentService.getAllAppointments(centerId);
+    }
+	
+	@GetMapping("/getTakenAppointment/{adminId}")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
+    public ResponseEntity<List<TakenAppointmentDTO>> getTakenAppointment(@PathVariable Integer adminId) {
+        return new ResponseEntity<List<TakenAppointmentDTO>>(appointmentService.getTakenAppointments(adminId), HttpStatus.OK);
     }
 }
