@@ -4,8 +4,7 @@
   class="example-radio-group"
   [(ngModel)]="optionView">
   <mat-radio-button class="example-radio-button"  value="weekly">Nedeljni prikaz </mat-radio-button>
-  <mat-radio-button class="example-radio-button"  value="monthly">Mesečni prikaz </mat-radio-button>
-  <mat-radio-button class="example-radio-button"  value="annuallsy">Godišnji prikaz </mat-radio-button>
+  <mat-radio-button class="example-radio-button"  value="monthly">Mesečni i godišnji prikaz </mat-radio-button>
 </mat-radio-group>
 <div *ngIf="optionView=='weekly'">
     <div class="center">
@@ -22,4 +21,25 @@
       [events]="events">
   </mwl-calendar-week-view>
 </div>
-  
+<div *ngIf="optionView=='monthly'">
+  <div class="center">
+    {{viewDate.toDateString().split(" ")[1]}}  </div>
+  <div class="center">
+      <button mat-button (click)="monthBefore()"> <mat-icon>keyboard_arrow_left</mat-icon></button>
+      <button mat-button (click)="monthAfter()"> <mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+  <br>
+  <div class="center">
+     {{viewDate.getFullYear()}}
+  </div>
+  <div class="center">
+    <button mat-button (click)="yearBefore()"> <mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button mat-button (click)="yearAfter()"> <mat-icon>keyboard_arrow_right</mat-icon></button>
+</div>
+<mwl-calendar-month-view
+    [viewDate]="viewDate" 
+    [weekStartsOn]="weekStartsOn"
+    [excludeDays]="daysExcluded"
+    [events]="events">
+</mwl-calendar-month-view>
+</div>

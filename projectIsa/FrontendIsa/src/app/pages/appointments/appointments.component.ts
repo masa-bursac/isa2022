@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
+import { MatCalendar } from '@angular/material/datepicker';
 import { CalendarEvent, CalendarEventTitleFormatter } from 'angular-calendar';
 import { WeekViewHourSegment } from 'calendar-utils';
 import { addDays, addMinutes, endOfWeek } from 'date-fns';
@@ -20,49 +21,37 @@ export class AppointmentsComponent implements OnInit {
   dayStartsHour: 7 = 7;
   dayEndsHour: 19 = 19;
   daysExcluded : any[]= [0,6];
-  dragToCreateActive = false;
   events: CalendarEvent[] = [];
   appointmentsFree : any = [];
-  days: any[] = [];
-  slots: any[] = [];
-  constructor(private cdr: ChangeDetectorRef, private appointmentsService: AppointmentsService,
-    private tokenStorage: TokenStorageService) {}
+  constructor( private appointmentsService: AppointmentsService,private tokenStorage: TokenStorageService) {}
 
   ngOnInit(): void {
     this.getAppointments();
   }
 
   public getAppointments(){
-    
     this.appointmentsService.getTakenAppointments(this.tokenStorage.getUser().id).subscribe(data => {
       this.appointmentsFree = data;
       console.log(this.appointmentsFree)
       this.mapAppointmentsToEvent(data);
     });
   }
-  initDays() {
-    
-  }
+  
   public mapAppointmentsToEvent(appointments: any){
     for(let appointment of appointments){
-      console.log(appointment.date);
       let startDate = new Date();
       startDate.setFullYear(Number(appointment.date[0]));
       startDate.setMonth(Number(appointment.date[1]-1));
       startDate.setDate(appointment.date[2]);
       startDate.setHours(Number(appointment.date[3]));
       startDate.setMinutes(Number(appointment.date[4]));
-
       var endDate = new Date(startDate);
       endDate.setMinutes(startDate.getMinutes()+appointment.duration)
-      console.log(endDate)
-
       this.events.push({
         start:  startDate,
         title: appointment.userName+ " "+ appointment.userSurname+ " "+startDate.getHours()
         +":"+startDate.getMinutes()+this.makeMinutesNicer(startDate)
-        +"-"+endDate.getHours()+":"+endDate.getMinutes()+this.makeMinutesNicer(endDate),
-        
+        +"-"+endDate.getHours()+":"+endDate.getMinutes()+this.makeMinutesNicer(endDate), 
         end: endDate,
         color: {primary:'Gray',secondary:'#FF9696', secondaryText: 'White'}
       })
@@ -81,6 +70,17 @@ export class AppointmentsComponent implements OnInit {
   public weekAfter(){
     this.viewDate = new Date(this.viewDate.setDate(this.viewDate.getDate() + 7));
   }
-
+  public monthBefore(){
+    this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() - 1));
+  }
+  public monthAfter(){
+    this.viewDate = new Date(this.viewDate.setMonth(this.viewDate.getMonth() + 1));
+  }
+  public yearBefore(){
+    this.viewDate = new Date(this.viewDate.setFullYear(this.viewDate.getFullYear() - 1));
+  }
+  public yearAfter(){
+    this.viewDate = new Date(this.viewDate.setFullYear(this.viewDate.getFullYear() + 1));
+  }
 
 }
