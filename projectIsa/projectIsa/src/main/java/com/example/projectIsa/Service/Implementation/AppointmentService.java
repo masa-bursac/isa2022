@@ -3,10 +3,12 @@ package com.example.projectIsa.Service.Implementation;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.ScheduleAppointmentDTO;
 import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.Model.Center;
 import com.example.projectIsa.Model.CenterAddress;
 import com.example.projectIsa.Model.CenterAdministrator;
+import com.example.projectIsa.Model.RegisteredUser;
 import com.example.projectIsa.Repository.AppointmentsRepository;
 import com.example.projectIsa.Repository.CenterAddressRepository;
 import com.example.projectIsa.Repository.CenterRepository;
@@ -26,14 +28,16 @@ public class AppointmentService implements IAppointmentService{
 	private final UserRepository userRepository;
 	private final CenterRepository centerRepository;
 	private final CenterAddressRepository centerAddressRepository;
+	private final EmailService emailService;
 	
 	public AppointmentService(AppointmentsRepository appointmentRepository, 
 			UserRepository userRepository, CenterRepository centerRepository,
-			CenterAddressRepository centerAddressRepository) {
+			CenterAddressRepository centerAddressRepository, EmailService emailService) {
 		this.appointmentRepository = appointmentRepository;
 		this.userRepository = userRepository;
 		this.centerRepository = centerRepository;
 		this.centerAddressRepository = centerAddressRepository;
+		this.emailService = emailService;
 	}
 	
 	@Override
@@ -139,6 +143,27 @@ public class AppointmentService implements IAppointmentService{
 		return allCenters;
 		
 	  }
+	}
+
+	@Override
+	public Boolean scheduleAppointment(ScheduleAppointmentDTO appointmentDTO) {
+		List<Appointment> allAppointmnets = appointmentRepository.findAllByDate(appointmentDTO.getDate());
+
+		for(Appointment appointment: allAppointmnets) {
+			if(!appointment.isTaken() && appointment.getCenter().getId().equals(appointmentDTO.getCenterId())) {
+				appointment.setTaken(true);
+				
+				RegisteredUser regUser = userRepository.findOneUserById(appointmentDTO.getUserId());
+				appointment.setRegUser(regUser);	
+				
+				appointmentRepository.save(appointment);
+				
+				emailService.scheduleAppointment(regUser.getName(), regUser.getSurname());
+				
+			}
+			
+		}
+		return true;
 	}
 
 }

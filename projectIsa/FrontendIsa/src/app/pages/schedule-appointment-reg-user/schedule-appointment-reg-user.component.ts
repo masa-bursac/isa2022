@@ -135,4 +135,71 @@ export class ScheduleAppointmentRegUserComponent implements OnInit {
       this.allCenters.sort((a,b) => a.rating < b.rating ? 1 : -1);
     }
   }
+
+  public scheduleAppointment(id: number) {
+    const format = "yyyy-MM-ddTHH:mm:ss";
+    const date = new Date(this.validateForm1.value.date);
+    switch ( this.selectedHour ) {
+      case "08":
+          date.setHours(8);
+          break;
+      case "09":
+          date.setHours(9);
+          break;
+      case "10":
+            date.setHours(10);
+            break;
+      case "11":
+            date.setHours(11);
+            break;
+      case "12":
+            date.setHours(12);
+            break;
+      case "13":
+            date.setHours(13);
+            break;
+      case "14":
+            date.setHours(14);
+            break;
+      case "15":
+            date.setHours(15);
+            break;
+      case "16":
+            date.setHours(16);
+            break;
+      default: 
+            break;
+    }
+
+    if(this.selectedMinute == "00"){
+      date.setMinutes(0);
+    }else if(this.selectedMinute == "30"){
+      date.setMinutes(30);
+    }
+
+    const body = {
+      date: formatDate(date,format, "en-US"),
+      userId: this.tokenStorage.getUser().id,
+      centerId: id
+    }
+
+    if(this.validateForm1.valid){
+      this.appointmentService.scheduleAppointment(body).subscribe(data=>{
+        if(data){
+          this._snackBar.open('Appointment scheduled successfully', 'Close',{
+            duration: 3000
+          });
+        }else {
+          this._snackBar.open('Something went wrong', 'Close',{
+            duration: 3000
+          });
+        }
+      });
+    }
+    else{
+      this._snackBar.open('Error! All feilds are required!', 'Close',{
+        duration: 3000
+      });
+    }
+  }
 }

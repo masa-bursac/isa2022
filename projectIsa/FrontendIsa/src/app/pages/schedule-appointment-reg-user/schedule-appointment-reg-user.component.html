@@ -62,6 +62,7 @@
           <p>{{ center.city }}, {{ center.street }} {{ center.houseNumber }}</p>
           <p>{{ center.description }}</p>
           <p>Rating: {{ center.rating }}</p>
+          <button mat-stroked-button color="accent" class="btn-block" (click)="scheduleAppointment(center.id)">Schedule appointment</button>
         </mat-card-content>
     </mat-card>
     </div>
