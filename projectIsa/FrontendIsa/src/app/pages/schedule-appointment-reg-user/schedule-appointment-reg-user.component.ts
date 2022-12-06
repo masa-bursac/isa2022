@@ -185,15 +185,21 @@ export class ScheduleAppointmentRegUserComponent implements OnInit {
 
     if(this.validateForm1.valid){
       this.appointmentService.scheduleAppointment(body).subscribe(data=>{
-        if(data){
-          this._snackBar.open('Appointment scheduled successfully', 'Close',{
-            duration: 3000
+        if(data.message == "You can make an appointment only if you take survey"){
+          this._snackBar.open(data.message, 'Close',{
+            duration: 5000
+          });
+          this.router.navigate(['/takeSurvey']);
+        }else if(data.message == "You can make an appointment only if you have not donated blood in the last 6 months"){
+          this._snackBar.open(data.message, 'Close',{
+            duration: 5000
           });
         }else {
-          this._snackBar.open('Something went wrong', 'Close',{
-            duration: 3000
+          this._snackBar.open(data.message, 'Close',{
+            duration: 5000
           });
         }
+          
       });
     }
     else{

@@ -55,10 +55,6 @@ public class AppointmentController {
 	@PostMapping(value = "/scheduleAppointment")
 	@PreAuthorize("hasRole('ROLE_REGISTERED')")
     public ResponseEntity scheduleAppointment(@RequestBody ScheduleAppointmentDTO appointment) {
-        try {
-        	return new ResponseEntity(appointmentService.scheduleAppointment(appointment), HttpStatus.OK);
-        } catch (Exception e) {
-        	return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity(appointmentService.scheduleAppointment(appointment), HttpStatus.OK);
     }
 }

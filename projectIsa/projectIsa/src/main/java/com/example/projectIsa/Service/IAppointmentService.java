@@ -7,6 +7,7 @@ import org.springframework.util.MultiValueMap;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.ResponseDTO;
 import com.example.projectIsa.DTO.ScheduleAppointmentDTO;
 import com.example.projectIsa.Model.Appointment;
 
@@ -18,5 +19,5 @@ public interface IAppointmentService {
 	
 	List<CentersDTO> findAppointment(String date);
 
-	Boolean scheduleAppointment(ScheduleAppointmentDTO appointment);
+	ResponseDTO scheduleAppointment(ScheduleAppointmentDTO appointment);
 }

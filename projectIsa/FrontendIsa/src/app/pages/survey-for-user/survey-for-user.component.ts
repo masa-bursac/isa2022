@@ -97,7 +97,7 @@ export class SurveyForUserComponent implements OnInit {
    for(let i=0; i<this.dataSource.length; i++){
     for(let j=0; j<this.finalArray.length; j++){
       if(this.dataSource[i].id === this.finalArray[j].id){
-        var newobj = {id: this.finalArray[j].id, answers: this.finalArray[j].selected, surveyId: this.dataSource[i].id, regUserId: 3};
+        var newobj = {id: this.finalArray[j].id, answers: this.finalArray[j].selected, surveyId: this.dataSource[i].id, regUserId: this.tokenStorage.getUser().id};
         this.answeredArray.push(newobj);
       }
     }

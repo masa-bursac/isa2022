@@ -3,15 +3,18 @@ package com.example.projectIsa.Service.Implementation;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.ResponseDTO;
 import com.example.projectIsa.DTO.ScheduleAppointmentDTO;
 import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.Model.Center;
 import com.example.projectIsa.Model.CenterAddress;
 import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.RegisteredUser;
+import com.example.projectIsa.Repository.AnsweredSurveyRepository;
 import com.example.projectIsa.Repository.AppointmentsRepository;
 import com.example.projectIsa.Repository.CenterAddressRepository;
 import com.example.projectIsa.Repository.CenterRepository;
+import com.example.projectIsa.Repository.SurveyRepository;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
@@ -29,15 +32,18 @@ public class AppointmentService implements IAppointmentService{
 	private final CenterRepository centerRepository;
 	private final CenterAddressRepository centerAddressRepository;
 	private final EmailService emailService;
+	private final AnsweredSurveyRepository ansRepository;
 	
 	public AppointmentService(AppointmentsRepository appointmentRepository, 
 			UserRepository userRepository, CenterRepository centerRepository,
-			CenterAddressRepository centerAddressRepository, EmailService emailService) {
+			CenterAddressRepository centerAddressRepository, EmailService emailService,
+			AnsweredSurveyRepository ansRepository) {
 		this.appointmentRepository = appointmentRepository;
 		this.userRepository = userRepository;
 		this.centerRepository = centerRepository;
 		this.centerAddressRepository = centerAddressRepository;
 		this.emailService = emailService;
+		this.ansRepository = ansRepository;
 	}
 	
 	@Override
@@ -146,15 +152,31 @@ public class AppointmentService implements IAppointmentService{
 	}
 
 	@Override
-	public Boolean scheduleAppointment(ScheduleAppointmentDTO appointmentDTO) {
+	public ResponseDTO scheduleAppointment(ScheduleAppointmentDTO appointmentDTO) {
 		List<Appointment> allAppointmnets = appointmentRepository.findAllByDate(appointmentDTO.getDate());
+		ResponseDTO responseDTO = new ResponseDTO();
 
 		for(Appointment appointment: allAppointmnets) {
 			if(!appointment.isTaken() && appointment.getCenter().getId().equals(appointmentDTO.getCenterId())) {
-				appointment.setTaken(true);
 				
 				RegisteredUser regUser = userRepository.findOneUserById(appointmentDTO.getUserId());
+				
+				if(regUser.getGaveBloodDate() != null) {
+					if(LocalDateTime.now().isBefore(regUser.getGaveBloodDate().plusMonths(6))) {
+						responseDTO.setMessage("You can make an appointment only if you have not donated blood in the last 6 months");
+						return responseDTO;
+					}
+					
+				}
+				
+				if(regUser.getTookSurvey() == null) {
+					responseDTO.setMessage("You can make an appointment only if you take survey");
+					return responseDTO;
+				}
+				
+				appointment.setTaken(true);
 				appointment.setRegUser(regUser);	
+				regUser.setGaveBloodDate(appointmentDTO.getDate());
 				
 				appointmentRepository.save(appointment);
 				
@@ -163,7 +185,8 @@ public class AppointmentService implements IAppointmentService{
 			}
 			
 		}
-		return true;
+		responseDTO.setMessage("Appointment scheduled successfully");
+		return responseDTO;
 	}
 
 }
