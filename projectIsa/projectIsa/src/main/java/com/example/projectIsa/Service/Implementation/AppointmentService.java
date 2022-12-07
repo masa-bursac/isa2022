@@ -52,13 +52,7 @@ public class AppointmentService implements IAppointmentService{
 		
 		for(Appointment a: appointmentRepository.findAllByCenterId(appointment.getCenterId())) {
 			if(a.getDate().equals(appointment.getDate())) {
-				for(CenterAdministrator ca: a.getCenterAdmin()) {
-					for(Integer ids: appointment.getStaffIds()) {
-						if(ca.getId().equals(ids)) {
-							return newAppointment;
-						}
-					}
-				}
+				return newAppointment;
 			}
 		}
 		
@@ -171,6 +165,9 @@ public class AppointmentService implements IAppointmentService{
 				
 				if(regUser.getTookSurvey() == null) {
 					responseDTO.setMessage("You can make an appointment only if you take survey");
+					return responseDTO;
+				}else if(regUser.getTookSurvey().plusDays(1).isBefore(LocalDateTime.now())) {
+					responseDTO.setMessage("You can make an appointment only if you take survey again");
 					return responseDTO;
 				}
 				

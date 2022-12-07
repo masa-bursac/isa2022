@@ -194,6 +194,11 @@ export class ScheduleAppointmentRegUserComponent implements OnInit {
           this._snackBar.open(data.message, 'Close',{
             duration: 5000
           });
+        }else if(data.message == "You can make an appointment only if you take survey again"){
+          this._snackBar.open(data.message, 'Close',{
+            duration: 5000
+          });
+          this.router.navigate(['/takeSurvey']);
         }else {
           this._snackBar.open(data.message, 'Close',{
             duration: 5000
