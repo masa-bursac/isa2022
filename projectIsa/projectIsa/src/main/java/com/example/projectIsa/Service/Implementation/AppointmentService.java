@@ -16,6 +16,7 @@ import com.example.projectIsa.Repository.CenterAddressRepository;
 import com.example.projectIsa.Repository.CenterRepository;
 import com.example.projectIsa.Repository.SurveyRepository;
 import com.example.projectIsa.Repository.UserRepository;
+import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.Service.IAppointmentService;
@@ -182,8 +183,34 @@ public class AppointmentService implements IAppointmentService{
 			}
 			
 		}
-		responseDTO.setMessage("Appointment scheduled successfully");
+		responseDTO.setMessage("Appointment scheduled successfully, you can see it on your profile page");
 		return responseDTO;
+	}
+
+	@Override
+	public List<AppointmentCenterDTO> getUsersAppointment(Integer userId) {
+		List<AppointmentCenterDTO> allAppointmentCenterDTO = new ArrayList<>(); 
+		List<Appointment> allAppointmnets = appointmentRepository.findAllByRegUserId(userId);
+		
+		AppointmentCenterDTO appointmentCenterDTO = new AppointmentCenterDTO();
+
+		for(Appointment appointment: allAppointmnets) {
+			Center center = centerRepository.findOneById(appointment.getCenter().getId());
+			appointmentCenterDTO.setId(appointment.getId());
+			appointmentCenterDTO.setDate(appointment.getDate());
+			appointmentCenterDTO.setDuration(appointment.getDuration());
+			appointmentCenterDTO.setName(center.getName());
+			appointmentCenterDTO.setDescription(center.getDescription());
+			appointmentCenterDTO.setRating(center.getRating());
+			appointmentCenterDTO.setStreet(center.getCenterAddress().getStreet());
+			appointmentCenterDTO.setHouseNumber(center.getCenterAddress().getHouseNumber());
+			appointmentCenterDTO.setCity(center.getCenterAddress().getCity());
+			appointmentCenterDTO.setState(center.getCenterAddress().getState());
+			appointmentCenterDTO.setPostcode(center.getCenterAddress().getPostcode());
+			allAppointmentCenterDTO.add(appointmentCenterDTO);
+		}
+		
+		return allAppointmentCenterDTO;
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
@@ -56,5 +57,11 @@ public class AppointmentController {
 	@PreAuthorize("hasRole('ROLE_REGISTERED')")
     public ResponseEntity scheduleAppointment(@RequestBody ScheduleAppointmentDTO appointment) {
         return new ResponseEntity(appointmentService.scheduleAppointment(appointment), HttpStatus.OK);
+    }
+	
+	@GetMapping("/getUsersAppointment/{userId}")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
+    public List<AppointmentCenterDTO> getUsersAppointment(@PathVariable Integer userId) {
+        return appointmentService.getUsersAppointment(userId);
     }
 }

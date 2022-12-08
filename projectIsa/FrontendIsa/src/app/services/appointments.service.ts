@@ -27,4 +27,8 @@ export class AppointmentsService {
     return this.http.post(appointments_url+`/scheduleAppointment`, body); 
   }
 
+  public getUsersAppointment(body:any): Observable<any>{
+    return this.http.get(appointments_url+`/getUsersAppointment/${body}`);
+  }
+
 }

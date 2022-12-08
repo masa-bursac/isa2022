@@ -5,6 +5,7 @@
         <mat-form-field style="width:50vw" appearance="fill">
           <input type="text" (change)="setCenters()" class="mat-card-font" matInput placeholder="Search centers by name or address" name="search" [(ngModel)]="search">
           <button matSuffix mat-button (click)="searchCenters()"><mat-icon>search</mat-icon></button>
+          <button *ngIf="searchCentersOn" matSuffix mat-button (click)="disableSearch()"><mat-icon>highlight_off</mat-icon></button>
         </mat-form-field>
         <div class="div-holder">
           <mat-form-field appearance="fill" class="mat-field-space">

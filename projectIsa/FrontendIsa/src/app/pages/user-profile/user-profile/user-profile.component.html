@@ -110,3 +110,22 @@
       </form>
     </mat-card>
 </div>
+
+<div>
+  <div *ngFor="let usersAppointments of allUsersAppointments">
+      <div class="review-holder">
+          <mat-card class="example-card">
+              <mat-card-content class="mat-card-font">
+                <h1>Scheduled appointment</h1>
+                <h2>{{ usersAppointments.name }}</h2>
+                <p>{{ usersAppointments.city }}, {{ usersAppointments.street }} {{ usersAppointments.houseNumber }}</p>
+                <p>{{ usersAppointments.description }}</p>
+                <p>Rating: {{ usersAppointments.rating }}</p>
+                <p>Time: <b>{{usersAppointments.date[2]}}/{{usersAppointments.date[1]}}/{{usersAppointments.date[0]}} {{usersAppointments.date[3]}}:{{usersAppointments.date[4]}}<span *ngIf="usersAppointments.date[4] === 0">{{usersAppointments.date[4]}}</span>h</b></p>
+              </mat-card-content>
+          </mat-card>
+          </div>
+      <br>
+      <br>
+  </div>
+</div>

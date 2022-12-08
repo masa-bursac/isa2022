@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppointmentsService } from 'src/app/services/appointments.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -41,8 +42,9 @@ export class UserProfileComponent implements OnInit {
     {value: 'OTHER', viewValue: 'OTHER'}
   ];
 
+  public allUsersAppointments: any[] = [];
 
-  constructor(private fb: FormBuilder, private profileService : ProfileService, private router: Router, private tokenStorage: TokenStorageService) { }
+  constructor(private fb: FormBuilder, private profileService : ProfileService, private router: Router, private tokenStorage: TokenStorageService, private appointmentService: AppointmentsService) { }
 
   ngOnInit(): void {
     if(Object.keys(this.tokenStorage.getUser()).length === 0){
@@ -70,6 +72,11 @@ export class UserProfileComponent implements OnInit {
         profession: [data.profession,[Validators.required, Validators.pattern(/^(?:[A-Za-z]+)(?:[A-Za-z0-9 _]*)$/)]],
       });
       this.selectedValueGender = data.gender;
+    });
+
+    this.appointmentService.getUsersAppointment(this.tokenStorage.getUser().id).subscribe(data=> {
+      this.allUsersAppointments = data;
+      console.log(this.allUsersAppointments)
     });
 
   }

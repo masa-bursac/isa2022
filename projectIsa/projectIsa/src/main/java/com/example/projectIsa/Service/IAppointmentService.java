@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.util.MultiValueMap;
 
+import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
@@ -20,4 +21,6 @@ public interface IAppointmentService {
 	List<CentersDTO> findAppointment(String date);
 
 	ResponseDTO scheduleAppointment(ScheduleAppointmentDTO appointment);
+
+	List<AppointmentCenterDTO> getUsersAppointment(Integer userId);
 }
