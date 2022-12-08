@@ -11,6 +11,7 @@ import com.example.projectIsa.DTO.CenterAdministratorDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.CentreDTO;
 import com.example.projectIsa.Model.Address;
+import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.Model.Center;
 import com.example.projectIsa.Model.CenterAddress;
 import com.example.projectIsa.Model.CenterAdministrator;
@@ -55,6 +56,10 @@ public class CenterService implements ICenterService{
 		returnCentre.setAppointments(center.getAppointments());
 		for(CenterAdministrator admin: center.getStaff()) {
 			admin.setCenter(null);
+			admin.getComplaints().clear();
+		}
+		for(Appointment a: returnCentre.getAppointments()) {
+			a.setRegUser(null);
 		}
 		
 		returnCentre.setStaff(center.getStaff());
