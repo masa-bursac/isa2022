@@ -18,16 +18,16 @@ insert into center_address (id,longitude,latitude,street,city,state,house_number
 
 insert into center (id,name,description,rating, center_address_id) values
 (1,'Centar Novi Sad','Centar za transfuziju krvi u Novom Sadu',5, 1);
-insert into center (id,name,description,rating) values
-(2,'Centar Novo Naselje','Centar za transfuziju krvi na Novom Naselju',2);
-insert into center (id,name,description,rating) values
-(3,'Centar Beograd','Centar za transfuziju krvi u Beogradu',3);
-insert into center (id,name,description,rating) values
-(4,'Centar Novi Beograd','Centar za transfuziju krvi na Novom Beogradu',4);
-insert into center (id,name,description,rating) values
-(5,'Beograd Centar','Centar za transfuziju krvi na Novom Beogradu',4);
-insert into center (id,name,description,rating) values
-(6,'Novi Beograd centar','Centar za transfuziju krvi na Novom Beogradu',5);
+insert into center (id,name,description,rating, center_address_id) values
+(2,'Centar Novo Naselje','Centar za transfuziju krvi na Novom Naselju',2, 2);
+insert into center (id,name,description,rating, center_address_id) values
+(3,'Centar Beograd','Centar za transfuziju krvi u Beogradu',3, 3);
+insert into center (id,name,description,rating, center_address_id) values
+(4,'Centar Novi Beograd','Centar za transfuziju krvi na Novom Beogradu',4, 4);
+insert into center (id,name,description,rating, center_address_id) values
+(5,'Beograd Centar','Centar za transfuziju krvi na Novom Beogradu',4, 5);
+insert into center (id,name,description,rating, center_address_id) values
+(6,'Novi Beograd centar','Centar za transfuziju krvi na Novom Beogradu',5, 6);
 
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
 (1,2,'Pera','Perovic','pera@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','3012457898654', 0, false);
@@ -41,7 +41,8 @@ insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,
 (5,0,'Biljana','Brankovic','bilja@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false);
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
 (6,0,'Marica','Maric','mara@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false);
-
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
+(7,1,'Milana','Milanovic','milana@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0639876543','0406894564321', 1, false,3);
 
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (1,0,0,'Njegoseva','Novi Sad','Srbija','5','21000');
@@ -55,6 +56,8 @@ insert into address (id,longitude,latitude,street,city,state,house_number,postco
 (5,0,0,'Zmaj Jovina','Novi Sad','Srbija','8','21000');
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (6,0,0,'Rumenacka','Novi Sad','Srbija','110','21000');
+insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
+(7,0,0,'Beogradska','Beograd','Srbija','22','11000');
 
 insert into education (id,education,profession) values 
 (1,'ftn','assistant');
@@ -68,6 +71,8 @@ insert into education (id,education,profession) values
 (5,'ftn','student');
 insert into education (id,education,profession) values 
 (6,'Srednja ekonomska skola, Novi Sad','penzioner');
+insert into education (id,education,profession) values 
+(7,'ftn','assistant');
 
 
 UPDATE users SET address_id = 1, education_id = 1 WHERE users.id = 1;
@@ -76,6 +81,7 @@ UPDATE users SET address_id = 3, education_id = 3 WHERE users.id = 3;
 UPDATE users SET address_id = 4, education_id = 4 WHERE users.id = 4;
 UPDATE users SET address_id = 5, education_id = 5 WHERE users.id = 5;
 UPDATE users SET address_id = 6, education_id = 6 WHERE users.id = 6;
+UPDATE users SET address_id = 7, education_id = 7 WHERE users.id = 7;
 
 
 insert into medical_equipment (id,quantity,blood_type) values 
@@ -135,9 +141,9 @@ insert into appointment(id, date, duration, taken, center_id, registered_user_id
 insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
 (2, '2022-12-07 12:30:00', 30, true, 1, 3);
 
-alter sequence user_entity_id_seq restart with 7;
-alter sequence user_address_id_seq restart with 7;
-alter sequence user_education_id_seq restart with 7;
+alter sequence user_entity_id_seq restart with 8;
+alter sequence user_address_id_seq restart with 8;
+alter sequence user_education_id_seq restart with 8;
 alter sequence center_id_seq restart with 7;
 alter sequence center_address_id_seq restart with 7;
 alter sequence complaint_id_seq restart with 7;

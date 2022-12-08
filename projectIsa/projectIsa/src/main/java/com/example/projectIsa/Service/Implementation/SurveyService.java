@@ -1,5 +1,6 @@
 package com.example.projectIsa.Service.Implementation;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +13,11 @@ import com.example.projectIsa.DTO.SurveyDTO;
 import com.example.projectIsa.Model.AnsweredSurvey;
 import com.example.projectIsa.Model.Center;
 import com.example.projectIsa.Model.CenterAddress;
+import com.example.projectIsa.Model.RegisteredUser;
 import com.example.projectIsa.Model.Survey;
 import com.example.projectIsa.Repository.AnsweredSurveyRepository;
 import com.example.projectIsa.Repository.SurveyRepository;
+import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.Service.ISurveyService;
 
 @Service
@@ -22,11 +25,14 @@ public class SurveyService implements ISurveyService {
 
 	private final SurveyRepository surveyRepository;
 	private final AnsweredSurveyRepository ansRepository;
+	private final UserRepository userRepository;
 	
 	@Autowired
-    public SurveyService(SurveyRepository surveyRepository, AnsweredSurveyRepository ansRepository){
+    public SurveyService(SurveyRepository surveyRepository, AnsweredSurveyRepository ansRepository,
+    		UserRepository userRepository){
         this.surveyRepository = surveyRepository;
         this.ansRepository = ansRepository;
+        this.userRepository = userRepository;
     }
 	
 	@Override
@@ -55,7 +61,11 @@ public class SurveyService implements ISurveyService {
 			answers.setSurveyId(answerDTO.get(i).getId());
 			answers.setAnswers(answerDTO.get(i).getAnswers());
 			ansRepository.save(answers);
+			
+			RegisteredUser regUser = userRepository.findOneUserById(answerDTO.get(i).getRegUserId());
+			regUser.setTookSurvey((LocalDateTime.now()));
 		}
+		
 		return true;
 	}
 

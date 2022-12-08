@@ -1,5 +1,6 @@
 package com.example.projectIsa.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
 import com.example.projectIsa.DTO.TakenAppointmentDTO;
+import com.example.projectIsa.DTO.ScheduleAppointmentDTO;
 import com.example.projectIsa.Service.IAppointmentService;
 
 @RestController
@@ -31,7 +34,7 @@ public class AppointmentController {
 	
 	@PostMapping(value = "/addFreeAppointment")
 	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
-    public ResponseEntity registerCenter(@RequestBody FreeAppointmentDTO appointment) {
+    public ResponseEntity addFreeAppointment(@RequestBody FreeAppointmentDTO appointment) {
         try {
         	return new ResponseEntity(appointmentService.addFreeAppointment(appointment), HttpStatus.OK);
         } catch (Exception e) {
@@ -49,5 +52,23 @@ public class AppointmentController {
 	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
     public ResponseEntity<List<TakenAppointmentDTO>> getTakenAppointment(@PathVariable Integer adminId) {
         return new ResponseEntity<List<TakenAppointmentDTO>>(appointmentService.getTakenAppointments(adminId), HttpStatus.OK);
+    }
+    
+	@GetMapping("/findAppointment/{date}")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
+    public List<CentersDTO> findAppointment(@PathVariable String date) {
+        return appointmentService.findAppointment(date);
+    }
+	
+	@PostMapping(value = "/scheduleAppointment")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
+    public ResponseEntity scheduleAppointment(@RequestBody ScheduleAppointmentDTO appointment) {
+        return new ResponseEntity(appointmentService.scheduleAppointment(appointment), HttpStatus.OK);
+    }
+	
+	@GetMapping("/getUsersAppointment/{userId}")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
+    public List<AppointmentCenterDTO> getUsersAppointment(@PathVariable Integer userId) {
+        return appointmentService.getUsersAppointment(userId);
     }
 }

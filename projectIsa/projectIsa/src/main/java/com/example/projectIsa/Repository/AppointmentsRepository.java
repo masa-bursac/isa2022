@@ -1,5 +1,6 @@
 package com.example.projectIsa.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,10 @@ import com.example.projectIsa.Model.Appointment;
 public interface AppointmentsRepository extends JpaRepository<Appointment, Integer>{
 
 	List<Appointment> findAllByCenterId(Integer centerId);
+	
+	List<Appointment> findAllByDate(LocalDateTime date);
+
+	List<Appointment> findAllByRegUserId(Integer userId);
 
 
 }

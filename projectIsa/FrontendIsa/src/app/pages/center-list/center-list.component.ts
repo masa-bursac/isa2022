@@ -17,6 +17,7 @@ export class CenterListComponent implements OnInit {
   search : string = '';
   selectedValue : number = 0;
   role: any;
+  searchCentersOn: boolean = false;
 
   constructor(private centerService : CenterService, private router: Router, private tokenStorage: TokenStorageService) { }
 
@@ -35,6 +36,16 @@ export class CenterListComponent implements OnInit {
     this.showAllCenters();
   }
 
+  public disableSearch(): void {
+    this.searchCentersOn = false;
+    this.search = '';
+    if(this.selectedValue !== 0){
+      this.filterRating(this.selectedValue);
+    }else{
+      this.allFilteredAndSorted = [];
+    }
+  }
+
   public showAllCenters(): void {
     this.centerService.getAllCenters().subscribe(data => {
       this.allCenters = data;
@@ -42,6 +53,7 @@ export class CenterListComponent implements OnInit {
   }
 
   public searchCenters(): any {
+    this.searchCentersOn = true;
     this.centerService.searchCenters(this.search).subscribe(data => {
       if(this.selectedValue === undefined){
         this.allFilteredAndSorted = data;

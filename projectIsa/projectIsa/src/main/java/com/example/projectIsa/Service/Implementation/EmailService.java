@@ -8,6 +8,7 @@ import com.example.projectIsa.DTO.ComplaintAnswerDTO;
 import com.example.projectIsa.Model.Complaint;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.ComplaintRepository;
+import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.Service.IEmailService;
 import org.thymeleaf.context.Context;
@@ -41,6 +42,17 @@ public class EmailService implements IEmailService {
         context.setVariable("admin", String.format("%s %s", adminWhoAnswers.getName(), adminWhoAnswers.getSurname()));
 
         emailContext.send("firma4validation@gmail.com", title, "answerComplaint", context);
+		return true;
+
+	}
+
+	@Override
+	public Boolean scheduleAppointment(String name, String surname) {
+		String title = "Zakazivanje termina";
+        Context context = new Context();
+        context.setVariable("name", String.format("%s %s", name, surname));
+
+        emailContext.send("firma4validation@gmail.com", title, "scheduleAppointment", context);
         return true;
 	}
 

@@ -1,5 +1,6 @@
 package com.example.projectIsa.Model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
@@ -12,6 +13,8 @@ public class RegisteredUser extends User{
 
 	@OneToMany(mappedBy="regUser")
 	private List<Appointment> appointments;
+	private LocalDateTime gaveBloodDate;
+	private LocalDateTime tookSurvey;
 	
 	@OneToMany(mappedBy="regUser")
 	private List<Complaint> complaints;
@@ -20,9 +23,11 @@ public class RegisteredUser extends User{
 	
 	public RegisteredUser(Integer id, String name, String surname, String email, String password, String phoneNumber,
 			String jmbg, Gender gender, Role role, Address address, Education education,
-			List<Appointment> appointments) {
+			List<Appointment> appointments,LocalDateTime gaveBloodDate, LocalDateTime tookSurvey) {
 		super(id, name, surname, email, password, phoneNumber, jmbg, gender, role, address, education);
 		this.appointments = appointments;
+		this.gaveBloodDate = gaveBloodDate;
+		this.tookSurvey = tookSurvey;
 	}
 
 	public RegisteredUser(Integer id, String name, String surname, String email, String password, String phoneNumber,
@@ -45,6 +50,22 @@ public class RegisteredUser extends User{
 	public void setComplaints(List<Complaint> complaints) {
 		this.complaints = complaints;
 	}
+	public LocalDateTime getGaveBloodDate() {
+		return gaveBloodDate;
+	}
+
+	public void setGaveBloodDate(LocalDateTime gaveBloodDate) {
+		this.gaveBloodDate = gaveBloodDate;
+	}
+
+	public LocalDateTime getTookSurvey() {
+		return tookSurvey;
+	}
+
+	public void setTookSurvey(LocalDateTime tookSurvey) {
+		this.tookSurvey = tookSurvey;
+	}
+	
 	
 	
 }
