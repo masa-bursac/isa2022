@@ -43,6 +43,7 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointment-reg-user/schedule-appointment-reg-user.component';
+import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointmen
     ComplaintsComponent,
     ChangePasswordComponent,
     AppointmentsComponent,  
-    ScheduleAppointmentRegUserComponent
+    ScheduleAppointmentRegUserComponent,
+    UpcomingAppointmentsComponent
   ],
   imports: [
     BrowserModule,
