@@ -1,6 +1,8 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { format } from 'date-fns';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -41,7 +43,7 @@ export class UpcomingAppointmentsComponent implements OnInit {
 
   public scheduleAppointment(date: string): void {
     const body = {
-      date: date,
+      date: format(new Date(date), 'Pp'),
       userId: this.tokenStorage.getUser().id,
       centerId: this.centerId
     }
@@ -68,6 +70,19 @@ export class UpcomingAppointmentsComponent implements OnInit {
       }
         
     });
+  }
+
+  allDirections: any[] = [
+    {value: 'ascending', viewValue: 'ascending'},
+    {value: 'descending', viewValue: 'descending'}
+  ];
+
+  public sortDate(value: string) {
+    if (value === 'ascending') {
+      this.allAppointments.sort((a,b) => a.name > b.name ? 1 : -1);
+    } else if (value === 'descending') {
+      this.allAppointments.sort((a,b) => a.name < b.name ? 1 : -1);
+    }
   }
 
 }

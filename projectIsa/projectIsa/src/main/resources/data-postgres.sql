@@ -140,6 +140,12 @@ insert into appointment(id, date, duration, taken, center_id, registered_user_id
 (1, '2022-12-07 12:00:00', 30, true, 1, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
 (2, '2022-12-07 12:30:00', 30, true, 1, 3);
+insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
+(3, '2022-12-12 11:00:00', 30, true, 1, 3);
+insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
+(4, '2022-12-19 10:00:00', 30, false, 2, 3);
+insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
+(5, '2022-12-20 13:30:00', 30, false, 2, 3);
 
 alter sequence user_entity_id_seq restart with 8;
 alter sequence user_address_id_seq restart with 8;
