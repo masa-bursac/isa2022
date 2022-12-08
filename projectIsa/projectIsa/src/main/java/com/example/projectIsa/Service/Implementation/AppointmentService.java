@@ -104,6 +104,7 @@ public class AppointmentService implements IAppointmentService{
 				}			
 				for(CenterAdministrator cen: appointment.getStaff()) {
 					cen.setCenter(null);
+					cen.getComplaints().clear();
 				}
 				returnAppointments.add(appointment);
 			}
