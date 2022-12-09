@@ -23,10 +23,12 @@ export class AppointmentsComponent implements OnInit {
   daysExcluded : any[]= [0,6];
   events: CalendarEvent[] = [];
   appointmentsFree : any = [];
+  appointmentsAllFree : any = [];
   constructor( private appointmentsService: AppointmentsService,private tokenStorage: TokenStorageService) {}
 
   ngOnInit(): void {
     this.getAppointments();
+    this.getFreeAppointments();
   }
 
   public getAppointments(){
@@ -34,6 +36,14 @@ export class AppointmentsComponent implements OnInit {
       this.appointmentsFree = data;
       console.log(this.appointmentsFree)
       this.mapAppointmentsToEvent(data);
+    });
+  }
+
+  public getFreeAppointments(){
+    this.appointmentsService.getFreeAppointment(this.tokenStorage.getUser().id).subscribe(data => {
+      this.appointmentsFree = data;
+      console.log('freeAppointments', this.appointmentsAllFree)
+      this.mapFreeAppointmentsToEvent(data);
     });
   }
   
@@ -57,6 +67,28 @@ export class AppointmentsComponent implements OnInit {
       })
     }
   }
+
+  public mapFreeAppointmentsToEvent(appointments: any){
+    for(let appointment of appointments){
+      let startDate = new Date();
+      startDate.setFullYear(Number(appointment.date[0]));
+      startDate.setMonth(Number(appointment.date[1]-1));
+      startDate.setDate(appointment.date[2]);
+      startDate.setHours(Number(appointment.date[3]));
+      startDate.setMinutes(Number(appointment.date[4]));
+      var endDate = new Date(startDate);
+      endDate.setMinutes(startDate.getMinutes()+appointment.duration)
+      this.events.push({
+        start:  startDate,
+        title: startDate.getHours()
+        +":"+startDate.getMinutes()+this.makeMinutesNicer(startDate)
+        +"-"+endDate.getHours()+":"+endDate.getMinutes()+this.makeMinutesNicer(endDate), 
+        end: endDate,
+        color: {primary:'Gray',secondary:'#FF9696', secondaryText: 'White'}
+      })
+    }
+  }
+
   makeMinutesNicer(date: any){
     if(date.getMinutes()<10)
       return '0';

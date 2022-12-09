@@ -36,4 +36,8 @@ export class AppointmentsService {
     return this.http.get(appointments_url+`/getUsersAppointment/${body}`);
   }
 
+  public getFreeAppointment(adminId : number){
+    return this.http.get(appointments_url+`/getFreeAppointment/${adminId}`);
+  }
+
 }

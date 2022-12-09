@@ -8,6 +8,7 @@ import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.GetFreeAppointmentsDTO;
 import com.example.projectIsa.DTO.TakenAppointmentDTO;
 import com.example.projectIsa.DTO.ResponseDTO;
 import com.example.projectIsa.DTO.ScheduleAppointmentDTO;
@@ -26,4 +27,6 @@ public interface IAppointmentService {
 	ResponseDTO scheduleAppointment(ScheduleAppointmentDTO appointment);
 
 	List<AppointmentCenterDTO> getUsersAppointment(Integer userId);
+
+	List<GetFreeAppointmentsDTO> getFreeAppointment(Integer adminId);
 }

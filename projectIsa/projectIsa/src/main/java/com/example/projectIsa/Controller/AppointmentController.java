@@ -18,6 +18,7 @@ import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.GetFreeAppointmentsDTO;
 import com.example.projectIsa.DTO.TakenAppointmentDTO;
 import com.example.projectIsa.DTO.ScheduleAppointmentDTO;
 import com.example.projectIsa.Service.IAppointmentService;
@@ -70,5 +71,11 @@ public class AppointmentController {
 	@PreAuthorize("hasRole('ROLE_REGISTERED')")
     public List<AppointmentCenterDTO> getUsersAppointment(@PathVariable Integer userId) {
         return appointmentService.getUsersAppointment(userId);
+    }
+	
+	@GetMapping("/getFreeAppointment/{adminId}")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
+    public ResponseEntity<List<GetFreeAppointmentsDTO>> getFreeAppointment(@PathVariable Integer adminId) {
+        return new ResponseEntity<List<GetFreeAppointmentsDTO>>(appointmentService.getFreeAppointment(adminId), HttpStatus.OK);
     }
 }

@@ -203,6 +203,7 @@ export class ScheduleAppointmentRegUserComponent implements OnInit {
           this._snackBar.open(data.message, 'Close',{
             duration: 5000
           });
+          this.router.navigate(['/userProfile']);
         }
           
       });

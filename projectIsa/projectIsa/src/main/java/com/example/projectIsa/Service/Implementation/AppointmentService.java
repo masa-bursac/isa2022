@@ -3,6 +3,7 @@ package com.example.projectIsa.Service.Implementation;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.GetFreeAppointmentsDTO;
 import com.example.projectIsa.DTO.TakenAppointmentDTO;
 import com.example.projectIsa.DTO.ResponseDTO;
 import com.example.projectIsa.DTO.ScheduleAppointmentDTO;
@@ -229,6 +230,24 @@ public class AppointmentService implements IAppointmentService{
 		}
 		
 		return allAppointmentCenterDTO;
+	}
+
+	@Override
+	public List<GetFreeAppointmentsDTO> getFreeAppointment(Integer adminId) {
+		CenterAdministrator user = userRepository.findOneById(adminId);
+		Center center = centerRepository.findOneById(user.getCenter().getId());
+		List<Appointment> appointments = appointmentRepository.findAllByCenterId(center.getId());
+		List<GetFreeAppointmentsDTO> appointmentDTOs = new ArrayList<GetFreeAppointmentsDTO>();
+		for(Appointment appointment: appointments) {
+			if(!appointment.isTaken()) {
+				GetFreeAppointmentsDTO appointmentDTO = new GetFreeAppointmentsDTO();
+				appointmentDTO.setId(appointment.getId());
+				appointmentDTO.setDate(appointment.getDate());
+				appointmentDTO.setDuration(appointment.getDuration());
+				appointmentDTOs.add(appointmentDTO);
+			}
+		}
+		return appointmentDTOs;
 	}
 
 }
