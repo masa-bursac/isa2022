@@ -33,14 +33,14 @@ insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,
 (1,2,'Pera','Perovic','pera@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','3012457898654', 0, false);
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
 (2,1,'Mila','Milic','mila@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0696754324','2567854569852', 1, false, 1);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
-(3,0,'Vladimir','Vladic','vlada@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','4567894561234', 2, false);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, penals) values
+(3,0,'Vladimir','Vladic','vlada@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','4567894561234', 2, false, 0);
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
 (4,1,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0, false,1);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
-(5,0,'Biljana','Brankovic','bilja@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
-(6,0,'Marica','Maric','mara@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, penals) values
+(5,0,'Biljana','Brankovic','bilja@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, 0);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, penals) values
+(6,0,'Marica','Maric','mara@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, 0);
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
 (7,1,'Milana','Milanovic','milana@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0639876543','0406894564321', 1, false,3);
 
@@ -136,10 +136,10 @@ UPDATE complaints SET center_id = 1 WHERE complaints.id = 1;
 UPDATE complaints SET center_id = 1 WHERE complaints.id = 3;
 UPDATE complaints SET center_id = 2 WHERE complaints.id = 5;
 
-insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
-(1, '2022-12-27 12:00:00', 30, true, 1, 5);
-insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
-(2, '2022-12-27 12:30:00', 30, true, 1, 6);
+insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
+(1, '2022-12-27 12:00:00', 30, true, 1, 5, 3);
+insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
+(2, '2022-12-27 12:30:00', 30, true, 1, 6, 3);
 
 alter sequence user_entity_id_seq restart with 8;
 alter sequence user_address_id_seq restart with 8;

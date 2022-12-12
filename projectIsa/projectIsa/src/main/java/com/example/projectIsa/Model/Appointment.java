@@ -46,10 +46,11 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name="registered_user_id", nullable = true)
 	private RegisteredUser regUser;
+	private PatientAbilityForAppointmentStatus patientStatus;
 	
 	
 	public Appointment(Integer id, Center center, List<CenterAdministrator> centerAdmin, LocalDateTime date,
-			Integer duration, boolean taken, RegisteredUser regUser) {
+			Integer duration, boolean taken, RegisteredUser regUser, PatientAbilityForAppointmentStatus patientStatus) {
 		super();
 		this.id = id;
 		this.center = center;
@@ -58,6 +59,7 @@ public class Appointment {
 		this.duration = duration;
 		this.taken = taken;
 		this.regUser = regUser;
+		this.patientStatus = patientStatus;
 	}
 
 	public Appointment() {
@@ -105,6 +107,14 @@ public class Appointment {
 	}
 	public void setRegUser(RegisteredUser regUser) {
 		this.regUser = regUser;
+	}
+
+	public PatientAbilityForAppointmentStatus getPatientStatus() {
+		return patientStatus;
+	}
+
+	public void setPatientStatus(PatientAbilityForAppointmentStatus patientStatus) {
+		this.patientStatus = patientStatus;
 	}
 	
 	

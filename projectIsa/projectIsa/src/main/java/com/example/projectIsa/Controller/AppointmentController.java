@@ -10,12 +10,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
+import com.example.projectIsa.DTO.AppointmentStatusDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
 import com.example.projectIsa.DTO.GetFreeAppointmentsDTO;
@@ -77,5 +79,15 @@ public class AppointmentController {
 	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
     public ResponseEntity<List<GetFreeAppointmentsDTO>> getFreeAppointment(@PathVariable Integer adminId) {
         return new ResponseEntity<List<GetFreeAppointmentsDTO>>(appointmentService.getFreeAppointment(adminId), HttpStatus.OK);
+    }
+	
+	@PutMapping(value = "/setPatientStatus")
+	//@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
+    public ResponseEntity setPatientStatus(@RequestBody AppointmentStatusDTO appointment) {
+        try {
+        	return new ResponseEntity(appointmentService.setPatientStatus(appointment), HttpStatus.OK);
+        } catch (Exception e) {
+        	return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

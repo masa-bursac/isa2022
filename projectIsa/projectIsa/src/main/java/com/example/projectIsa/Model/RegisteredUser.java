@@ -19,15 +19,18 @@ public class RegisteredUser extends User{
 	@OneToMany(mappedBy="regUser")
 	private List<Complaint> complaints;
 	
+	private Integer penals;
+	
 	public RegisteredUser() {}
 	
 	public RegisteredUser(Integer id, String name, String surname, String email, String password, String phoneNumber,
 			String jmbg, Gender gender, Role role, Address address, Education education,
-			List<Appointment> appointments,LocalDateTime gaveBloodDate, LocalDateTime tookSurvey) {
+			List<Appointment> appointments,LocalDateTime gaveBloodDate, LocalDateTime tookSurvey, Integer penals) {
 		super(id, name, surname, email, password, phoneNumber, jmbg, gender, role, address, education);
 		this.appointments = appointments;
 		this.gaveBloodDate = gaveBloodDate;
 		this.tookSurvey = tookSurvey;
+		this.penals = penals;
 	}
 
 	public RegisteredUser(Integer id, String name, String surname, String email, String password, String phoneNumber,
@@ -64,6 +67,14 @@ public class RegisteredUser extends User{
 
 	public void setTookSurvey(LocalDateTime tookSurvey) {
 		this.tookSurvey = tookSurvey;
+	}
+
+	public Integer getPenals() {
+		return penals;
+	}
+
+	public void setPenals(Integer penals) {
+		this.penals = penals;
 	}
 	
 	
