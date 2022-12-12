@@ -25,7 +25,6 @@
     "add-subtract-date": "^1.0.15",
     "angular-calendar": "^0.30.1",
     "angular-material": "^1.1.24",
-    "date-fns": "^2.29.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -34,7 +33,9 @@
     "@angular-devkit/build-angular": "^14.2.6",
     "@angular/cli": "~14.2.6",
     "@angular/compiler-cli": "^14.2.0",
+    "@types/date-fns": "^2.6.0",
     "@types/jasmine": "~4.0.0",
+    "date-fns": "^2.29.3",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
