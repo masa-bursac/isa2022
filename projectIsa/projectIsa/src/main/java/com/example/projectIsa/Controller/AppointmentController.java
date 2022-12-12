@@ -82,7 +82,7 @@ public class AppointmentController {
     }
 	
 	@PutMapping(value = "/setPatientStatus")
-	//@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
     public ResponseEntity setPatientStatus(@RequestBody AppointmentStatusDTO appointment) {
         try {
         	return new ResponseEntity(appointmentService.setPatientStatus(appointment), HttpStatus.OK);

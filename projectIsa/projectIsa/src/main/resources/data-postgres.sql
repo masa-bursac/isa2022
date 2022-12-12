@@ -114,6 +114,16 @@ insert into survey (id,question) values
 (9,'Да ли сте до сада испитивани или лечени у болници или сте тренутно на испитивању или боловању?');
 insert into survey (id,question) values
 (10,'Да ли сте вадили зуб у протеклих 7 дана?');
+insert into survey (id,question) values
+(11,'Да ли сте у последњих 7 до 10 дана имали температуру преко 38 C, кијавицу, прехладу или узимали антибиотике?');
+insert into survey (id,question) values
+(12,'Да ли имате неке промене на кожи или болујете од алергије?');
+insert into survey (id,question) values
+(13,'Да ли тренутно имате менструацију?');
+insert into survey (id,question) values
+(14,'Да ли сте у протеклих 6 месеци имали неку операцију или примили крв?');
+insert into survey (id,question) values
+(15,'Да ли сте у протеклих 6 месеци имали акупунктуру, пирсинг или тетоважу?');
 
 
 insert into complaints(id,complaint_type, complaint,answer,registered_user_id, complaint_date, answer_date, system_adminstrator_id) values
