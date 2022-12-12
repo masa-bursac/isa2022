@@ -255,16 +255,17 @@ public class AppointmentService implements IAppointmentService{
 
 	@Override
 	public Boolean setPatientStatus(AppointmentStatusDTO appointment) {
+		RegisteredUser patient = userRepository.findOneUserById(appointment.getPatientId());
 		if(appointment.getPatientStatus().equals(PatientAbilityForAppointmentStatus.DIDNT_COME)) {
-			RegisteredUser patient = userRepository.findOneUserById(appointment.getPatientId());
 			patient.setPenals(patient.getPenals() + 1);
-			if(userRepository.save(patient) != null) {
-	        	return true;
-	        }        
-	        else
-	            return false;
 		}
-		return true;
+		Appointment app = appointmentRepository.findOneAppointmentById(appointment.getId());
+		app.setPatientStatus(appointment.getPatientStatus());
+		if(userRepository.save(patient) != null && appointmentRepository.save(app) != null) {
+        	return true;
+        }        
+        else
+            return false;
 	}
 
 }
