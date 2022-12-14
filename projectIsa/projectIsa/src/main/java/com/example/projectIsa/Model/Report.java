@@ -30,8 +30,8 @@ public class Report {
 	private String bagNumber;
 	
 	private String puncturePlace;
-	private LocalDateTime start;
-	private LocalDateTime end;
+	private LocalDateTime startTime;
+	private LocalDateTime endTime;
 	private String reasonForEndingEarly;
 	private Integer quantityTaken;
 	
@@ -50,7 +50,7 @@ public class Report {
 
 	public Report(Integer id, Integer patientId, Integer doctorId, BloodType bloodType, String noteToDoctor,
 			boolean bakarSulfatLevel, double levelHemoglobin, String bagNumber, String puncturePlace,
-			LocalDateTime start, LocalDateTime end, String reasonForEndingEarly, Integer quantityTaken,
+			LocalDateTime startTime, LocalDateTime endTime, String reasonForEndingEarly, Integer quantityTaken,
 			String bloodPressure, Integer patientWeight, Integer pulse, String lungs, boolean isAccepted,
 			String reasonForRejection) {
 		super();
@@ -63,8 +63,8 @@ public class Report {
 		this.levelHemoglobin = levelHemoglobin;
 		this.bagNumber = bagNumber;
 		this.puncturePlace = puncturePlace;
-		this.start = start;
-		this.end = end;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.reasonForEndingEarly = reasonForEndingEarly;
 		this.quantityTaken = quantityTaken;
 		this.bloodPressure = bloodPressure;
@@ -166,23 +166,23 @@ public class Report {
 	}
 
 
-	public LocalDateTime getStart() {
-		return start;
+	public LocalDateTime getStartTime() {
+		return startTime;
 	}
 
 
-	public void setStart(LocalDateTime start) {
-		this.start = start;
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
 	}
 
 
-	public LocalDateTime getEnd() {
-		return end;
+	public LocalDateTime getEndTime() {
+		return endTime;
 	}
 
 
-	public void setEnd(LocalDateTime end) {
-		this.end = end;
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
 	}
 
 
@@ -264,6 +264,7 @@ public class Report {
 	public void setReasonForRejection(String reasonForRejection) {
 		this.reasonForRejection = reasonForRejection;
 	}
+	
 	
 	
 }
