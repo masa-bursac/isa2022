@@ -1,5 +1,7 @@
 package com.example.projectIsa.Model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,71 +19,251 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "report_id_seq")
     @Column(name = "id")
 	private Integer id;
+	private Integer patientId;
+	private Integer doctorId;
+	
 	private BloodType bloodType;
 	private String noteToDoctor;
-	private String bs;
-	private boolean levelHem;
-	private String hemMeter;
-	private String trueValue;
+	private boolean bakarSulfatLevel;
+	private double levelHemoglobin;
+	
+	private String bagNumber;
+	
+	private String puncturePlace;
+	private LocalDateTime start;
+	private LocalDateTime end;
+	private String reasonForEndingEarly;
+	private Integer quantityTaken;
+	
+	private String bloodPressure;
+	private Integer patientWeight;
+	private Integer pulse;
+	private String lungs;
+	private boolean isAccepted;
+	private String reasonForRejection;
 	
 
 	public Report() {
 		super();
 	}
-	public Report(Integer id, BloodType bloodType, String noteToDoctor, String bs, boolean levelHem, String hemMeter,
-			String trueValue) {
+
+
+	public Report(Integer id, Integer patientId, Integer doctorId, BloodType bloodType, String noteToDoctor,
+			boolean bakarSulfatLevel, double levelHemoglobin, String bagNumber, String puncturePlace,
+			LocalDateTime start, LocalDateTime end, String reasonForEndingEarly, Integer quantityTaken,
+			String bloodPressure, Integer patientWeight, Integer pulse, String lungs, boolean isAccepted,
+			String reasonForRejection) {
 		super();
 		this.id = id;
+		this.patientId = patientId;
+		this.doctorId = doctorId;
 		this.bloodType = bloodType;
 		this.noteToDoctor = noteToDoctor;
-		this.bs = bs;
-		this.levelHem = levelHem;
-		this.hemMeter = hemMeter;
-		this.trueValue = trueValue;
+		this.bakarSulfatLevel = bakarSulfatLevel;
+		this.levelHemoglobin = levelHemoglobin;
+		this.bagNumber = bagNumber;
+		this.puncturePlace = puncturePlace;
+		this.start = start;
+		this.end = end;
+		this.reasonForEndingEarly = reasonForEndingEarly;
+		this.quantityTaken = quantityTaken;
+		this.bloodPressure = bloodPressure;
+		this.patientWeight = patientWeight;
+		this.pulse = pulse;
+		this.lungs = lungs;
+		this.isAccepted = isAccepted;
+		this.reasonForRejection = reasonForRejection;
 	}
+
+
 	public Integer getId() {
 		return id;
 	}
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
+	public Integer getPatientId() {
+		return patientId;
+	}
+
+
+	public void setPatientId(Integer patientId) {
+		this.patientId = patientId;
+	}
+
+
+	public Integer getDoctorId() {
+		return doctorId;
+	}
+
+
+	public void setDoctorId(Integer doctorId) {
+		this.doctorId = doctorId;
+	}
+
+
 	public BloodType getBloodType() {
 		return bloodType;
 	}
+
+
 	public void setBloodType(BloodType bloodType) {
 		this.bloodType = bloodType;
 	}
+
+
 	public String getNoteToDoctor() {
 		return noteToDoctor;
 	}
+
+
 	public void setNoteToDoctor(String noteToDoctor) {
 		this.noteToDoctor = noteToDoctor;
 	}
-	public String getBs() {
-		return bs;
+
+
+	public boolean isBakarSulfatLevel() {
+		return bakarSulfatLevel;
 	}
-	public void setBs(String bs) {
-		this.bs = bs;
+
+
+	public void setBakarSulfatLevel(boolean bakarSulfatLevel) {
+		this.bakarSulfatLevel = bakarSulfatLevel;
 	}
-	public boolean isLevelHem() {
-		return levelHem;
+
+
+	public double getLevelHemoglobin() {
+		return levelHemoglobin;
 	}
-	public void setLevelHem(boolean levelHem) {
-		this.levelHem = levelHem;
+
+
+	public void setLevelHemoglobin(double levelHemoglobin) {
+		this.levelHemoglobin = levelHemoglobin;
 	}
-	public String getHemMeter() {
-		return hemMeter;
+
+
+	public String getBagNumber() {
+		return bagNumber;
 	}
-	public void setHemMeter(String hemMeter) {
-		this.hemMeter = hemMeter;
+
+
+	public void setBagNumber(String bagNumber) {
+		this.bagNumber = bagNumber;
 	}
-	public String getTrueValue() {
-		return trueValue;
+
+
+	public String getPuncturePlace() {
+		return puncturePlace;
 	}
-	public void setTrueValue(String trueValue) {
-		this.trueValue = trueValue;
+
+
+	public void setPuncturePlace(String puncturePlace) {
+		this.puncturePlace = puncturePlace;
 	}
-	
+
+
+	public LocalDateTime getStart() {
+		return start;
+	}
+
+
+	public void setStart(LocalDateTime start) {
+		this.start = start;
+	}
+
+
+	public LocalDateTime getEnd() {
+		return end;
+	}
+
+
+	public void setEnd(LocalDateTime end) {
+		this.end = end;
+	}
+
+
+	public String getReasonForEndingEarly() {
+		return reasonForEndingEarly;
+	}
+
+
+	public void setReasonForEndingEarly(String reasonForEndingEarly) {
+		this.reasonForEndingEarly = reasonForEndingEarly;
+	}
+
+
+	public Integer getQuantityTaken() {
+		return quantityTaken;
+	}
+
+
+	public void setQuantityTaken(Integer quantityTaken) {
+		this.quantityTaken = quantityTaken;
+	}
+
+
+	public String getBloodPressure() {
+		return bloodPressure;
+	}
+
+
+	public void setBloodPressure(String bloodPressure) {
+		this.bloodPressure = bloodPressure;
+	}
+
+
+	public Integer getPatientWeight() {
+		return patientWeight;
+	}
+
+
+	public void setPatientWeight(Integer patientWeight) {
+		this.patientWeight = patientWeight;
+	}
+
+
+	public Integer getPulse() {
+		return pulse;
+	}
+
+
+	public void setPulse(Integer pulse) {
+		this.pulse = pulse;
+	}
+
+
+	public String getLungs() {
+		return lungs;
+	}
+
+
+	public void setLungs(String lungs) {
+		this.lungs = lungs;
+	}
+
+
+	public boolean isAccepted() {
+		return isAccepted;
+	}
+
+
+	public void setAccepted(boolean isAccepted) {
+		this.isAccepted = isAccepted;
+	}
+
+
+	public String getReasonForRejection() {
+		return reasonForRejection;
+	}
+
+
+	public void setReasonForRejection(String reasonForRejection) {
+		this.reasonForRejection = reasonForRejection;
+	}
 	
 	
 }
