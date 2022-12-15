@@ -87,6 +87,7 @@
           <p>{{ center.city }}, {{ center.street }} {{ center.houseNumber }}</p>
           <p>{{ center.description }}</p>
           <p>Rating: {{ center.rating }}</p>
+          <button mat-stroked-button color="accent" class="btn-block" routerLink="/upcomingAppointments" (click)="seeAvailable(center.id)">See available appointments</button>
         </mat-card-content>
     </mat-card>
     </div>

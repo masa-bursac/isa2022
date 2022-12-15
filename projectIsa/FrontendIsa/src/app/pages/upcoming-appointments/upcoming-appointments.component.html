@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+
+<div class="heder">
+  <h1>All appointments for chosen center</h1>
+</div>
+
+<div class="sort-items">
+  <mat-label class="label-sort">Sort:</mat-label>
+    <div>
+      <div class="div-holder">
+        <mat-form-field appearance="fill" class="mat-field-space">
+          <mat-label>Sort</mat-label>
+          <mat-select (selectionChange)="sortDate($event.value)">
+            <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
+              {{direction.viewValue}}
+            </mat-option>
+            <mat-option>None</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+</div>
+
+<div *ngFor="let appointment of allAppointments">
+    <div class="review-holder">
+    <mat-card class="example-card">
+        <mat-card-content class="mat-card-font">
+          <h1>{{ appointment.date }}</h1>
+          <p>{{ appointment.duration }}</p>
+          <button mat-stroked-button color="accent" class="btn-block" (click)="scheduleAppointment(appointment.date)">Schedule appointment</button>
+        </mat-card-content>
+    </mat-card>
+    </div>
+    <br>
+    <br>
+</div>

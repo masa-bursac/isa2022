@@ -52,6 +52,10 @@ export class CenterListComponent implements OnInit {
     });
   }
 
+  public seeAvailable(idCenter: number) {
+    localStorage.setItem('center', JSON.stringify(idCenter));
+  }
+
   public searchCenters(): any {
     this.searchCentersOn = true;
     this.centerService.searchCenters(this.search).subscribe(data => {

@@ -16,6 +16,7 @@ import { ComplaintsComponent } from './pages/complaints/complaints.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
 import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointment-reg-user/schedule-appointment-reg-user.component';
+import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
 
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo:'landingPage'},
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'complaints', component: ComplaintsComponent},
   { path: 'changePassword', component: ChangePasswordComponent},
   { path: 'appointments', component: AppointmentsComponent},
-  { path: 'scheduleAppointment', component: ScheduleAppointmentRegUserComponent}
+  { path: 'scheduleAppointment', component: ScheduleAppointmentRegUserComponent},
+  { path: 'upcomingAppointments', component: UpcomingAppointmentsComponent}
 ];
 
 @NgModule({
