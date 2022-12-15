@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
+import com.example.projectIsa.DTO.ReportDTO;
 import com.example.projectIsa.Model.Report;
 import com.example.projectIsa.Service.IReportService;
 
@@ -25,7 +26,7 @@ public class ReportController {
 	 
 	@PostMapping(value = "/addReport")
 	//@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
-    public ResponseEntity addReport(@RequestBody Report report) {
+    public ResponseEntity addReport(@RequestBody ReportDTO report) {
         try {
         	return new ResponseEntity(reportService.addReport(report), HttpStatus.OK);
         } catch (Exception e) {
