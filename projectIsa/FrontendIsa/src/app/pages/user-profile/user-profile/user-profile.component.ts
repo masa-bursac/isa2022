@@ -81,6 +81,12 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  public cancelAppointment(appointmentId: number): void {
+    this.appointmentService.deleteAppointment(appointmentId).subscribe(data => {
+      alert("Appointment successfully deleted!");
+    });
+  }
+
   submitForm(): void {
     this.validateForm.markAllAsTouched();
     if (this.validateForm.valid) {

@@ -122,6 +122,7 @@
                 <p>{{ usersAppointments.description }}</p>
                 <p>Rating: {{ usersAppointments.rating }}</p>
                 <p>Time: <b>{{usersAppointments.date[2]}}/{{usersAppointments.date[1]}}/{{usersAppointments.date[0]}} {{usersAppointments.date[3]}}:{{usersAppointments.date[4]}}<span *ngIf="usersAppointments.date[4] === 0">{{usersAppointments.date[4]}}</span>h</b></p>
+                <button mat-stroked-button color="accent" class="btn-block" (click)="cancelAppointment(usersAppointments.id)">Cancel appointment</button>
               </mat-card-content>
           </mat-card>
           </div>

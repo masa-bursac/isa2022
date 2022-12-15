@@ -25,7 +25,7 @@
     <div class="review-holder">
     <mat-card class="example-card">
         <mat-card-content class="mat-card-font">
-          <h1>Date and time: {{ appointment.date[2]}}/{{ appointment.date[1]}}/{{ appointment.date[0]}} {{ appointment.date[3]}}:{{ appointment.date[4]}}</h1>
+          <h1>Date and time: {{ appointment.date[2]}}/{{ appointment.date[1]}}/{{ appointment.date[0]}} {{ appointment.date[3]}}:{{ appointment.date[4]}}<span *ngIf="appointment.date[4] === 0">{{appointment.date[4]}}</span>h</h1>
           <p>Duration: {{ appointment.duration }} min</p>
           <button mat-stroked-button color="accent" class="btn-block" (click)="scheduleAppointment(appointment.date)">Schedule appointment</button>
         </mat-card-content>

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,4 +79,14 @@ public class AppointmentController {
     public ResponseEntity<List<GetFreeAppointmentsDTO>> getFreeAppointment(@PathVariable Integer adminId) {
         return new ResponseEntity<List<GetFreeAppointmentsDTO>>(appointmentService.getFreeAppointment(adminId), HttpStatus.OK);
     }
+	
+	@DeleteMapping("/deleteAppointment/{appointmentId}")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
+	public ResponseEntity deleteExperience(@PathVariable Integer appointmentId) {
+        try {
+        	return new ResponseEntity(appointmentService.deleteAppointment(appointmentId), HttpStatus.OK);
+        } catch (Exception e) {
+        	return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+	}
 }

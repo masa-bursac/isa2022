@@ -29,4 +29,6 @@ public interface IAppointmentService {
 	List<AppointmentCenterDTO> getUsersAppointment(Integer userId);
 
 	List<GetFreeAppointmentsDTO> getFreeAppointment(Integer adminId);
+	
+	Boolean deleteAppointment(Integer appointmentId);
 }
