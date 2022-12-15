@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <div class="heder">
-  <h1>All appointments for chosen center</h1>
+  <h1 class="title">All appointments for chosen center</h1>
 </div>
 
 <div class="sort-items">
@@ -25,8 +25,8 @@
     <div class="review-holder">
     <mat-card class="example-card">
         <mat-card-content class="mat-card-font">
-          <h1>{{ appointment.date }}</h1>
-          <p>{{ appointment.duration }}</p>
+          <h1>Date and time: {{ appointment.date[2]}}/{{ appointment.date[1]}}/{{ appointment.date[0]}} {{ appointment.date[3]}}:{{ appointment.date[4]}}</h1>
+          <p>Duration: {{ appointment.duration }} min</p>
           <button mat-stroked-button color="accent" class="btn-block" (click)="scheduleAppointment(appointment.date)">Schedule appointment</button>
         </mat-card-content>
     </mat-card>

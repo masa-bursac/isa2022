@@ -36,14 +36,13 @@ export class UpcomingAppointmentsComponent implements OnInit {
 
   public showAllAppointments(): void {
     this.appointmentService.getAllCenters(this.centerId).subscribe(data => {
-      console.log(data);
       this.allAppointments = data;
     });
   }
 
   public scheduleAppointment(date: string): void {
     const body = {
-      date: format(new Date(date), 'Pp'),
+      date: date,
       userId: this.tokenStorage.getUser().id,
       centerId: this.centerId
     }
