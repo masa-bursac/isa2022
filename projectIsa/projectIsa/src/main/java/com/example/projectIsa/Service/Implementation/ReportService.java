@@ -1,5 +1,7 @@
 package com.example.projectIsa.Service.Implementation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +38,10 @@ public class ReportService implements IReportService {
         else
             return false;
 	
+	}
+
+	@Override
+	public List<Report> getReportsForPatient(Integer patientId) {
+		return reportRepository.findAllByPatientId(patientId);
 	}
 }
