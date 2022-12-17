@@ -18,6 +18,6 @@ public interface AppointmentsRepository extends JpaRepository<Appointment, Integ
 
 	List<Appointment> findAllByRegUserId(Integer userId);
 	
-	List<Appointment> findAllById(Integer appointmentId);
+	Appointment findOneById(Integer appointmentId);
 
 }

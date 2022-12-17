@@ -80,11 +80,11 @@ public class AppointmentController {
         return new ResponseEntity<List<GetFreeAppointmentsDTO>>(appointmentService.getFreeAppointment(adminId), HttpStatus.OK);
     }
 	
-	@DeleteMapping("/deleteAppointment/{appointmentId}")
+	@DeleteMapping("/cancelAppointment/{appointmentId}")
 	@PreAuthorize("hasRole('ROLE_REGISTERED')")
-	public ResponseEntity deleteExperience(@PathVariable Integer appointmentId) {
+	public ResponseEntity cancelAppointment(@PathVariable Integer appointmentId) {
         try {
-        	return new ResponseEntity(appointmentService.deleteAppointment(appointmentId), HttpStatus.OK);
+        	return new ResponseEntity(appointmentService.cancelAppointment(appointmentId), HttpStatus.OK);
         } catch (Exception e) {
         	return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }

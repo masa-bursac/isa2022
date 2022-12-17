@@ -40,8 +40,8 @@ export class AppointmentsService {
     return this.http.get(appointments_url+`/getFreeAppointment/${adminId}`);
   }
 
-  public deleteAppointment(appointmentId: number){
-    return this.http.delete(appointments_url+`/deleteAppointment/${appointmentId}`);
+  public cancelAppointment(appointmentId: number){
+    return this.http.delete(appointments_url+`/cancelAppointment/${appointmentId}`);
   }
 
 }

@@ -253,16 +253,16 @@ public class AppointmentService implements IAppointmentService{
 	}
 
 	@Override
-	public Boolean deleteAppointment(Integer appointmentId) {
-		List<Appointment> allAppointmnets = appointmentRepository.findAllById(appointmentId);
+	public Boolean cancelAppointment(Integer appointmentId) {
+		Appointment app = appointmentRepository.findOneById(appointmentId);
 
-		for(Appointment appointment: allAppointmnets) {
-			if(appointment.isTaken() && appointment.getCenter().getId().equals(appointmentId)) {
-				appointment.setTaken(false);
-			}	
-				appointmentRepository.save(appointment);
-			}
-		return true;
+		if(app.isTaken() && LocalDateTime.now().isBefore(app.getDate().minusDays(1))) {
+			app.setTaken(false);
+			appointmentRepository.save(app);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

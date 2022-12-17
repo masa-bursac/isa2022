@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -44,7 +45,7 @@ export class UserProfileComponent implements OnInit {
 
   public allUsersAppointments: any[] = [];
 
-  constructor(private fb: FormBuilder, private profileService : ProfileService, private router: Router, private tokenStorage: TokenStorageService, private appointmentService: AppointmentsService) { }
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private profileService : ProfileService, private router: Router, private tokenStorage: TokenStorageService, private appointmentService: AppointmentsService) { }
 
   ngOnInit(): void {
     if(Object.keys(this.tokenStorage.getUser()).length === 0){
@@ -82,8 +83,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   public cancelAppointment(appointmentId: number): void {
-    this.appointmentService.deleteAppointment(appointmentId).subscribe(data => {
-      alert("Appointment successfully deleted!");
+    this.appointmentService.cancelAppointment(appointmentId).subscribe(data => {
+      if(data === true){
+        this._snackBar.open("Appointment successfully canceled!", 'Close',{
+          duration: 5000
+        });
+        window.location.reload();
+      } else {
+        this._snackBar.open("Appointment can be canceled minimum 24 hours before appointment starts!", 'Close',{
+          duration: 5000
+        });
+      }
     });
   }
 

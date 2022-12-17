@@ -30,5 +30,5 @@ public interface IAppointmentService {
 
 	List<GetFreeAppointmentsDTO> getFreeAppointment(Integer adminId);
 	
-	Boolean deleteAppointment(Integer appointmentId);
+	Boolean cancelAppointment(Integer appointmentId);
 }
