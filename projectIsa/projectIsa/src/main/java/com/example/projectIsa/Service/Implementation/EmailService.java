@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.projectIsa.Config.EmailContext;
 import com.example.projectIsa.DTO.ComplaintAnswerDTO;
 import com.example.projectIsa.Model.Complaint;
+import com.example.projectIsa.Model.RegisteredUser;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.ComplaintRepository;
 import com.example.projectIsa.Model.User;
@@ -54,6 +55,15 @@ public class EmailService implements IEmailService {
 
         emailContext.send("firma4validation@gmail.com", title, "scheduleAppointment", context);
         return true;
+	}
+	
+	@Override
+	public void continueRegistration(RegisteredUser user) {
+		String title = "Continue your registration.";
+
+        Context context = new Context();
+        context.setVariable("link", String.format("http://localhost:4200/login/%s", user.getEmail()));
+        emailContext.send("firma4validation@gmail.com", title, "continueRegistration", context);
 	}
 
 }

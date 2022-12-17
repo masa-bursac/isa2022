@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'takeSurvey', component: SurveyForUserComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'login/:token', component: LoginComponent},
   { path: 'landingPage', component: LandingPageComponent},
   { path: 'complaints', component: ComplaintsComponent},
   { path: 'changePassword', component: ChangePasswordComponent},

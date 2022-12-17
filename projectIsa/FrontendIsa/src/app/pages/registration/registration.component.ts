@@ -99,8 +99,7 @@ export class RegistrationComponent implements OnInit {
       this.authService.registration(body).subscribe(data => {
         console.log(data);
         if(data){
-          alert("Successfully registered!");
-          this.router.navigate(['/login']);
+          alert("Continue registration, check your email!");
         }
         else
           alert("Something went wrong!");

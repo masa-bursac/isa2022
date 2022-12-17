@@ -30,6 +30,15 @@ export class LoginComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
     }
+
+    const token = this.route.snapshot.params['token'];
+    if (token != undefined) {
+      this.authService.continueRegistration(token).subscribe(() => {
+        this.router.navigateByUrl(`/login`);
+      },
+        error => {
+        });
+    }
   }
 
   submitForm(): void {
