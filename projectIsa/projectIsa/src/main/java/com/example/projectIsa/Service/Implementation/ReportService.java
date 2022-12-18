@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.ReportDTO;
+import com.example.projectIsa.Model.MedicalEquipment;
 import com.example.projectIsa.Model.RegisteredUser;
 import com.example.projectIsa.Model.Report;
+import com.example.projectIsa.Repository.MedicalEquipmentRepository;
 import com.example.projectIsa.Repository.ReportRepository;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.Service.IReportService;
@@ -17,12 +19,15 @@ public class ReportService implements IReportService {
 
 	private final ReportRepository reportRepository;
 	private final UserRepository userRepository;
+	private final MedicalEquipmentRepository medicalEquipmentRepository;
 	
 	@Autowired
-	public ReportService(ReportRepository reportRepository, UserRepository userRepository)
+	public ReportService(ReportRepository reportRepository, UserRepository userRepository,
+			MedicalEquipmentRepository medicalEquipmentRepository)
     {
        this.reportRepository = reportRepository;
        this.userRepository = userRepository;
+       this.medicalEquipmentRepository = medicalEquipmentRepository;
     }
 
 	@Override
@@ -32,7 +37,9 @@ public class ReportService implements IReportService {
 		Report report = new Report(reportDTO);
 		report.setRegUser(patient);
 		report.setId((int) (reportRepository.count()) + 1 );
-		if(reportRepository.save(report) != null) {
+		MedicalEquipment blood = medicalEquipmentRepository.findOneMedicalEquipmentByBloodType(reportDTO.getBloodType());
+		blood.setQuantity(blood.getQuantity() + reportDTO.getQuantityTaken());
+		if(reportRepository.save(report) != null && medicalEquipmentRepository.save(blood) != null) {
         	return true;
         }        
         else
