@@ -10,5 +10,5 @@ public interface IEmailService {
 
 	Boolean scheduleAppointment(String name, String surname);
 
-	void continueRegistration(RegisteredUser user);
+	void sendEmailRegistration(RegisteredUser user);
 }

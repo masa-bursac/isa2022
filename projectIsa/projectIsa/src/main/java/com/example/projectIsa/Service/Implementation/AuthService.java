@@ -86,7 +86,7 @@ public class AuthService implements IAuthService{
 		regUser.setAddress(address);
 		regUser.setEducation(education);
 		
-		emailService.continueRegistration(regUser);
+		emailService.sendEmailRegistration(regUser);
 		
         if (educationRepository.save(education) != null && addressRepository.save(address) != null && userRepository.save(regUser) != null) {
         	return true;
@@ -111,5 +111,12 @@ public class AuthService implements IAuthService{
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void continueRegistration(int id) {
+		RegisteredUser user = userRepository.findOneUserById(id);
+        user.setActive(true);
+        userRepository.save(user);
 	}
 }

@@ -10,4 +10,6 @@ public interface IAuthService {
 	Boolean registration(RegistrationDTO registrationDTO);
 
 	Boolean HasToChangePass(@Valid AuthDTO loginRequest);
+
+	void continueRegistration(int id);
 }
