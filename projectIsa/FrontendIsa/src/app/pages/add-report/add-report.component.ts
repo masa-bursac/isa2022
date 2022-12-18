@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { ReportService } from 'src/app/services/report.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -101,6 +101,9 @@ export class AddReportComponent implements OnInit {
   quantityTaken?: number;
   accepted: boolean = false;
 
+  id: any;//patientid
+  ap: any;//appointmentid
+
   validateForm = new FormGroup({
     bloodType: new FormControl(),
     noteToDoctor: new FormControl(),
@@ -118,7 +121,8 @@ export class AddReportComponent implements OnInit {
     dateStart: new FormControl()
   }); 
 
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private reportService: ReportService, private appointmentService: AppointmentsService,private router: Router, private tokenStorage: TokenStorageService) { }
+  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private reportService: ReportService, private appointmentService: AppointmentsService,
+    private router: Router, private tokenStorage: TokenStorageService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     if(Object.keys(this.tokenStorage.getUser()).length === 0){
@@ -128,6 +132,8 @@ export class AddReportComponent implements OnInit {
       alert("Unauthorized!");
       this.router.navigate(['/homePage']);
     }
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.ap = this.route.snapshot.paramMap.get('ap');
   }
   submitForm(): void {
     this.quantityTaken = this.validateForm.value.quantityTaken;
@@ -139,9 +145,9 @@ export class AddReportComponent implements OnInit {
     }
     if(this.accepted == false){
       const bodyPatient = {
-        id: 1, //appointmentId //CHANGE
-        patientStatus: 1, //notable
-        patientId: 5 //CHANFGE
+        id: this.ap, 
+        patientStatus: 1, //not able
+        patientId: this.id 
       }
       console.log(bodyPatient)
       this.appointmentService.setPatientStatus(bodyPatient).subscribe(data=>{});

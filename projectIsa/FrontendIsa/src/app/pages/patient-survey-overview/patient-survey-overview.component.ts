@@ -17,16 +17,14 @@ export class PatientSurveyOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.surveyService.GetAnsweredSurvey(5).subscribe(data=>{
- 
       this.dataSource = data;
-          //console.log(this.dataSource)
     });
     
   }
-  patientDidntCome(): void{
+  patientDidntCome($myParam: number = 0, $myParam1: number = 0): void{
     const body = {
-      id: 1, //CHANGE
-      patientId: 5,//CHANGE
+      id: $myParam1,
+      patientId: $myParam,
       patientStatus: 2
     }
       this.appointmentService.setPatientStatus(body).subscribe(data=>{
@@ -35,10 +33,10 @@ export class PatientSurveyOverviewComponent implements OnInit {
         });
       });
   }
-  patientNotFit(): void{
+  patientNotFit($myParam: number = 0, $myParam1: number = 0): void{
     const body = {
-      id: 1, //CHANGE
-      patientId: 5,//CHANGE
+      id: $myParam1,
+      patientId: $myParam,
       patientStatus: 1
     }
     this.appointmentService.setPatientStatus(body).subscribe(data=>{
@@ -47,10 +45,10 @@ export class PatientSurveyOverviewComponent implements OnInit {
       });
     });
   }
-  fillReport(): void{
+  fillReport($myParam: number = 0, $myParam1: number = 0): void{
     const body = {
-      id: 1, //CHANGE
-      patientId: 5,//CHANGE
+      id: $myParam1,
+      patientId: $myParam,
       patientStatus: 0
     }
     this.appointmentService.setPatientStatus(body).subscribe(data=>{
@@ -58,7 +56,13 @@ export class PatientSurveyOverviewComponent implements OnInit {
         duration: 3000
       });
     });
-    this.router.navigate(['/addReport']);
+    const navigationDetails: string[] = ['/addReport'];
+    if($myParam && $myParam1) {
+      navigationDetails.push($myParam.toString());
+      navigationDetails.push($myParam1.toString());
+    }
+    console.log(navigationDetails)
+    this.router.navigate(navigationDetails);
   }
 
 }

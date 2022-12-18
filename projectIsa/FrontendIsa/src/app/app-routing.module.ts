@@ -37,8 +37,9 @@ const routes: Routes = [
   { path: 'changePassword', component: ChangePasswordComponent},
   { path: 'appointments', component: AppointmentsComponent},
   { path: 'scheduleAppointment', component: ScheduleAppointmentRegUserComponent},
-  { path: 'addReport', component: AddReportComponent},
-  { path: 'patientSurveyReportOverview', component: PatientSurveyOverviewComponent}
+  { path: 'addReport/:id/:ap', component: AddReportComponent},
+  { path: 'patientSurveyReportOverview', component: PatientSurveyOverviewComponent},
+  { path: "**", pathMatch:'full', redirectTo:'landingPage'},
 ];
 
 @NgModule({
