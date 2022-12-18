@@ -30,7 +30,7 @@ public class ReportController {
 	}
 	 
 	@PostMapping(value = "/addReport")
-	//@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
     public ResponseEntity addReport(@RequestBody ReportDTO report) {
         try {
         	return new ResponseEntity(reportService.addReport(report), HttpStatus.OK);
@@ -40,7 +40,7 @@ public class ReportController {
     }
 	
 	@GetMapping("/getHistoryForPatient/{patientId}")
-	//@PreAuthorize("hasRole('ROLE_REGISTERED')")
+	@PreAuthorize("hasRole('ROLE_REGISTERED')")
     public List<Report> getHistoryForPatient(@PathVariable Integer patientId) {
         return reportService.getReportsForPatient(patientId);
     }
