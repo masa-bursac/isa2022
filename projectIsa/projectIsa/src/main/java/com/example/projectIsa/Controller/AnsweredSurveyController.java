@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.projectIsa.DTO.AnsweredSurveyDTO;
 import com.example.projectIsa.Model.AnsweredSurvey;
 import com.example.projectIsa.Service.IAnsweredSurveyService;
 
@@ -26,7 +26,7 @@ public class AnsweredSurveyController {
 	
 	@GetMapping("/getAllAnsweredSurvey/{patientId}")
 	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
-    public List<AnsweredSurvey> getAllAnsweredSurvey(@PathVariable Integer patientId) {
+    public List<AnsweredSurveyDTO> getAllAnsweredSurvey(@PathVariable Integer patientId) {
         return answeredSurveyService.getAnsweredSurvey(patientId);
     }
 }
