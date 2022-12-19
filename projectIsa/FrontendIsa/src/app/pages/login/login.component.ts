@@ -35,10 +35,8 @@ export class LoginComponent implements OnInit {
     console.log(token);
     if (token != undefined) {
       console.log('yes');
-      this.authService.continueRegistration(token).subscribe(() => {
+      this.authService.continueRegistration(localStorage.getItem('email')).subscribe(() => {
         this.router.navigateByUrl(`/login`);
-      },
-      error => {
       });
     }
   }

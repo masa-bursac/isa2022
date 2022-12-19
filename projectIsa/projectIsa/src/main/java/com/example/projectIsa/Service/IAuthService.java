@@ -11,5 +11,5 @@ public interface IAuthService {
 
 	Boolean HasToChangePass(@Valid AuthDTO loginRequest);
 
-	void continueRegistration(int id);
+	boolean continueRegistration(String email);
 }

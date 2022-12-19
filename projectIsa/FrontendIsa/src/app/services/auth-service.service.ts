@@ -27,7 +27,8 @@ export class AuthServiceService {
     return this.http.post(auth_url + '/registration', body, httpOptions);
   }
 
-  public continueRegistration(body: any) : Observable<any> {
-    return this.http.put(auth_url + '/continueRegistration', body, httpOptions);
+  public continueRegistration(email: string | null) : Observable<any> {
+    console.log(email);
+    return this.http.post(auth_url + '/continueRegistration', email, httpOptions);
   }
 }

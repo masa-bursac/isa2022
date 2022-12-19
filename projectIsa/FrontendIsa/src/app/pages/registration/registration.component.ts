@@ -95,9 +95,8 @@ export class RegistrationComponent implements OnInit {
       education: this.validateForm.value.education,
       profession: this.validateForm.value.profession
     }
-      console.log(body);
+      localStorage.setItem('email', this.validateForm.value.email);
       this.authService.registration(body).subscribe(data => {
-        console.log(data);
         if(data){
           alert("Continue registration, check your email!");
         }

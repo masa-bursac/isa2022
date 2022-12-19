@@ -96,8 +96,8 @@ public class AuthController {
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
 	
-	@PutMapping("/continueRegistration")
-    public void continueRegistration(@RequestBody int id){
-        authService.continueRegistration(id);
+	@PostMapping("/continueRegistration")
+    public boolean continueRegistration(@RequestBody String email){
+        return authService.continueRegistration(email);
     }
 }

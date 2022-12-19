@@ -114,9 +114,10 @@ public class AuthService implements IAuthService{
 	}
 
 	@Override
-	public void continueRegistration(int id) {
-		RegisteredUser user = userRepository.findOneUserById(id);
-        user.setActive(true);
+	public boolean continueRegistration(String email) {
+		User user = userRepository.findOneByEmail(email);
+		user.setActive(true);
         userRepository.save(user);
+        return true;
 	}
 }
