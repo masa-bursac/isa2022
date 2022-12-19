@@ -5,7 +5,6 @@ public class AuthDTO {
 	 String email;
 	 String password;
 	 
-	 
 	public AuthDTO(String email, String password) {
 		super();
 		this.email = email;
