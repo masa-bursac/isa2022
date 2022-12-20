@@ -13,7 +13,7 @@
         <button *ngIf="role === 'ROLE_SYSTEMADMIN'" mat-button routerLink="/complaints">Complaints</button>
         <button *ngIf="role === 'ROLE_REGISTERED'" mat-button [matMenuTriggerFor]="menu">Medical center</button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/registration">Upcomming appointments</button>
+            <button mat-menu-item routerLink="/upcomingAppointments">Upcomming appointments</button>
             <button mat-menu-item routerLink="/registration">History of appointments</button>
         </mat-menu>
         <button *ngIf="role !== 'ROLE_UNREGISTERED'" mat-icon-button [matMenuTriggerFor]="menuProfile">

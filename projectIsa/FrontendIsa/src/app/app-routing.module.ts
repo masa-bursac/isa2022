@@ -19,6 +19,8 @@ import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointmen
 import { AddReportComponent } from './pages/add-report/add-report.component';
 import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/patient-survey-overview.component';
 import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
+import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
+
 
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo:'landingPage'},
@@ -33,6 +35,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'takeSurvey', component: SurveyForUserComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'login/:token', component: LoginComponent},
   { path: 'landingPage', component: LandingPageComponent},
   { path: 'complaints', component: ComplaintsComponent},
   { path: 'changePassword', component: ChangePasswordComponent},
@@ -41,7 +44,9 @@ const routes: Routes = [
   { path: 'addReport/:id/:ap', component: AddReportComponent},
   { path: 'patientSurveyReportOverview/:id/:ap', component: PatientSurveyOverviewComponent},
   { path: 'patientAppointments/:id', component: PatientAppointmentListComponent},
+  { path: 'upcomingAppointments', component: UpcomingAppointmentsComponent}
   { path: "**", pathMatch:'full', redirectTo:'landingPage'},
+ 
 ];
 
 @NgModule({

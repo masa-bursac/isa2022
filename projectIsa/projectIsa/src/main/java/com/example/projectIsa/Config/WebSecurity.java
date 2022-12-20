@@ -67,6 +67,7 @@ public class WebSecurity {
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests().antMatchers("/auth/login").permitAll()
       .antMatchers("/auth/registration").permitAll()
+      .antMatchers("/auth/continueRegistration").permitAll()
       .antMatchers("/profile/**").permitAll()
       .antMatchers("/center/**").permitAll()
       .antMatchers("/medicalEquipment/**").permitAll()

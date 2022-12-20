@@ -20,11 +20,15 @@ export class AuthServiceService {
       email: email,
       password: password
   };
-
     return this.http.post(auth_url + '/login', data, httpOptions);
   }
 
   public registration(body: any) : Observable<any>{ 
     return this.http.post(auth_url + '/registration', body, httpOptions);
+  }
+
+  public continueRegistration(email: string | null) : Observable<any> {
+    console.log(email);
+    return this.http.post(auth_url + '/continueRegistration', email, httpOptions);
   }
 }

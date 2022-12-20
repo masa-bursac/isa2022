@@ -1,0 +1,79 @@
+.example-card{
+    width: 50%;
+    max-height: 700px;
+    background-color:#DCDCDC;
+    border-radius: 10px;
+    margin-left: 3%;
+    margin-right: 3%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: 2px solid #f09b9b;
+}
+
+.title {
+    font-size: 30px;
+}
+
+.review-holder {
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-card-font {
+    font-size:18px;
+}
+
+.div-search {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.div-inline {
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background: rgb(255, 136, 136);
+}
+
+.example-full {
+    width: 300px;
+}
+
+.mat-field-space {
+    width: 100%;
+    padding: 2%;
+}
+
+.div-holder {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.label-sort {
+    font-size: large;
+}
+
+.sort-items {
+    margin-top: 3%;
+    display: flex;
+    align-items: inline;
+    justify-content: space-between;
+    width: 300px;
+    margin-left: 600px;
+}
+
+.heder {
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+}
+
+.btn-block {
+    color:rgb(216, 30, 5);
+    border: 1px solid rgb(216, 30, 5);
+    line-height: 30px;
+    background: #dbb4c3;
+}

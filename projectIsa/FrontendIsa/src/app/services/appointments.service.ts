@@ -43,4 +43,8 @@ export class AppointmentsService {
   public setPatientStatus(body:any): Observable<any>{
     return this.http.put(appointments_url+`/setPatientStatus`, body);
   }
+  
+  public cancelAppointment(appointmentId: number){
+    return this.http.delete(appointments_url+`/cancelAppointment/${appointmentId}`);
+  }
 }

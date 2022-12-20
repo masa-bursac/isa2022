@@ -9,6 +9,13 @@ body {
   background: #e2e2e2;
 }
 
+.btn-block {
+  color:rgb(216, 30, 5);
+  border: 1px solid rgb(216, 30, 5);
+  line-height: 30px;
+  background: #dbb4c3;
+}
+
 .login-wrapper {
   display: flex;
   justify-content: center;

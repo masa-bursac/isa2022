@@ -46,6 +46,8 @@ import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointmen
 import { AddReportComponent } from './pages/add-report/add-report.component';
 import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/patient-survey-overview.component';
 import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
+import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +71,11 @@ import { PatientAppointmentListComponent } from './pages/patient-appointment-lis
     ChangePasswordComponent,
     AppointmentsComponent,  
     ScheduleAppointmentRegUserComponent, 
-    AddReportComponent, PatientSurveyOverviewComponent, PatientAppointmentListComponent
+    AddReportComponent,
+    PatientSurveyOverviewComponent,
+    PatientAppointmentListComponent,
+    ScheduleAppointmentRegUserComponent,
+    UpcomingAppointmentsComponent
   ],
   imports: [
     BrowserModule,

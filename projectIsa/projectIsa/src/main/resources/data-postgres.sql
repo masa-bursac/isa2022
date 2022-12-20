@@ -29,20 +29,20 @@ insert into center (id,name,description,rating, center_address_id) values
 insert into center (id,name,description,rating, center_address_id) values
 (6,'Novi Beograd centar','Centar za transfuziju krvi na Novom Beogradu',5, 6);
 
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass) values
-(1,2,'Pera','Perovic','pera@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','3012457898654', 0, false);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
-(2,1,'Mila','Milic','mila@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0696754324','2567854569852', 1, false, 1);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, penals) values
-(3,0,'Vladimir','Vladic','vlada@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','4567894561234', 2, false, 0);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
-(4,1,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0, false,1);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, penals) values
-(5,0,'Biljana','Brankovic','bilja@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, 0);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, penals) values
-(6,0,'Marica','Maric','mara@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, 0);
-insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id) values
-(7,1,'Milana','Milanovic','milana@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0639876543','0406894564321', 1, false,3);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, is_active) values
+(1,2,'Pera','Perovic','pera@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0645654324','3012457898654', 0, false, true);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id, is_active) values
+(2,1,'Mila','Milic','mila@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0696754324','2567854569852', 1, false, 1, true);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, is_active) values
+(3,0,'Vladimir','Vladic','vlada@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626554304','4567894561234', 2, false, true);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id, is_active) values
+(4,1,'Veljko','Veljkovic','veljko@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','064432123','1203894564321', 0, false,1, true);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, is_active) values
+(5,0,'Biljana','Brankovic','bilja@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, true);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, is_active) values
+(6,0,'Marica','Maric','mara@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, true);
+insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id, is_active) values
+(7,1,'Milana','Milanovic','milana@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0639876543','0406894564321', 1, false,3, true);
 
 insert into address (id,longitude,latitude,street,city,state,house_number,postcode) values
 (1,0,0,'Njegoseva','Novi Sad','Srbija','5','21000');

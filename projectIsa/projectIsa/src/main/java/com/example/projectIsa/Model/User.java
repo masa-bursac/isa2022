@@ -56,6 +56,7 @@ public abstract class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="education_id", referencedColumnName = "id")
 	private Education education;
+	private boolean isActive;
 	
 	public Integer getId() {
 		return id;
@@ -123,6 +124,12 @@ public abstract class User {
 	public void setEducation(Education education) {
 		this.education = education;
 	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 	public User(Integer id, String name, String surname, String email, String password, String phoneNumber, String jmbg,
 			Gender gender, Role role, Address address, Education education) {
 		super();
@@ -137,6 +144,22 @@ public abstract class User {
 		this.role = role;
 		this.address = address;
 		this.education = education;
+	}
+	public User(Integer id, String name, String surname, String email, String password, String phoneNumber, String jmbg,
+			Gender gender, Role role, Address address, Education education, boolean isActive) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.jmbg = jmbg;
+		this.gender = gender;
+		this.role = role;
+		this.address = address;
+		this.education = education;
+		this.isActive = isActive;
 	}
 	public User() {}
 }

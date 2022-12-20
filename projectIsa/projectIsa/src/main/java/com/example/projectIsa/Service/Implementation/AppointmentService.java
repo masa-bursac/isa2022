@@ -217,19 +217,21 @@ public class AppointmentService implements IAppointmentService{
 		AppointmentCenterDTO appointmentCenterDTO = new AppointmentCenterDTO();
 
 		for(Appointment appointment: allAppointmnets) {
-			Center center = centerRepository.findOneById(appointment.getCenter().getId());
-			appointmentCenterDTO.setId(appointment.getId());
-			appointmentCenterDTO.setDate(appointment.getDate());
-			appointmentCenterDTO.setDuration(appointment.getDuration());
-			appointmentCenterDTO.setName(center.getName());
-			appointmentCenterDTO.setDescription(center.getDescription());
-			appointmentCenterDTO.setRating(center.getRating());
-			appointmentCenterDTO.setStreet(center.getCenterAddress().getStreet());
-			appointmentCenterDTO.setHouseNumber(center.getCenterAddress().getHouseNumber());
-			appointmentCenterDTO.setCity(center.getCenterAddress().getCity());
-			appointmentCenterDTO.setState(center.getCenterAddress().getState());
-			appointmentCenterDTO.setPostcode(center.getCenterAddress().getPostcode());
-			allAppointmentCenterDTO.add(appointmentCenterDTO);
+			if(appointment.isTaken() == true) {
+				Center center = centerRepository.findOneById(appointment.getCenter().getId());
+				appointmentCenterDTO.setId(appointment.getId());
+				appointmentCenterDTO.setDate(appointment.getDate());
+				appointmentCenterDTO.setDuration(appointment.getDuration());
+				appointmentCenterDTO.setName(center.getName());
+				appointmentCenterDTO.setDescription(center.getDescription());
+				appointmentCenterDTO.setRating(center.getRating());
+				appointmentCenterDTO.setStreet(center.getCenterAddress().getStreet());
+				appointmentCenterDTO.setHouseNumber(center.getCenterAddress().getHouseNumber());
+				appointmentCenterDTO.setCity(center.getCenterAddress().getCity());
+				appointmentCenterDTO.setState(center.getCenterAddress().getState());
+				appointmentCenterDTO.setPostcode(center.getCenterAddress().getPostcode());
+				allAppointmentCenterDTO.add(appointmentCenterDTO);
+			}
 		}
 		
 		return allAppointmentCenterDTO;
@@ -266,6 +268,22 @@ public class AppointmentService implements IAppointmentService{
         }        
         else
             return false;
+          }
+
+}  
+
+  @Override
+	public Boolean cancelAppointment(Integer appointmentId) {
+		Appointment app = appointmentRepository.findOneById(appointmentId);
+
+		if(app.isTaken() && LocalDateTime.now().isBefore(app.getDate().minusDays(1))) {
+			app.setTaken(false);
+			appointmentRepository.save(app);
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }

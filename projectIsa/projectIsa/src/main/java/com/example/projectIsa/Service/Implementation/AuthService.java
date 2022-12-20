@@ -30,18 +30,20 @@ public class AuthService implements IAuthService{
 	private final UserRepository userRepository;
 	private final AddressRepository addressRepository;
 	private final EducationRepository educationRepository;
+	private final EmailService emailService;
 	private final PasswordEncoder passwordEncoder;
 	private final CenterAdministratorRepository centerAdministratorRepository;
 	private final SystemAdministratorRepository systemAdministratorRepository;
 	
 	@Autowired
 	public AuthService(UserRepository userRepository, AddressRepository addressRepository,
-			EducationRepository educationRepository, PasswordEncoder passwordEncoder, CenterAdministratorRepository centerAdministratorRepository,
+			EducationRepository educationRepository, EmailService emailService, PasswordEncoder passwordEncoder, CenterAdministratorRepository centerAdministratorRepository,
 			SystemAdministratorRepository systemAdministratorRepository)
     {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.educationRepository = educationRepository;
+        this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
         this.centerAdministratorRepository = centerAdministratorRepository;
         this.systemAdministratorRepository = systemAdministratorRepository;
@@ -57,6 +59,7 @@ public class AuthService implements IAuthService{
 		regUser.setPhoneNumber(registrationDTO.getPhoneNumber());
 		regUser.setJmbg(registrationDTO.getJmbg());
 		regUser.setRole(Role.ROLE_REGISTERED);
+		regUser.setActive(false);
 		
 		if(registrationDTO.getGender().toLowerCase().equals(Gender.MALE.toString().toLowerCase(Locale.ROOT)))
 			regUser.setGender(Gender.MALE);
@@ -83,6 +86,8 @@ public class AuthService implements IAuthService{
 		regUser.setAddress(address);
 		regUser.setEducation(education);
 		
+		emailService.sendEmailRegistration(regUser);
+		
         if (educationRepository.save(education) != null && addressRepository.save(address) != null && userRepository.save(regUser) != null) {
         	return true;
         }        
@@ -106,5 +111,13 @@ public class AuthService implements IAuthService{
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean continueRegistration(String email) {
+		User user = userRepository.findOneByEmail(email);
+		user.setActive(true);
+        userRepository.save(user);
+        return true;
 	}
 }
