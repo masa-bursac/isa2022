@@ -32,9 +32,9 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
-        <button mat-stroked-button color="accent" class="btn-block" class="notshown" style="margin: 20px; margin-left: 50px;" (click)="patientDidntCome(5,1)">Patient didn't come</button>
-        <button mat-stroked-button color="accent" class="btn-block" class="reject" style="margin: 20px;" (click)="patientNotFit(5,1)">Patient not fit</button>
-        <button mat-stroked-button color="accent" class="btn-block" class="fill" style="margin: 20px;" (click)="fillReport(5,1)">Fill report</button>
+        <button mat-stroked-button color="accent" class="btn-block" class="notshown" style="margin: 20px; margin-left: 50px;" (click)="patientDidntCome()">Patient didn't come</button>
+        <button mat-stroked-button color="accent" class="btn-block" class="reject" style="margin: 20px;" (click)="patientNotFit()">Patient not fit</button>
+        <button mat-stroked-button color="accent" class="btn-block" class="fill" style="margin: 20px;" (click)="fillReport()">Fill report</button>
       </form>
     </mat-card>
 </div>

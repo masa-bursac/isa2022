@@ -12,7 +12,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'role','gender','email', 'phoneNumber', 'jmbg','education','profession','address'];
+  displayedColumns: string[] = ['name', 'role','gender','email', 'phoneNumber', 'jmbg','education','profession','address', 'appointments'];
   search: string = '';
   searchUsersOn: boolean = false;
   public searchedUsers: any[] = [];
@@ -30,6 +30,14 @@ export class UsersComponent implements OnInit {
       this.router.navigate(['/homePage']);
     }
     this.getAllUsers();
+  }
+
+  public showAppointments($myParam: number = 0) : void{
+    const navigationDetails: string[] = ['/patientAppointments'];
+    if($myParam) {
+      navigationDetails.push($myParam.toString());
+    }
+    this.router.navigate(navigationDetails);
   }
 
   public getAllUsers(): void {

@@ -45,6 +45,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointment-reg-user/schedule-appointment-reg-user.component';
 import { AddReportComponent } from './pages/add-report/add-report.component';
 import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/patient-survey-overview.component';
+import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/
     ChangePasswordComponent,
     AppointmentsComponent,  
     ScheduleAppointmentRegUserComponent, 
-    AddReportComponent, PatientSurveyOverviewComponent
+    AddReportComponent, PatientSurveyOverviewComponent, PatientAppointmentListComponent
   ],
   imports: [
     BrowserModule,

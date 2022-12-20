@@ -8,8 +8,8 @@
         <mat-card-content>
           <mat-form-field class="example-full-width">
             <mat-label>BloodType</mat-label>
-            <mat-select  formControlName="bloodType" >
-                <mat-option *ngFor="let bloodType of bloodTypes" [value]="bloodType.value" required>
+            <mat-select  formControlName="bloodType" required>
+                <mat-option *ngFor="let bloodType of bloodTypes" [value]="bloodType.value" >
                   {{bloodType.viewValue}}
                 </mat-option>
               </mat-select>
@@ -19,8 +19,8 @@
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Level of Cu2SO4</mat-label>
-            <mat-select  formControlName="bakar" >
-                <mat-option *ngFor="let level of levels" [value]="level.value" required>
+            <mat-select  formControlName="bakar" required>
+                <mat-option *ngFor="let level of levels" [value]="level.value" >
                   {{level.viewValue}}
                 </mat-option>
               </mat-select>

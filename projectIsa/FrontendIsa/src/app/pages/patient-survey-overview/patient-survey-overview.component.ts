@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { SurveyService } from 'src/app/services/survey.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-patient-survey-overview',
@@ -12,19 +13,31 @@ import { SurveyService } from 'src/app/services/survey.service';
 export class PatientSurveyOverviewComponent implements OnInit {
   displayedColumns: string[] = ['id', 'question', 'answer'];
   dataSource = [];
+  id: any;
+  ap: any;
 
-  constructor(private router: Router, private appointmentService: AppointmentsService, private _snackBar: MatSnackBar, private surveyService: SurveyService) { }
+  constructor(private router: Router, private appointmentService: AppointmentsService, private _snackBar: MatSnackBar, private surveyService: SurveyService,
+    private tokenStorage: TokenStorageService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.surveyService.GetAnsweredSurvey(5).subscribe(data=>{
+    if(Object.keys(this.tokenStorage.getUser()).length === 0){
+      alert("Unauthorized!");
+      this.router.navigate(['/landingPage']);
+    }else if(this.tokenStorage.getUser().roles[0] !== "ROLE_CENTERADMIN"){
+      alert("Unauthorized!");
+      this.router.navigate(['/homePage']);
+    }
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.ap = this.route.snapshot.paramMap.get('ap');
+    this.surveyService.GetAnsweredSurvey(this.id).subscribe(data=>{
       this.dataSource = data;
     });
     
   }
-  patientDidntCome($myParam: number = 0, $myParam1: number = 0): void{
+  patientDidntCome(): void{
     const body = {
-      id: $myParam1,
-      patientId: $myParam,
+      id: this.ap,
+      patientId: this.id,
       patientStatus: 2
     }
       this.appointmentService.setPatientStatus(body).subscribe(data=>{
@@ -33,10 +46,10 @@ export class PatientSurveyOverviewComponent implements OnInit {
         });
       });
   }
-  patientNotFit($myParam: number = 0, $myParam1: number = 0): void{
+  patientNotFit(): void{
     const body = {
-      id: $myParam1,
-      patientId: $myParam,
+      id: this.ap,
+      patientId: this.id,
       patientStatus: 1
     }
     this.appointmentService.setPatientStatus(body).subscribe(data=>{
@@ -45,10 +58,10 @@ export class PatientSurveyOverviewComponent implements OnInit {
       });
     });
   }
-  fillReport($myParam: number = 0, $myParam1: number = 0): void{
+  fillReport(): void{
     const body = {
-      id: $myParam1,
-      patientId: $myParam,
+      id: this.ap,
+      patientId: this.id,
       patientStatus: 0
     }
     this.appointmentService.setPatientStatus(body).subscribe(data=>{
@@ -57,11 +70,12 @@ export class PatientSurveyOverviewComponent implements OnInit {
       });
     });
     const navigationDetails: string[] = ['/addReport'];
+    const $myParam = this.id;
+    const $myParam1 = this.ap;
     if($myParam && $myParam1) {
       navigationDetails.push($myParam.toString());
       navigationDetails.push($myParam1.toString());
     }
-    console.log(navigationDetails)
     this.router.navigate(navigationDetails);
   }
 

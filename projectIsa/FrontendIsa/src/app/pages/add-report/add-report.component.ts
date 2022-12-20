@@ -265,7 +265,7 @@ switch ( this.selectedMinuteEnd ) {
 }
 
     const body = {
-      patientId: 5, //CHANGE
+      patientId: this.id,
       doctorId: this.tokenStorage.getUser().id,
       bloodType: this.validateForm.value.bloodType,
       noteToDoctor: this.validateForm.value.noteToDoctor,
@@ -290,7 +290,9 @@ switch ( this.selectedMinuteEnd ) {
           this._snackBar.open('Report added successfully', 'Close',{
             duration: 3000
           });
+          this.router.navigate(['/landingPage']);
       });
+      
    }
    else{
     this._snackBar.open('Error! All feilds are required!', 'Close',{

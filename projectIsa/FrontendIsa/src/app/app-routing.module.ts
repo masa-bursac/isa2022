@@ -18,6 +18,7 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
 import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointment-reg-user/schedule-appointment-reg-user.component';
 import { AddReportComponent } from './pages/add-report/add-report.component';
 import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/patient-survey-overview.component';
+import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo:'landingPage'},
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'appointments', component: AppointmentsComponent},
   { path: 'scheduleAppointment', component: ScheduleAppointmentRegUserComponent},
   { path: 'addReport/:id/:ap', component: AddReportComponent},
-  { path: 'patientSurveyReportOverview', component: PatientSurveyOverviewComponent},
+  { path: 'patientSurveyReportOverview/:id/:ap', component: PatientSurveyOverviewComponent},
+  { path: 'patientAppointments/:id', component: PatientAppointmentListComponent},
   { path: "**", pathMatch:'full', redirectTo:'landingPage'},
 ];
 

@@ -70,7 +70,7 @@ public class AppointmentController {
     }
 	
 	@GetMapping("/getUsersAppointment/{userId}")
-	@PreAuthorize("hasRole('ROLE_REGISTERED')")
+	@PreAuthorize("hasAnyRole('ROLE_REGISTERED','ROLE_CENTERADMIN')")
     public List<AppointmentCenterDTO> getUsersAppointment(@PathVariable Integer userId) {
         return appointmentService.getUsersAppointment(userId);
     }
