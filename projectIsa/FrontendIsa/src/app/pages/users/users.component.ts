@@ -12,7 +12,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'role','gender','email', 'phoneNumber', 'jmbg','education','profession','address', 'appointments'];
+  displayedColumns: string[] = ['name', 'role','gender','email', 'phoneNumber', 'jmbg','education','profession','address','appointments'];
   search: string = '';
   searchUsersOn: boolean = false;
   public searchedUsers: any[] = [];
@@ -54,6 +54,7 @@ export class UsersComponent implements OnInit {
         this.searchedUsers.push(user);
       }
     }
+
   }
   public disableSearch(): void {
     this.searchUsersOn = false;
