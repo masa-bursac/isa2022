@@ -114,6 +114,16 @@ insert into survey (id,question) values
 (9,'Да ли сте до сада испитивани или лечени у болници или сте тренутно на испитивању или боловању?');
 insert into survey (id,question) values
 (10,'Да ли сте вадили зуб у протеклих 7 дана?');
+insert into survey (id,question) values
+(11,'Да ли сте у последњих 7 до 10 дана имали температуру преко 38 C, кијавицу, прехладу или узимали антибиотике?');
+insert into survey (id,question) values
+(12,'Да ли имате неке промене на кожи или болујете од алергије?');
+insert into survey (id,question) values
+(13,'Да ли тренутно имате менструацију?');
+insert into survey (id,question) values
+(14,'Да ли сте у протеклих 6 месеци имали неку операцију или примили крв?');
+insert into survey (id,question) values
+(15,'Да ли сте у протеклих 6 месеци имали акупунктуру, пирсинг или тетоважу?');
 
 
 insert into complaints(id,complaint_type, complaint,answer,registered_user_id, complaint_date, answer_date, system_adminstrator_id) values
@@ -136,10 +146,10 @@ UPDATE complaints SET center_id = 1 WHERE complaints.id = 1;
 UPDATE complaints SET center_id = 1 WHERE complaints.id = 3;
 UPDATE complaints SET center_id = 2 WHERE complaints.id = 5;
 
-insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
-(1, '2022-12-27 12:00:00', 30, true, 1, 5);
-insert into appointment(id, date, duration, taken, center_id, registered_user_id) values
-(2, '2022-12-27 12:30:00', 30, true, 1, 6);
+insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
+(1, '2022-12-27 12:00:00', 30, true, 1, 5, 3);
+insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
+(2, '2022-12-27 12:30:00', 30, true, 1, 6, 3);
 
 alter sequence user_entity_id_seq restart with 8;
 alter sequence user_address_id_seq restart with 8;

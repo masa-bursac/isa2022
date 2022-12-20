@@ -40,8 +40,11 @@ export class AppointmentsService {
     return this.http.get(appointments_url+`/getFreeAppointment/${adminId}`);
   }
 
+  public setPatientStatus(body:any): Observable<any>{
+    return this.http.put(appointments_url+`/setPatientStatus`, body);
+  }
+  
   public cancelAppointment(appointmentId: number){
     return this.http.delete(appointments_url+`/cancelAppointment/${appointmentId}`);
   }
-
 }

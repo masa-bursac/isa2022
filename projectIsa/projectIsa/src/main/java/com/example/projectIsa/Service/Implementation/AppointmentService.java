@@ -11,7 +11,9 @@ import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.Model.Center;
 import com.example.projectIsa.Model.CenterAddress;
 import com.example.projectIsa.Model.CenterAdministrator;
+import com.example.projectIsa.Model.PatientAbilityForAppointmentStatus;
 import com.example.projectIsa.Model.RegisteredUser;
+import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AnsweredSurveyRepository;
 import com.example.projectIsa.Repository.AppointmentsRepository;
 import com.example.projectIsa.Repository.CenterAddressRepository;
@@ -20,6 +22,7 @@ import com.example.projectIsa.Repository.SurveyRepository;
 import com.example.projectIsa.Repository.UserRepository;
 import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
+import com.example.projectIsa.DTO.AppointmentStatusDTO;
 import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.Service.IAppointmentService;
 
@@ -253,6 +256,23 @@ public class AppointmentService implements IAppointmentService{
 	}
 
 	@Override
+	public Boolean setPatientStatus(AppointmentStatusDTO appointment) {
+		RegisteredUser patient = userRepository.findOneUserById(appointment.getPatientId());
+		if(appointment.getPatientStatus().equals(PatientAbilityForAppointmentStatus.DIDNT_COME)) {
+			patient.setPenals(patient.getPenals() + 1);
+		}
+		Appointment app = appointmentRepository.findOneAppointmentById(appointment.getId());
+		app.setPatientStatus(appointment.getPatientStatus());
+		if(userRepository.save(patient) != null && appointmentRepository.save(app) != null) {
+        	return true;
+        }        
+        else
+            return false;
+          }
+
+}  
+
+  @Override
 	public Boolean cancelAppointment(Integer appointmentId) {
 		Appointment app = appointmentRepository.findOneById(appointmentId);
 
@@ -263,6 +283,7 @@ public class AppointmentService implements IAppointmentService{
 		} else {
 			return false;
 		}
+
 	}
 
 }

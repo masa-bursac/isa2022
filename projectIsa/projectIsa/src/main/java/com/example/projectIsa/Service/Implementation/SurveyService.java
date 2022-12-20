@@ -56,8 +56,8 @@ public class SurveyService implements ISurveyService {
 		AnsweredSurvey answers = new AnsweredSurvey();
 		for(int i = 0; i < answerDTO.size(); i++) {
 			answers = new AnsweredSurvey();
-			answers.setId(answerDTO.get(i).getId());
-			answers.setRegUserId(3);
+			//answers.setId(answerDTO.get(i).getId());
+			answers.setRegUserId(answerDTO.get(i).getRegUserId());
 			answers.setSurveyId(answerDTO.get(i).getId());
 			answers.setAnswers(answerDTO.get(i).getAnswers());
 			ansRepository.save(answers);

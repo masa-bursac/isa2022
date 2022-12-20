@@ -1,4 +1,8 @@
-html,
+table {
+    width: 100%;
+  }
+
+  html,
 body {
   height: 100%;
 }
@@ -58,9 +62,4 @@ body {
 .alert {
   color: red;
 }
-
-table {
-  width: 100%;
-}
-
 

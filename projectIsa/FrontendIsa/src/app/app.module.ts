@@ -43,7 +43,11 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ScheduleAppointmentRegUserComponent } from './pages/schedule-appointment-reg-user/schedule-appointment-reg-user.component';
+import { AddReportComponent } from './pages/add-report/add-report.component';
+import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/patient-survey-overview.component';
+import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
 import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
+
 
 @NgModule({
   declarations: [
@@ -66,6 +70,10 @@ import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upc
     ComplaintsComponent,
     ChangePasswordComponent,
     AppointmentsComponent,  
+    ScheduleAppointmentRegUserComponent, 
+    AddReportComponent,
+    PatientSurveyOverviewComponent,
+    PatientAppointmentListComponent,
     ScheduleAppointmentRegUserComponent,
     UpcomingAppointmentsComponent
   ],

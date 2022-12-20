@@ -1,0 +1,107 @@
+<app-navbar></app-navbar>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card [class.mat-elevation-z10]="true" class="box">
+      <mat-card-header>
+        <mat-card-title>Report</mat-card-title>
+      </mat-card-header>
+      <form class="example-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <mat-label>BloodType</mat-label>
+            <mat-select  formControlName="bloodType" required>
+                <mat-option *ngFor="let bloodType of bloodTypes" [value]="bloodType.value" >
+                  {{bloodType.viewValue}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Note to doctor"  formControlName="noteToDoctor">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Level of Cu2SO4</mat-label>
+            <mat-select  formControlName="bakar" required>
+                <mat-option *ngFor="let level of levels" [value]="level.value" >
+                  {{level.viewValue}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Blood pressure" formControlName="bloodPressure" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Patient weight" formControlName="patientWeight" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Pulse" formControlName="pulse" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Hemoglobin level" formControlName="levelHem" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" > 
+            <input matInput placeholder="Lungs" formControlName="lungs" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Reasons for rejection" formControlName="reasonForRejection" >
+          </mat-form-field>
+        </mat-card-content>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Bag number" formControlName="bagNumber">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Pucture place</mat-label>
+            <mat-select formControlName="puncturePlace">
+                <mat-option *ngFor="let place of places" [value]="place.value" >
+                  {{place.viewValue}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Date of appointment</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dateStart">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Start hour</mat-label>
+            <mat-select [(value)]="selectedHourStart"  >
+                <mat-option *ngFor="let hour of hoursStart" [value]="hour.name">
+                  {{hour.name}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Start Minutes</mat-label>
+            <mat-select [(value)]="selectedMinuteStart" >
+                <mat-option *ngFor="let minute of minutesStart" [value]="minute.name" >
+                  {{minute.name}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>End Hour</mat-label>
+            <mat-select  [(value)]="selectedHourEnd" >
+                <mat-option *ngFor="let hour of hoursEnd" [value]="hour.name">
+                  {{hour.name}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>End Minutes</mat-label>
+            <mat-select [(value)]="selectedMinuteEnd" >
+                <mat-option *ngFor="let minute of minutesEnd" [value]="minute.name" >
+                  {{minute.name}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Reasons for ending early" formControlName="reasonForEndingEarly">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Quantity taken" formControlName="quantityTaken" >
+          </mat-form-field>
+        <button mat-stroked-button color="accent" class="btn-block"  [disabled]="validateForm.invalid">Add Report</button>
+      </form>
+    </mat-card>
+</div>
+
