@@ -35,9 +35,9 @@ public class CenterAdministratorController {
 	
 	@PostMapping(value ="/registerSystemAdmin", consumes =  MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasRole('ROLE_SYSTEMADMIN')")
-    public ResponseEntity<SystemAdminstrator> registerSystemAdmin(@RequestBody CenterAdministratorDTO centerAdministratorDTO){
+    public ResponseEntity registerSystemAdmin(@RequestBody CenterAdministratorDTO centerAdministratorDTO){
 			
-        return new ResponseEntity<SystemAdminstrator>(centerAdminService.registerSystemAdmin(centerAdministratorDTO),HttpStatus.OK);
+        return new ResponseEntity(centerAdminService.registerSystemAdmin(centerAdministratorDTO),HttpStatus.OK);
 	
     }
 

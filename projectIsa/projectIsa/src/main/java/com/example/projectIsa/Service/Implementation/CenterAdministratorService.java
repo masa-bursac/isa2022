@@ -88,7 +88,10 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 	}
 
 	@Override
-	public SystemAdminstrator registerSystemAdmin(CenterAdministratorDTO adminDTO) {
+	public boolean registerSystemAdmin(CenterAdministratorDTO adminDTO) {
+		if(userRepository.findOneByEmail(adminDTO.getEmail())!= null) {
+			return false;
+		}
 		SystemAdminstrator systemAdmin = new SystemAdminstrator(adminDTO);
 		systemAdmin.setId((int) (userRepository.count()+1));
 		switch(adminDTO.getGender()) {
@@ -105,7 +108,8 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 		education.setUser(systemAdmin);
 		systemAdmin.setEducation(education);
 		systemAdmin.setHasToChangePass(true);
-		return systemAdministratorRepository.save(systemAdmin);
+		systemAdministratorRepository.save(systemAdmin);
+		return true;
 	}
 
 }

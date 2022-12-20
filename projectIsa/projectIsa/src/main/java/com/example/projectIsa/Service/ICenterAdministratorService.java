@@ -13,5 +13,5 @@ public interface ICenterAdministratorService {
 
 	List<CenterAdministrator> getAllCentreAdminByCenterId(Integer id);
 
-	SystemAdminstrator registerSystemAdmin(CenterAdministratorDTO centerAdministratorDTO);
+	boolean registerSystemAdmin(CenterAdministratorDTO centerAdministratorDTO);
 }

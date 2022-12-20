@@ -120,10 +120,18 @@ export class RegisterCenterAdministratorComponent implements OnInit {
       postcode : this.validateForm.value.postcode
     }
     this.centerAdminService.registerAdmin(admin).subscribe(data => { 
+      if(data == true){
       this._snackBar.open('Admin registration successful', 'Close',{
         duration: 3000
       });
       this.onClose.emit(true);
+    }
+    else{
+      this._snackBar.open('Email already exists in system', 'Close',{
+        duration: 3000
+      });
+      this.onClose.emit(true);
+    }
     })
 
     this.onClose.emit(admin);
