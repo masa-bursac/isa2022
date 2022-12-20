@@ -1,10 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, TemplateRef } from '@angular/core';
 import { MatCalendar } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
 import { CalendarEvent, CalendarEventTitleFormatter } from 'angular-calendar';
 import { WeekViewHourSegment } from 'calendar-utils';
 import { addDays, addMinutes, endOfWeek } from 'date-fns';
 import { fromEvent, finalize, takeUntil } from 'rxjs';
 import { AppointmentsService } from 'src/app/services/appointments.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
@@ -14,7 +16,6 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit {
-
   optionView : string = "weekly";
   viewDate : Date = new Date();
   weekStartsOn: 1 = 1;
@@ -24,11 +25,20 @@ export class AppointmentsComponent implements OnInit {
   events: CalendarEvent[] = [];
   appointmentsFree : any = [];
   appointmentsAllFree : any = [];
-  constructor( private appointmentsService: AppointmentsService,private tokenStorage: TokenStorageService) {}
+  hourSegmentClicked!: EventEmitter<{
+    date: Date;
+    sourceEvent: MouseEvent;
+}>;
+eventClicked!: EventEmitter<{
+  event: CalendarEvent;
+  sourceEvent: MouseEvent | KeyboardEvent;
+}>;
+  constructor( private appointmentsService: AppointmentsService,private tokenStorage: TokenStorageService, private profileService: ProfileService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAppointments();
     this.getFreeAppointments();
+  
   }
 
   public getAppointments(){
@@ -42,7 +52,7 @@ export class AppointmentsComponent implements OnInit {
   public getFreeAppointments(){
     this.appointmentsService.getFreeAppointment(this.tokenStorage.getUser().id).subscribe(data => {
       this.appointmentsFree = data;
-      console.log('freeAppointments', this.appointmentsAllFree)
+      //console.log('freeAppointments', this.appointmentsAllFree)
       this.mapFreeAppointmentsToEvent(data);
     });
   }
@@ -63,7 +73,9 @@ export class AppointmentsComponent implements OnInit {
         +":"+startDate.getMinutes()+this.makeMinutesNicer(startDate)
         +"-"+endDate.getHours()+":"+endDate.getMinutes()+this.makeMinutesNicer(endDate), 
         end: endDate,
-        color: {primary:'Gray',secondary:'#FF9696', secondaryText: 'White'}
+        color: {primary:'Gray',secondary:'#FF9696', secondaryText: 'White'},
+        id: appointment.id,
+        cssClass: appointment.email
       })
     }
   }
@@ -115,4 +127,19 @@ export class AppointmentsComponent implements OnInit {
     this.viewDate = new Date(this.viewDate.setFullYear(this.viewDate.getFullYear() + 1));
   }
 
+  click($event: { event: CalendarEvent<any>; sourceEvent: MouseEvent|KeyboardEvent; }) {
+    this.profileService.getProfile($event.event.cssClass).subscribe(data=>{
+      const navigationDetails: string[] = ['/patientSurveyReportOverview'];
+      const $param = data.id;
+      const $param1 = $event.event.id;
+   
+      if($param && $param1){
+        navigationDetails.push($param.toString());
+        navigationDetails.push($param1.toString());
+      }
+
+      this.router.navigate(navigationDetails);
+    })
+  }
+  
 }
