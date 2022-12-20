@@ -268,9 +268,7 @@ public class AppointmentService implements IAppointmentService{
         }        
         else
             return false;
-          }
-
-}  
+	}  
 
   @Override
 	public Boolean cancelAppointment(Integer appointmentId) {

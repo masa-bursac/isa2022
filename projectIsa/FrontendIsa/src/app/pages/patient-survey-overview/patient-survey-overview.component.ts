@@ -40,11 +40,11 @@ export class PatientSurveyOverviewComponent implements OnInit {
       patientId: this.id,
       patientStatus: 2
     }
-      this.appointmentService.setPatientStatus(body).subscribe(data=>{
-        this._snackBar.open('Patient status set successfully', 'Close',{
-          duration: 3000
-        });
+    this.appointmentService.setPatientStatus(body).subscribe(data=>{
+      this._snackBar.open('Patient status set successfully', 'Close',{
+        duration: 3000
       });
+    });
   }
   patientNotFit(): void{
     const body = {

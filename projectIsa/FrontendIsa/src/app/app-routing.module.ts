@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'addReport/:id/:ap', component: AddReportComponent},
   { path: 'patientSurveyReportOverview/:id/:ap', component: PatientSurveyOverviewComponent},
   { path: 'patientAppointments/:id', component: PatientAppointmentListComponent},
-  { path: 'upcomingAppointments', component: UpcomingAppointmentsComponent}
+  { path: 'upcomingAppointments', component: UpcomingAppointmentsComponent},
   { path: "**", pathMatch:'full', redirectTo:'landingPage'},
  
 ];
