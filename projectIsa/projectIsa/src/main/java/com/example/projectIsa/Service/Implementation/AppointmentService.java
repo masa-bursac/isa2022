@@ -273,10 +273,13 @@ public class AppointmentService implements IAppointmentService{
   @Override
 	public Boolean cancelAppointment(Integer appointmentId) {
 		Appointment app = appointmentRepository.findOneById(appointmentId);
+		RegisteredUser user = userRepository.findOneUserById(app.getRegUser().getId());
 
 		if(app.isTaken() && LocalDateTime.now().isBefore(app.getDate().minusDays(1))) {
 			app.setTaken(false);
+			user.setGaveBloodDate(null);
 			appointmentRepository.save(app);
+			userRepository.save(user);
 			return true;
 		} else {
 			return false;
