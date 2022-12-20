@@ -11,6 +11,7 @@ public class TakenAppointmentDTO {
 	private LocalDateTime date;
 	private String userName;
 	private String userSurname;
+	private String email;
 	
 	public TakenAppointmentDTO() {
 		// TODO Auto-generated constructor stub
@@ -22,6 +23,7 @@ public class TakenAppointmentDTO {
 		this.date = appointment.getDate();
 		this.userName = appointment.getRegUser().getName();
 		this.userSurname = appointment.getRegUser().getSurname();
+		this.email = appointment.getRegUser().getEmail();
 	}
 
 	public Integer getId() {
@@ -64,4 +66,12 @@ public class TakenAppointmentDTO {
 		this.userSurname = userSurname;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 }

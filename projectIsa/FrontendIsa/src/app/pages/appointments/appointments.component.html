@@ -18,7 +18,9 @@
       [dayStartHour]="dayStartsHour"
       [excludeDays]="daysExcluded"
       [dayEndHour]="dayEndsHour"
-      [events]="events">
+      [events]="events"
+      (eventClicked)="click($event)"
+      >
   </mwl-calendar-week-view>
 </div>
 <div *ngIf="optionView=='monthly'">
