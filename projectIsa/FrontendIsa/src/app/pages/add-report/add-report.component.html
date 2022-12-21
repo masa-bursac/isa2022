@@ -56,13 +56,6 @@
               </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width">
-            <mat-label>Date of appointment</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dateStart">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
             <mat-label>Start hour</mat-label>
             <mat-select [(value)]="selectedHourStart"  >
                 <mat-option *ngFor="let hour of hoursStart" [value]="hour.name">

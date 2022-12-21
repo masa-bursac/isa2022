@@ -47,4 +47,7 @@ export class AppointmentsService {
   public cancelAppointment(appointmentId: number){
     return this.http.delete(appointments_url+`/cancelAppointment/${appointmentId}`);
   }
+  public findAppointmentById(ap: any) {
+    return this.http.get(appointments_url+`/findAppointmentById/${ap}`);
+  }
 }

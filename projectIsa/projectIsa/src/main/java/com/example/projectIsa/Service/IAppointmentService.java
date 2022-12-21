@@ -35,4 +35,6 @@ public interface IAppointmentService {
 	
 	Boolean cancelAppointment(Integer appointmentId);
 
+	AppointmentDTO findAppointmentById(Integer id);
+
 }

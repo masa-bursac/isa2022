@@ -64,6 +64,12 @@ public class AppointmentController {
         return appointmentService.findAppointment(date);
     }
 	
+	@GetMapping("/findAppointmentById/{id}")
+	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")
+    public AppointmentDTO findAppointmentById(@PathVariable Integer id) {
+        return appointmentService.findAppointmentById(id);
+    }
+	
 	@PostMapping(value = "/scheduleAppointment")
 	@PreAuthorize("hasRole('ROLE_REGISTERED')")
     public ResponseEntity scheduleAppointment(@RequestBody ScheduleAppointmentDTO appointment) {
