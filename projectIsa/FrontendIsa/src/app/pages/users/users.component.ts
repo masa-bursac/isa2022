@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit {
   addForm: boolean = false;
   users: any[] = [];
   type: string = "systemAdmin"
+  role: any;
   constructor(private profileService: ProfileService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
@@ -28,6 +29,10 @@ export class UsersComponent implements OnInit {
     }else if(this.tokenStorage.getUser().roles[0] === "ROLE_REGISTERED"){
       alert("Unauthorized!");
       this.router.navigate(['/homePage']);
+    }
+    this.role = this.tokenStorage.getUser().roles[0];
+    if(this.role != "ROLE_CENTERADMIN"){
+      this.displayedColumns = ['name', 'role','gender','email', 'phoneNumber', 'jmbg','education','profession','address'];
     }
     this.getAllUsers();
   }

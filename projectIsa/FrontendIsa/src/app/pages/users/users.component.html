@@ -99,7 +99,7 @@
     <th mat-header-cell *matHeaderCellDef style="padding: 10px"> Address </th>
     <td mat-cell *matCellDef="let element"> {{element.street}} {{element.houseNumber}}, {{element.postcode}} {{element.city}}</td>
   </ng-container>
-  <ng-container matColumnDef="appointments">
+  <ng-container matColumnDef="appointments" *ngIf="role === 'ROLE_CENTERADMIN'">
     <th mat-header-cell *matHeaderCellDef> Appointments </th>
     <td mat-cell *matCellDef="let element"> 
       <div *ngIf="element.role === 'ROLE_REGISTERED'">
