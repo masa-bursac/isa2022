@@ -163,4 +163,4 @@ alter sequence user_education_id_seq restart with 8;
 alter sequence center_id_seq restart with 7;
 alter sequence center_address_id_seq restart with 7;
 alter sequence complaint_id_seq restart with 7;
-alter sequence appointment_id_seq restart with 5;
+alter sequence appointment_id_seq restart with 6;
