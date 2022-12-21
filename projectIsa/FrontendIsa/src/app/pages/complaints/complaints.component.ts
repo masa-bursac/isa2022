@@ -45,7 +45,7 @@ export class ComplaintsComponent implements OnInit {
       this._snackBar.open('Answer sent successfully', 'Close',{
         duration: 3000
       });
-      
+      window.location.reload();
       this.onClose.emit(true);
     })
   }

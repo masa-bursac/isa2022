@@ -68,6 +68,7 @@ export class CenterAdminOverviewComponent implements OnInit {
 
   selectedHour?: hour;
   selectedMinute?: minute;
+  doktor: staff = {id: 1, name: "Mila", surname: "Milic"}
 
   centerAddress: address = {};
 
@@ -127,6 +128,11 @@ export class CenterAdminOverviewComponent implements OnInit {
         });
         this.dataSource = data.staff;
         this.appointmentService.getAllCenters(data.id).subscribe((data : any)=> {
+          data.forEach(element => {
+            if(element.staff.length == 0){
+              element.staff.push(this.doktor);
+            }
+          });
           this.dataSource1 = data;
         });
         this.adminService.getAdmins(data.id).subscribe((data : any)=> {

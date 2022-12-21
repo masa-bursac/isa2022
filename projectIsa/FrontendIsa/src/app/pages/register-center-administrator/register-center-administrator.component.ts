@@ -125,6 +125,7 @@ export class RegisterCenterAdministratorComponent implements OnInit {
         duration: 3000
       });
       this.onClose.emit(true);
+      window.location.reload();
     }
     else{
       this._snackBar.open('Email already exists in system', 'Close',{
