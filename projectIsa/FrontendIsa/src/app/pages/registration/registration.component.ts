@@ -73,7 +73,7 @@ export class RegistrationComponent implements OnInit {
     return {};
   };
 
-  submitForm(): void {
+  async submitForm() {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();

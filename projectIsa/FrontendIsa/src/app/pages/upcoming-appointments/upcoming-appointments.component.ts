@@ -40,7 +40,7 @@ export class UpcomingAppointmentsComponent implements OnInit {
     });
   }
 
-  public scheduleAppointment(date: string): void {
+  async scheduleAppointment(date: string) {
     const body = {
       date: date,
       userId: this.tokenStorage.getUser().id,

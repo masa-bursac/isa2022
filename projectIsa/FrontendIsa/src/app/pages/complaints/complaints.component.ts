@@ -27,7 +27,6 @@ export class ComplaintsComponent implements OnInit {
     console.log(this.tokenStorage.getUser().id);
     this.complaintService.getComplaints().subscribe(data => {
       this.complaints = data;
-      console.log(this.complaints)
     });
   }
 
@@ -35,7 +34,7 @@ export class ComplaintsComponent implements OnInit {
     return this.complaints.sort((a,b) => ( a.answer == null ) && ( b.answer !=null )? -1 : 1);
   }
 
-  public sendAnswer(complaint: any){
+  async sendAnswer(complaint: any){
     const body = {
       id: complaint.id,
       answer: complaint.currentAnswer,

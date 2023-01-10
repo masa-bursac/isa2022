@@ -136,7 +136,7 @@ export class ScheduleAppointmentRegUserComponent implements OnInit {
     }
   }
 
-  public scheduleAppointment(id: number) {
+  async scheduleAppointment(id: number) {
     const format = "yyyy-MM-ddTHH:mm:ss";
     const date = new Date(this.validateForm1.value.date);
     switch ( this.selectedHour ) {

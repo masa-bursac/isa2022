@@ -79,15 +79,12 @@ export class SurveyForUserComponent implements OnInit {
 
     this.surveyService.GetQuestions().subscribe((data: any)=>{
       this.dataSource = data;
-      console.log(this.dataSource);
     });
   }
 
   radioChange(event: MatRadioChange, data: { id: any; }) {
     var obj = this.dataSource.filter(x => x.id == data.id)[0];
-    console.log(obj);
     obj.selected = event.value;
-    console.log(this.finalArray.some(x => x.id == data.id))
     if (!this.finalArray.some(x => x.id == data.id)) {
       this.finalArray.push(obj);
     }
@@ -102,11 +99,9 @@ export class SurveyForUserComponent implements OnInit {
       }
     }
    }
-   console.log(this.answeredArray);
    this.surveyService.AddAnswers(this.answeredArray).subscribe((data: any) => {
     if(data){
       alert("Survey sent!");
-      console.log(data);
     }
     else
       alert("Something went wrong!");
