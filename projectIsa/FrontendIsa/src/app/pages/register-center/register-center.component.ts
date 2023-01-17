@@ -28,7 +28,7 @@ export class RegisterCenterComponent implements OnInit {
     if(Object.keys(this.tokenStorage.getUser()).length === 0){
       alert("Unauthorized!");
       this.router.navigate(['/landingPage']);
-    }else if(this.tokenStorage.getUser().roles[0] !== "ROLE_CENTERADMIN"){
+    }else if(this.tokenStorage.getUser().roles[0] !== "ROLE_SYSTEMADMIN"){
       alert("Unauthorized!");
       this.router.navigate(['/homePage']);
     }
