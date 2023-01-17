@@ -52,8 +52,11 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
 
+        console.log(data)
         this.isLoggedIn = true;
-        if(data.hasToChangePass == true){
+        if((data.roles == "ROLE_CENTERADMIN") && (data.hasToChangePass == true)){
+          this.router.navigate(['/changeCenterAdminPassword']);
+        }else if(data.hasToChangePass == true){
           this.router.navigate(['/changePassword']);
         }
         else{

@@ -116,6 +116,7 @@ public class ProfileService implements IProfileService{
 		CenterAdministrator administrator = userRepository.findOneById(admin.getId());
 		if(administrator != null) {
 			administrator.setPassword(passwordEncoder.encode(admin.getPassword()));
+			administrator.setHasToChangePass(false);
 			if (userRepository.save(administrator) != null) {
 				return true;
 	        }        
