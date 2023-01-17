@@ -65,6 +65,7 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 		education.setUser(centerAdmin);
 		centerAdmin.setEducation(education);
 		centerAdmin.setHasToChangePass(true);
+		centerAdmin.setActive(true);
 		centerAdministratorRepository.save(centerAdmin);
 		return true;
 	}
