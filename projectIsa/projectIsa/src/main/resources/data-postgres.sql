@@ -84,14 +84,16 @@ UPDATE users SET address_id = 6, education_id = 6 WHERE users.id = 6;
 UPDATE users SET address_id = 7, education_id = 7 WHERE users.id = 7;
 
 
-insert into medical_equipment (id,quantity,blood_type) values 
-(1,500,0);
-insert into medical_equipment (id,quantity,blood_type) values 
-(2,1000,1);
-insert into medical_equipment (id,quantity,blood_type) values 
-(3,400,2);
-insert into medical_equipment (id,quantity,blood_type) values 
-(4,300,3);
+insert into medical_equipment (id,quantity,blood_type, name) values 
+(1,500,0, 'blood a');
+insert into medical_equipment (id,quantity,blood_type, name) values 
+(2,1000,1, 'blood b');
+insert into medical_equipment (id,quantity,blood_type, name) values 
+(3,400,2, 'blood o');
+insert into medical_equipment (id,quantity,blood_type, name) values 
+(4,300,3, 'blood ab');
+insert into medical_equipment (id,quantity,blood_type, name) values 
+(5,50,4, 'needle');
 
 
 insert into survey (id,question) values

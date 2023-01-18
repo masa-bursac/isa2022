@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.ReportDTO;
+import com.example.projectIsa.Model.BloodType;
 import com.example.projectIsa.Model.MedicalEquipment;
 import com.example.projectIsa.Model.RegisteredUser;
 import com.example.projectIsa.Model.Report;
@@ -39,7 +40,9 @@ public class ReportService implements IReportService {
 		report.setId((int) (reportRepository.count()) + 1 );
 		MedicalEquipment blood = medicalEquipmentRepository.findOneMedicalEquipmentByBloodType(reportDTO.getBloodType());
 		blood.setQuantity(blood.getQuantity() + reportDTO.getQuantityTaken());
-		if(reportRepository.save(report) != null && medicalEquipmentRepository.save(blood) != null) {
+		MedicalEquipment needles = medicalEquipmentRepository.findOneMedicalEquipmentByBloodType(BloodType.NOTBLOOD);
+		needles.setQuantity(needles.getQuantity() - reportDTO.getNeedlesUsed());
+		if(reportRepository.save(report) != null && medicalEquipmentRepository.save(blood) != null && medicalEquipmentRepository.save(needles) != null) {
         	return true;
         }        
         else

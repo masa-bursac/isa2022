@@ -21,6 +21,7 @@ public class ReportDTO {
 	private LocalDateTime endTime;
 	private String reasonForEndingEarly;
 	private Integer quantityTaken;
+	private Integer needlesUsed;
 	
 	private String bloodPressure;
 	private Integer patientWeight;
@@ -33,7 +34,7 @@ public class ReportDTO {
 			boolean bakarSulfatLevel, Integer levelHem, String bagNumber, String puncturePlace,
 			LocalDateTime startTime, LocalDateTime endTime, String reasonForEndingEarly, Integer quantityTaken,
 			String bloodPressure, Integer patientWeight, Integer pulse, String lungs, boolean accepted,
-			String reasonForRejection) {
+			String reasonForRejection, Integer needlesUsed) {
 		super();
 		this.patientId = patientId;
 		this.doctorId = doctorId;
@@ -53,6 +54,7 @@ public class ReportDTO {
 		this.lungs = lungs;
 		this.accepted = accepted;
 		this.reasonForRejection = reasonForRejection;
+		this.needlesUsed = needlesUsed;
 	}
 	public ReportDTO() {
 		super();
@@ -165,6 +167,12 @@ public class ReportDTO {
 	}
 	public void setReasonForRejection(String reasonForRejection) {
 		this.reasonForRejection = reasonForRejection;
+	}
+	public Integer getNeedlesUsed() {
+		return needlesUsed;
+	}
+	public void setNeedlesUsed(Integer needlesUsed) {
+		this.needlesUsed = needlesUsed;
 	}
 	
 	

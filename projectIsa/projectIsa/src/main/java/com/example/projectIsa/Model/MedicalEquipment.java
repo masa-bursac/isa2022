@@ -19,16 +19,18 @@ public class MedicalEquipment {
 	private Integer id;
 	private double quantity;
 	private BloodType bloodType;
+	private String name;
 	
 	
 	
 	public MedicalEquipment() {
 	}
-	public MedicalEquipment(Integer id, double quantity, BloodType bloodType) {
+	public MedicalEquipment(Integer id, double quantity, BloodType bloodType, String name) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.bloodType = bloodType;
+		this.name = name;
 	}
 	public Integer getId() {
 		return id;
@@ -47,6 +49,12 @@ public class MedicalEquipment {
 	}
 	public void setBloodType(BloodType bloodType) {
 		this.bloodType = bloodType;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

@@ -99,6 +99,7 @@ export class AddReportComponent implements OnInit {
   selectedMinuteEnd?: minute;
   selectedLevel?: any;
   quantityTaken?: number;
+  needlesUsed?: number;
   accepted: boolean = false;
 
   id: any;//patientid
@@ -121,7 +122,8 @@ export class AddReportComponent implements OnInit {
     lungs: new FormControl(),
     reasonForRejection: new FormControl(),
     levelHem: new FormControl(),
-    dateStart: new FormControl()
+    dateStart: new FormControl(),
+    needlesUsed: new FormControl()
   }); 
 
   constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private reportService: ReportService, private appointmentService: AppointmentsService,
@@ -144,6 +146,10 @@ export class AddReportComponent implements OnInit {
     this.quantityTaken = this.validateForm.value.quantityTaken;
     if(this.quantityTaken == null){
       this.quantityTaken = 0;
+    }
+    this.needlesUsed = this.validateForm.value.needlesUsed;
+    if(this.needlesUsed == null){
+      this.needlesUsed = 0;
     }
     if((this.validateForm.value.reasonForRejection == ("/"))|| (this.validateForm.value.reasonForRejection == null)){
       this.accepted = true;
@@ -291,7 +297,8 @@ export class AddReportComponent implements OnInit {
        accepted: this.accepted, 
        levelHem: this.validateForm.value.levelHem,
        startTime: formatDate(dateStart,format, "en-US"),
-       endTime: formatDate(dateEnd,format, "en-US")
+       endTime: formatDate(dateEnd,format, "en-US"),
+       needlesUsed: this.needlesUsed
      }
      console.log(body)
      if(this.validateForm.valid){
