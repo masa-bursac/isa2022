@@ -1,5 +1,7 @@
 package com.example.projectIsa.Controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projectIsa.DTO.CenterAdminPasswordDTO;
+import com.example.projectIsa.DTO.DonorsDTO;
 import com.example.projectIsa.DTO.UpdateDTO;
 import com.example.projectIsa.Service.IProfileService;
 
@@ -58,6 +61,12 @@ public class ProfileController {
     @PreAuthorize("hasRole('ROLE_SYSTEMADMIN') or hasRole('ROLE_CENTERADMIN')")
     public ResponseEntity getUsers() {
     	return new ResponseEntity(profileService.getUsers(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/getDonors")
+    @PreAuthorize("hasRole('ROLE_CENTERADMIN')")
+    public List<DonorsDTO> getDonors() {
+    	return profileService.getDonors();
     }
 
 }

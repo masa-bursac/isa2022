@@ -9,12 +9,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.projectIsa.DTO.CenterAdminPasswordDTO;
+import com.example.projectIsa.DTO.DonorsDTO;
 import com.example.projectIsa.DTO.UpdateDTO;
 import com.example.projectIsa.DTO.UserDTO;
 import com.example.projectIsa.Model.Address;
 import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.Education;
 import com.example.projectIsa.Model.Gender;
+import com.example.projectIsa.Model.RegisteredUser;
+import com.example.projectIsa.Model.Role;
 import com.example.projectIsa.Model.SystemAdminstrator;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AddressRepository;
@@ -154,6 +157,22 @@ public Boolean changeSystemAdminPassword(CenterAdminPasswordDTO admin) {
 	else {
 		return false;
 	}
+}
+
+@Override
+public List<DonorsDTO> getDonors() {
+	List<DonorsDTO> donors = new ArrayList<DonorsDTO>();
+	for(User reg: userRepository.findAll()) {
+		if(reg.getRole().equals(Role.ROLE_REGISTERED)) {
+			RegisteredUser registeredUser = userRepository.findOneUserById(reg.getId());
+			if(registeredUser.getGaveBloodDate()!=null) {
+				DonorsDTO donor = new DonorsDTO(reg);
+				donor.setGaveBlood(registeredUser.getGaveBloodDate());
+				donors.add(donor);
+			}
+		}
+	}
+	return donors;
 }
 
 }

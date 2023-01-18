@@ -42,7 +42,10 @@ public class ReportService implements IReportService {
 		blood.setQuantity(blood.getQuantity() + reportDTO.getQuantityTaken());
 		MedicalEquipment needles = medicalEquipmentRepository.findOneMedicalEquipmentByBloodType(BloodType.NOTBLOOD);
 		needles.setQuantity(needles.getQuantity() - reportDTO.getNeedlesUsed());
-		if(reportRepository.save(report) != null && medicalEquipmentRepository.save(blood) != null && medicalEquipmentRepository.save(needles) != null) {
+		
+		patient.setGaveBloodDate(reportDTO.getEndTime());
+		if(reportRepository.save(report) != null && medicalEquipmentRepository.save(blood) != null && medicalEquipmentRepository.save(needles) != null
+				&& userRepository.save(patient) != null) {
         	return true;
         }        
         else
