@@ -34,5 +34,7 @@ public interface IAppointmentService {
 	Boolean setPatientStatus(AppointmentStatusDTO appointment);
 	
 	Boolean cancelAppointment(Integer appointmentId);
+	
+	AppointmentDTO findAppointmentById(Integer id);
 
 }

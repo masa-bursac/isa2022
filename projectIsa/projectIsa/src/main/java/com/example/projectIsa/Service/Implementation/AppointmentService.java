@@ -286,5 +286,13 @@ public class AppointmentService implements IAppointmentService{
 		}
 
 	}
+  @Override
+  public AppointmentDTO findAppointmentById(Integer id) {
+  	Appointment appointment = appointmentRepository.findOneById(id);
+  	AppointmentDTO returnAppointment = new AppointmentDTO();
+  	returnAppointment.setId(appointment.getId());
+  	returnAppointment.setDate(appointment.getDate());
+  	return returnAppointment;
+  }
 
 }
