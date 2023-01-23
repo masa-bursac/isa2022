@@ -33,8 +33,9 @@
             <mat-card class="example-card">
                 <mat-card-content class="mat-card-font">
                   <h1>Appointment</h1>
-                  <p>Date: <b>{{usersAppointments.startTime[2]}}/{{usersAppointments.startTime[1]}}/{{usersAppointments.startTime[0]}} {{usersAppointments.startTime[3]}}:{{usersAppointments.startTime[4]}}<span *ngIf="usersAppointments.startTime[4] === 0">{{usersAppointments.startTime[4]}}</span>h</b></p>
-                  <div *ngFor="let number of numbers"><p>Duration: <b>{{ duration[number] }}</b></p></div>
+                  <p>Start time: <b>{{usersAppointments.startTime[2]}}/{{usersAppointments.startTime[1]}}/{{usersAppointments.startTime[0]}} {{usersAppointments.startTime[3]}}:{{usersAppointments.startTime[4]}}<span *ngIf="usersAppointments.startTime[4] === 0">{{usersAppointments.startTime[4]}}</span>h</b></p>
+                  <p>End time: <b>{{usersAppointments.endTime[2]}}/{{usersAppointments.endTime[1]}}/{{usersAppointments.endTime[0]}} {{usersAppointments.endTime[3]}}:{{usersAppointments.endTime[4]}}<span *ngIf="usersAppointments.endTime[4] === 0">{{usersAppointments.endTime[4]}}</span>h</b></p>
+                  <p>Duration: <b>{{usersAppointments.endTime[3]}}:{{usersAppointments.endTime[4]-usersAppointments.startTime[3]}}:{{usersAppointments.startTime[4]}}</b></p>
                 </mat-card-content>
             </mat-card>
             </div>

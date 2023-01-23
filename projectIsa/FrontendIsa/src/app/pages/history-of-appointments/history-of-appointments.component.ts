@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { ReportService } from 'src/app/services/report.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -11,37 +12,18 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 export class HistoryOfAppointmentsComponent implements OnInit {
 
   public allUsersAppointments: any[] = [];
-  public startHour: number  = 0;
-  public startMinute: number = 0;
-  public endHour: number  = 0;
-  public endMinute: number = 0;
-  public durationHour: number = 0;
-  public durationMinute: number  = 0;
-  public duration: number[] = [];
-  public numbers: number[] = [0, 1];
+  public duration: number = 0;
 
   constructor(private router: Router, private tokenStorage: TokenStorageService, private reportService: ReportService) { }
 
   ngOnInit(): void {
     this.reportService.getHistoryForPatient(this.tokenStorage.getUser().id).subscribe(data=> {
       this.allUsersAppointments = data;
-      console.log(data);
-      this.allUsersAppointments.map((el) => {
-        this.startHour = el.startTime[3];
-        this.startMinute = el.startTime[4];
-        this.endHour = el.endTime[3];
-        this.endMinute = el.endTime[4];
-        if(this.startHour <= this.endHour) {
-          this.durationHour = this.endHour - this.startHour;
-          this.durationMinute = this.endMinute - this.startMinute;
-          if(this.durationHour >= 1) {
-            this.duration.push(this.durationHour + this.durationMinute);
-          } else {
-            this.duration.push(this.durationMinute);
-          }
-        }
-      });
-      console.log(this.duration);
+      // this.allUsersAppointments.map((el) => {
+      //   var start = moment(el.startTime);
+      //   var end = moment(el.endTime);
+      //   this.duration = moment.duration(end.diff(start)).asMinutes();
+      // });
     });
   }
 

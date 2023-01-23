@@ -21,8 +21,9 @@ export class HomePageComponent implements OnInit {
       alert("Unauthorized!");
       this.router.navigate(['/landingPage']);
     }
-    this.authService.getPenals(this.currentUser.id).subscribe(data => this.penals = data);
-    console.log(this.penals);
+    if(this.currentUser.role === 'ROLE_REGISTERED') {
+      this.authService.getPenals(this.currentUser.id).subscribe(data => this.penals = data);
+    }
   }
 
 }
