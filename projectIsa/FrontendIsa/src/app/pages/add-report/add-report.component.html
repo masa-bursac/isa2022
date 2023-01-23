@@ -28,15 +28,19 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Blood pressure" formControlName="bloodPressure" required>
           </mat-form-field>
+          <mat-error *ngIf="hasError('bloodPressure', 'pattern')">Blood pressure format: number/number!</mat-error>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Patient weight" formControlName="patientWeight" required>
           </mat-form-field>
+          <mat-error *ngIf="hasError('patientWeight', 'pattern')">Patient weight requires only numbers!</mat-error>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Pulse" formControlName="pulse" required>
           </mat-form-field>
+          <mat-error *ngIf="hasError('pulse', 'pattern')">Pulse requires only numbers!</mat-error>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Hemoglobin level" formControlName="levelHem" required>
           </mat-form-field>
+          <mat-error *ngIf="hasError('levelHem', 'pattern')">Hemoglobin level requires only numbers!</mat-error>
           <mat-form-field class="example-full-width" > 
             <input matInput placeholder="Lungs" formControlName="lungs" required>
           </mat-form-field>
@@ -93,9 +97,11 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Quantity taken" formControlName="quantityTaken" >
           </mat-form-field>
+          <mat-error *ngIf="hasError('quantityTaken', 'pattern')">Quantity requires only numbers!</mat-error>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Needles used" formControlName="needlesUsed" >
           </mat-form-field>
+          <mat-error *ngIf="hasError('needlesUsed', 'pattern')">Quantity of needles requires only numbers!</mat-error>
         <button mat-stroked-button color="accent" class="btn-block"  [disabled]="validateForm.invalid">Add Report</button>
       </form>
     </mat-card>

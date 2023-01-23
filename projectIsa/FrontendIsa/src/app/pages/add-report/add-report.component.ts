@@ -108,7 +108,7 @@ export class AddReportComponent implements OnInit {
   dateEnd!: Date;
 
 
-  validateForm = new FormGroup({
+  public validateForm = new FormGroup({
     bloodType: new FormControl(),
     noteToDoctor: new FormControl(),
     bakar: new FormControl(),
@@ -140,9 +140,36 @@ export class AddReportComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.ap = this.route.snapshot.paramMap.get('ap');
 
+    this.validateForm = this.fb.group({
+     bloodType: [null],
+     noteToDoctor: [null],
+     bakar: [null],
+     bagNumber: [null],
+     puncturePlace: [null],
+     reasonForEndingEarly: [null],
+     quantityTaken: [null,  Validators.pattern('[0-9]*')],
+     bloodPressure: [null,  Validators.pattern('[0-9]+/[0-9]+')],
+     patientWeight: [null,  Validators.pattern('[0-9]+')],
+     pulse: [null,  Validators.pattern('[0-9]+')],
+     lungs:[null],
+     reasonForRejection: [null],
+     levelHem: [null,  Validators.pattern('[0-9]+')],
+     dateStart: [null],
+     needlesUsed: [null,  Validators.pattern('[0-9]*')]
+    })
   
   }
+
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.validateForm.controls[controlName].hasError(errorName);
+  }
   submitForm(): void {
+
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+
     this.quantityTaken = this.validateForm.value.quantityTaken;
     if(this.quantityTaken == null){
       this.quantityTaken = 0;
