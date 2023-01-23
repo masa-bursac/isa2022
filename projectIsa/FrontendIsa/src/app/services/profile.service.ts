@@ -30,4 +30,8 @@ export class ProfileService {
   public getAllUsers(): Observable<any>{
     return this.http.get(profile_url+`/getUsers`);
   }
+
+  public getAllDonors(): Observable<any>{
+    return this.http.get(profile_url+`/getDonors`);
+  }
 }
