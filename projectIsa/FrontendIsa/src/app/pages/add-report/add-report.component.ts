@@ -305,43 +305,55 @@ export class AddReportComponent implements OnInit {
   default: 
         break;
 }
-  
-     const body = {
-       patientId: this.id,
-       doctorId: this.tokenStorage.getUser().id,
-       bloodType: this.validateForm.value.bloodType,
-       noteToDoctor: this.validateForm.value.noteToDoctor,
-       bakarSulfatLevel: this.validateForm.value.bakar,
-       bagNumber: this.validateForm.value.bagNumber,
-       puncturePlace: this.validateForm.value.puncturePlace,
-       reasonForEndingEarly: this.validateForm.value.reasonForEndingEarly,
-       quantityTaken: this.quantityTaken,
-       bloodPressure: this.validateForm.value.bloodPressure,
-       patientWeight: this.validateForm.value.patientWeight,
-       pulse: this.validateForm.value.pulse,
-       lungs: this.validateForm.value.lungs,
-       reasonForRejection: this.validateForm.value.reasonForRejection,
-       accepted: this.accepted, 
-       levelHem: this.validateForm.value.levelHem,
-       startTime: formatDate(dateStart,format, "en-US"),
-       endTime: formatDate(dateEnd,format, "en-US"),
-       needlesUsed: this.needlesUsed
-     }
-     console.log(body)
-     if(this.validateForm.valid){
-      this.reportService.addReport(body).subscribe(data=>{
-          this._snackBar.open('Report added successfully', 'Close',{
-            duration: 3000
-          });
-          this.router.navigate(['/landingPage']);
+
+console.log(dateEnd);
+console.log(dateStart);
+
+const dateEndCheck = new Date(dateEnd);
+const dateStartCheck = new Date(dateStart)
+
+if(dateEndCheck < dateStartCheck){
+  alert("End time must be before start time!");
+}else{
+  const body = {
+    patientId: this.id,
+    doctorId: this.tokenStorage.getUser().id,
+    bloodType: this.validateForm.value.bloodType,
+    noteToDoctor: this.validateForm.value.noteToDoctor,
+    bakarSulfatLevel: this.validateForm.value.bakar,
+    bagNumber: this.validateForm.value.bagNumber,
+    puncturePlace: this.validateForm.value.puncturePlace,
+    reasonForEndingEarly: this.validateForm.value.reasonForEndingEarly,
+    quantityTaken: this.quantityTaken,
+    bloodPressure: this.validateForm.value.bloodPressure,
+    patientWeight: this.validateForm.value.patientWeight,
+    pulse: this.validateForm.value.pulse,
+    lungs: this.validateForm.value.lungs,
+    reasonForRejection: this.validateForm.value.reasonForRejection,
+    accepted: this.accepted, 
+    levelHem: this.validateForm.value.levelHem,
+    startTime: formatDate(dateStart,format, "en-US"),
+    endTime: formatDate(dateEnd,format, "en-US"),
+    needlesUsed: this.needlesUsed
+  }  
+     
+ 
+  if(this.validateForm.valid){
+   this.reportService.addReport(body).subscribe(data=>{
+       this._snackBar.open('Report added successfully', 'Close',{
+         duration: 3000
+       });
+       this.router.navigate(['/landingPage']);
+   
       });
-      
-   }
-   else{
-    this._snackBar.open('Error! All feilds are required!', 'Close',{
-      duration: 3000
-    });
-   }
+  }
+  else{
+ this._snackBar.open('Error! All feilds are required!', 'Close',{
+   duration: 3000
+ });
+} 
+}
+
      
 
 })
