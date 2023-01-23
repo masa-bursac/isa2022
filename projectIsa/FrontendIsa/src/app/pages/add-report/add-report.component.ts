@@ -306,9 +306,6 @@ export class AddReportComponent implements OnInit {
         break;
 }
 
-console.log(dateEnd);
-console.log(dateStart);
-
 const dateEndCheck = new Date(dateEnd);
 const dateStartCheck = new Date(dateStart)
 
