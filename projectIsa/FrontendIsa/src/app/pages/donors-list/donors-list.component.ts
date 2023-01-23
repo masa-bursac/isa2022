@@ -12,42 +12,55 @@ export class DonorsListComponent implements OnInit {
 
   allDirections: any[] = [
     {value: 'ascending', viewValue: 'ascending'},
-    {value: 'descending', viewValue: 'descending'}
+    {value: 'descending', viewValue: 'descending'},
+    {value: 'none', viewValue: 'none'}
+  ];
+  allCriterias: any[] = [
+    {value: 'name', viewValue: 'name'},
+    {value: 'surname', viewValue: 'surname'},
+    {value: 'date', viewValue: 'date'},
+    {value: 'none', viewValue: 'none'}
   ];
 
   public allDonors: any[] = [];
-  public allFilteredAndSorted: any[] = [];
+  public sortByCriteria?: string;
+
+  publ
   role: any;
 
-  public sortByName(value: string) {
-    if (value === 'ascending') {
-      this.allDonors.sort((a,b) => a.name > b.name ? 1 : -1);
-      this.allFilteredAndSorted.sort((a,b) => a.name > b.name ? 1 : -1);
-    } else if (value === 'descending') {
-      this.allDonors.sort((a,b) => a.name < b.name ? 1 : -1);
-      this.allFilteredAndSorted.sort((a,b) => a.name < b.name ? 1 : -1);
+  public sortBy(value: string) {
+    if (value === 'name') {
+      this.sortByCriteria = "name";
+    } else if (value === 'surname') {
+      this.sortByCriteria = "surname";
+    }else if (value === 'date') {
+      this.sortByCriteria = "date";
     }
   }
 
-  public sortBySurname(value: string) {
-    if (value === 'ascending') {
-      this.allDonors.sort((a,b) => a.surname > b.surname ? 1 : -1);
-      this.allFilteredAndSorted.sort((a,b) => a.surname > b.surname ? 1 : -1);
-    } else if (value === 'descending') {
-      this.allDonors.sort((a,b) => a.surname < b.surname ? 1 : -1);
-      this.allFilteredAndSorted.sort((a,b) => a.surname < b.surname ? 1 : -1);
-    }
+  public sort(value: string) {
+    if(this.sortByCriteria === "name"){
+      if (value === 'ascending') {
+        this.allDonors.sort((a,b) => a.name > b.name ? 1 : -1);
+      } else if (value === 'descending') {
+        this.allDonors.sort((a,b) => a.name < b.name ? 1 : -1);
+      }
+    }else if(this.sortByCriteria === "surname"){
+      if (value === 'ascending') {
+        this.allDonors.sort((a,b) => a.surname > b.surname ? 1 : -1);
+      } else if (value === 'descending') {
+        this.allDonors.sort((a,b) => a.surname < b.surname ? 1 : -1);
+      }
+    }else if(this.sortByCriteria === "date"){
+      if (value === 'ascending') {
+        this.allDonors.sort((a,b) => a.gaveBlood > b.gaveBlood ? 1 : -1);
+      } else if (value === 'descending') {
+        this.allDonors.sort((a,b) => a.gaveBlood < b.gaveBlood ? 1 : -1);
+      }
+    }else if(this.sortByCriteria === "none"){}
+   
   }
 
-  public sortByDate(value: string) {
-    if (value === 'ascending') {
-      this.allDonors.sort((a,b) => a.gaveBlood > b.gaveBlood ? 1 : -1);
-      this.allFilteredAndSorted.sort((a,b) => a.gaveBlood > b.gaveBlood ? 1 : -1);
-    } else if (value === 'descending') {
-      this.allDonors.sort((a,b) => a.gaveBlood < b.gaveBlood ? 1 : -1);
-      this.allFilteredAndSorted.sort((a,b) => a.gaveBlood < b.gaveBlood ? 1 : -1);
-    }
-  }
 
   constructor(private router: Router, private tokenStorage: TokenStorageService, private profileService: ProfileService) { }
 
@@ -69,7 +82,6 @@ export class DonorsListComponent implements OnInit {
   public showAllDonors(): void {
     this.profileService.getAllDonors().subscribe(data => {
       this.allDonors = data;
-      console.log(data)
     });
   }
 

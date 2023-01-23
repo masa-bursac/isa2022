@@ -7,55 +7,27 @@
           <div class="sort-items">
             <div class="div-holder">
               <mat-form-field appearance="fill" class="mat-field-space">
-                <mat-label>Sort by name</mat-label>
-                <mat-select (selectionChange)="sortByName($event.value)">
-                  <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
-                    {{direction.viewValue}}
+                <mat-label>Sort by:</mat-label>
+                <mat-select (selectionChange)="sortBy($event.value)">
+                  <mat-option *ngFor="let criteria of allCriterias" [value]="criteria.value">
+                    {{criteria.viewValue}}
                   </mat-option>
-                  <mat-option>None</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div class="div-holder">
               <mat-form-field appearance="fill" class="mat-field-space">
-                <mat-label>Sort by surname</mat-label>
-                <mat-select (selectionChange)="sortBySurname($event.value)">
+                <mat-label>Ascending/Discending</mat-label>
+                <mat-select (selectionChange)="sort($event.value)">
                   <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
                     {{direction.viewValue}}
                   </mat-option>
-                  <mat-option>None</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="div-holder">
-              <mat-form-field appearance="fill" class="mat-field-space">
-                <mat-label>Sort by date</mat-label>
-                <mat-select (selectionChange)="sortByDate($event.value)">
-                  <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
-                    {{direction.viewValue}}
-                  </mat-option>
-                  <mat-option>None</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
         </div>
       </div>
       </form>
-</div>
-<div>
-  <div *ngFor="let filteredAndSorted of allFilteredAndSorted">
-      <div class="review-holder" class="div-inline">
-          <mat-card class="example-card">
-              <mat-card-content class="mat-card-font">
-                <h1>{{ filteredAndSorted.name }} {{ filteredAndSorted.surname }}</h1>
-                <p>{{filteredAndSorted.email}}</p>
-                <p>Gave blood: {{filteredAndSorted.gaveBlood[2]}}/{{filteredAndSorted.gaveBlood[1]}}/{{filteredAndSorted.gaveBlood[0]}} {{filteredAndSorted.gaveBlood[3]}}:{{filteredAndSorted.gaveBlood[4]}}</p>
-              </mat-card-content>
-          </mat-card>
-          </div>
-      <br>
-      <br>
-  </div>
 </div>
 
 <div *ngFor="let donor of allDonors">
