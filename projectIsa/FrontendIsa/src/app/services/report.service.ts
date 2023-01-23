@@ -16,4 +16,9 @@ export class ReportService {
     console.log(body);
     return this.http.post(report_url+`/addReport`, body);
   }
+
+  public getHistoryForPatient(body:any): Observable<any>{
+    return this.http.get(report_url+`/getHistoryForPatient/${body}`);
+  }
+
 }

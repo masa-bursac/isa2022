@@ -35,4 +35,6 @@ public interface IAppointmentService {
 	
 	Boolean cancelAppointment(Integer appointmentId);
 
+	//List<Appointment> getUsersAppointmentHistory(Integer userId);
+
 }

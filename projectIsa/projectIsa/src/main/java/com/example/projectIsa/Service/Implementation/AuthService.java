@@ -121,4 +121,10 @@ public class AuthService implements IAuthService{
         userRepository.save(user);
         return true;
 	}
+
+	@Override
+	public Integer getPenals(Integer userId) {
+		RegisteredUser regUser = userRepository.findOneUserById(userId);
+		return regUser.getPenals();
+	}
 }

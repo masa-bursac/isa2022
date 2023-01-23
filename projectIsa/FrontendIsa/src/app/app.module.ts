@@ -47,6 +47,7 @@ import { AddReportComponent } from './pages/add-report/add-report.component';
 import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/patient-survey-overview.component';
 import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
 import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
+import { HistoryOfAppointmentsComponent } from './pages/history-of-appointments/history-of-appointments.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upc
     PatientSurveyOverviewComponent,
     PatientAppointmentListComponent,
     ScheduleAppointmentRegUserComponent,
-    UpcomingAppointmentsComponent
+    UpcomingAppointmentsComponent,
+    HistoryOfAppointmentsComponent
   ],
   imports: [
     BrowserModule,

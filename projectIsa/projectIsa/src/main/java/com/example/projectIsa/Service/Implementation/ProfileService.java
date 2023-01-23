@@ -139,21 +139,21 @@ public class ProfileService implements IProfileService{
 		return usersDTO;
 	}
 
-@Override
-public Boolean changeSystemAdminPassword(CenterAdminPasswordDTO admin) {
-	SystemAdminstrator administrator = systemAdministratorRepository.findById(admin.getId()).get();
-	if(administrator != null) {
-		administrator.setPassword(passwordEncoder.encode(admin.getPassword()));
-		administrator.setHasToChangePass(false);
-		if (systemAdministratorRepository.save(administrator) != null) {
-			return true;
-        }        
-        else
-            return false;
+	@Override
+	public Boolean changeSystemAdminPassword(CenterAdminPasswordDTO admin) {
+		SystemAdminstrator administrator = systemAdministratorRepository.findById(admin.getId()).get();
+		if(administrator != null) {
+			administrator.setPassword(passwordEncoder.encode(admin.getPassword()));
+			administrator.setHasToChangePass(false);
+			if (systemAdministratorRepository.save(administrator) != null) {
+				return true;
+	        }        
+	        else
+	            return false;
+		}
+		else {
+			return false;
+		}
 	}
-	else {
-		return false;
-	}
-}
 
 }

@@ -36,6 +36,10 @@ export class AppointmentsService {
     return this.http.get(appointments_url+`/getUsersAppointment/${body}`);
   }
 
+  public getUsersAppointmentHistory(body:any): Observable<any>{
+    return this.http.get(appointments_url+`/getUsersAppointmentHistory/${body}`);
+  }
+
   public getFreeAppointment(adminId : number){
     return this.http.get(appointments_url+`/getFreeAppointment/${adminId}`);
   }

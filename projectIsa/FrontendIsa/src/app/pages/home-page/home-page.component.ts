@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 export class HomePageComponent implements OnInit {
 
   currentUser: any;
+  penals: number = 0;
 
-  constructor(private tokenStorage: TokenStorageService, private router: Router) { }
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
@@ -19,6 +21,8 @@ export class HomePageComponent implements OnInit {
       alert("Unauthorized!");
       this.router.navigate(['/landingPage']);
     }
+    this.authService.getPenals(this.currentUser.id).subscribe(data => this.penals = data);
+    console.log(this.penals);
   }
 
 }

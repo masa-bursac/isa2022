@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -32,9 +33,7 @@ export class LoginComponent implements OnInit {
     }
 
     const token = this.route.snapshot.params['token'];
-    console.log(token);
     if (token != undefined) {
-      console.log('yes');
       this.authService.continueRegistration(localStorage.getItem('email')).subscribe(() => {
         this.router.navigateByUrl(`/login`);
       });
@@ -47,25 +46,26 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
 
-    this.authService.login(this.validateForm.value.email, this.validateForm.value.password).subscribe(data => {
-      if(data){
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
+    this.authService.login(this.validateForm.value.email, this.validateForm.value.password).subscribe(
+      data => {
+        if(data.active){
+          this.tokenStorage.saveToken(data.accessToken);
+          this.tokenStorage.saveUser(data);
 
-        console.log(data)
-        this.isLoggedIn = true;
-        if((data.roles == "ROLE_CENTERADMIN") && (data.hasToChangePass == true)){
-          this.router.navigate(['/changeCenterAdminPassword']);
-        }else if(data.hasToChangePass == true){
-          this.router.navigate(['/changePassword']);
+          this.isLoggedIn = true;
+          if((data.roles == "ROLE_CENTERADMIN") && (data.hasToChangePass == true)){
+            this.router.navigate(['/changeCenterAdminPassword']);
+          }else if(data.hasToChangePass == true){
+            this.router.navigate(['/changePassword']);
+          }
+          else{
+          this.router.navigate(['/homePage']);
+          }
         }
-        else{
-        this.router.navigate(['/homePage']);
-        }
+        else
+          alert("You are not active! Please activate your acount via email we sent you");
       }
-      else
-        alert("Something went wrong!");
-    });
+      );
   }
 
 }

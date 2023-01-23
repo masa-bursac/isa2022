@@ -20,6 +20,7 @@ import { AddReportComponent } from './pages/add-report/add-report.component';
 import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/patient-survey-overview.component';
 import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
 import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
+import { HistoryOfAppointmentsComponent } from './pages/history-of-appointments/history-of-appointments.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
   { path: 'patientSurveyReportOverview/:id/:ap', component: PatientSurveyOverviewComponent},
   { path: 'patientAppointments/:id', component: PatientAppointmentListComponent},
   { path: 'upcomingAppointments', component: UpcomingAppointmentsComponent},
-  { path: "**", pathMatch:'full', redirectTo:'landingPage'},
+  { path: 'historyOfAppointments', component: HistoryOfAppointmentsComponent},
+  { path: "**", pathMatch:'full', redirectTo:'landingPage'}
  
 ];
 
