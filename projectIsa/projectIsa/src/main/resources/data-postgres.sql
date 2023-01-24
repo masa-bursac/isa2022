@@ -147,13 +147,13 @@ UPDATE complaints SET center_id = 1 WHERE complaints.id = 3;
 UPDATE complaints SET center_id = 2 WHERE complaints.id = 5;
 
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
-(1, '2022-12-27 12:00:00', 30, true, 1, 3, 3);
+(1, '2023-01-17 12:00:00', 30, true, 1, 3, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
 (2, '2023-12-27 12:30:00', 30, true, 1, 6, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
-(3, '2022-1-30 08:00:00', 30, false, 1, 3, 3);
+(3, '2022-01-27 08:00:00', 30, true, 1, 3, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
-(4, '2020-12-30 08:30:00', 20, false, 1, 3, 3);
+(4, '2022-12-30 08:30:00', 20, true, 1, 3, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
 (5, '2023-12-30 08:00:00', 20, false, 2, null, 3);
 

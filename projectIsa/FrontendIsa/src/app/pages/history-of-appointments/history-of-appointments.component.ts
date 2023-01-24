@@ -19,11 +19,11 @@ export class HistoryOfAppointmentsComponent implements OnInit {
   ngOnInit(): void {
     this.reportService.getHistoryForPatient(this.tokenStorage.getUser().id).subscribe(data=> {
       this.allUsersAppointments = data;
-      // this.allUsersAppointments.map((el) => {
-      //   var start = moment(el.startTime);
-      //   var end = moment(el.endTime);
-      //   this.duration = moment.duration(end.diff(start)).asMinutes();
-      // });
+      this.allUsersAppointments.map((el) => {
+        var start = moment(el.startTime);
+        var end = moment(el.endTime);
+        this.duration = moment.duration(end.diff(start)).asMinutes();
+      });
     });
   }
 

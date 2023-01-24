@@ -35,7 +35,7 @@
                   <h1>Appointment</h1>
                   <p>Start time: <b>{{usersAppointments.startTime[2]}}/{{usersAppointments.startTime[1]}}/{{usersAppointments.startTime[0]}} {{usersAppointments.startTime[3]}}:{{usersAppointments.startTime[4]}}<span *ngIf="usersAppointments.startTime[4] === 0">{{usersAppointments.startTime[4]}}</span>h</b></p>
                   <p>End time: <b>{{usersAppointments.endTime[2]}}/{{usersAppointments.endTime[1]}}/{{usersAppointments.endTime[0]}} {{usersAppointments.endTime[3]}}:{{usersAppointments.endTime[4]}}<span *ngIf="usersAppointments.endTime[4] === 0">{{usersAppointments.endTime[4]}}</span>h</b></p>
-                  <p>Duration: <b>{{usersAppointments.endTime[3]}}:{{usersAppointments.endTime[4]-usersAppointments.startTime[3]}}:{{usersAppointments.startTime[4]}}</b></p>
+                  <p>Duration: <b>{{duration}}</b></p>
                 </mat-card-content>
             </mat-card>
             </div>
