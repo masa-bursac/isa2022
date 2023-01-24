@@ -37,4 +37,6 @@ public interface IAppointmentService {
 	
 	AppointmentDTO findAppointmentById(Integer id);
 
+	//List<Appointment> getUsersAppointmentHistory(Integer userId);
+
 }

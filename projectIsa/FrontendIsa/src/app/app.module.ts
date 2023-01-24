@@ -48,6 +48,7 @@ import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/
 import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
 import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
 import { DonorsListComponent } from './pages/donors-list/donors-list.component';
+import { HistoryOfAppointmentsComponent } from './pages/history-of-appointments/history-of-appointments.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { DonorsListComponent } from './pages/donors-list/donors-list.component';
     ScheduleAppointmentRegUserComponent,
     UpcomingAppointmentsComponent,
     DonorsListComponent
+    HistoryOfAppointmentsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<h1 class="my-history">My history</h1>
+<div>
+    <h2 class="sort">Sort:</h2>
+    <div class="sort-items">
+      <div class="div-holder">
+        <mat-form-field appearance="fill" class="mat-field-space">
+          <mat-label>Sort by date</mat-label>
+          <mat-select (selectionChange)="sortByDate($event.value)">
+            <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
+              {{direction.viewValue}}
+            </mat-option>
+            <mat-option>None</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="div-holder">
+        <mat-form-field appearance="fill" class="mat-field-space">
+          <mat-label>Sort by duration</mat-label>
+          <mat-select (selectionChange)="sortByDuration($event.value)">
+            <mat-option *ngFor="let direction of allDirections" [value]="direction.value">
+              {{direction.viewValue}}
+            </mat-option>
+            <mat-option>None</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  </div>
+
+  <div>
+    <div *ngFor="let usersAppointments of allUsersAppointments">
+        <div class="review-holder">
+            <mat-card class="example-card">
+                <mat-card-content class="mat-card-font">
+                  <h1>Appointment</h1>
+                  <p>Start time: <b>{{usersAppointments.startTime[2]}}/{{usersAppointments.startTime[1]}}/{{usersAppointments.startTime[0]}} {{usersAppointments.startTime[3]}}:{{usersAppointments.startTime[4]}}<span *ngIf="usersAppointments.startTime[4] === 0">{{usersAppointments.startTime[4]}}</span>h</b></p>
+                  <p>End time: <b>{{usersAppointments.endTime[2]}}/{{usersAppointments.endTime[1]}}/{{usersAppointments.endTime[0]}} {{usersAppointments.endTime[3]}}:{{usersAppointments.endTime[4]}}<span *ngIf="usersAppointments.endTime[4] === 0">{{usersAppointments.endTime[4]}}</span>h</b></p>
+                  <p>Duration: <b>{{duration}}</b></p>
+                </mat-card-content>
+            </mat-card>
+            </div>
+        <br>
+        <br>
+    </div>
+  </div>

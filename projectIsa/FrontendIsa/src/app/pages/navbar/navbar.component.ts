@@ -16,7 +16,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
-    console.log(this.currentUser);
     if(Object.keys(this.currentUser).length === 0){
       this.role = "ROLE_UNREGISTERED"
     }else{

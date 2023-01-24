@@ -28,7 +28,11 @@ export class AuthServiceService {
   }
 
   public continueRegistration(email: string | null) : Observable<any> {
-    console.log(email);
     return this.http.post(auth_url + '/continueRegistration', email, httpOptions);
   }
+
+  public getPenals(body: number) : Observable<any> {
+    return this.http.get(auth_url + `/getPenals/${body}`);
+  }
+
 }

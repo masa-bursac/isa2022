@@ -12,4 +12,7 @@ public interface IAuthService {
 	Boolean HasToChangePass(@Valid AuthDTO loginRequest);
 
 	boolean continueRegistration(String email);
+
+	Integer getPenals(Integer userId);
+
 }

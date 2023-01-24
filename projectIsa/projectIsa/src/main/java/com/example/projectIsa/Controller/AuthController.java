@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,25 +63,20 @@ public class AuthController {
 				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
 		User user = userRepository.findOneByEmail(loginRequest.getEmail());
-		if(user.isActive()) {
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			String jwt = jwtUtils.generateJwtToken(authentication);
-			
-			UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
-			List<String> roles = userDetails.getAuthorities().stream()
-					.map(item -> item.getAuthority())
-					.collect(Collectors.toList());
-			Boolean hasToChangePass = authService.HasToChangePass(loginRequest);
-			return ResponseEntity.ok(new JwtResponse(jwt, 
-													 userDetails.getId(), 
-													 userDetails.getUsername(), 
-													 userDetails.getEmail(), 
-													 roles, hasToChangePass));
-		} else {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: You are not active!"));
-		}
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+		
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
+		List<String> roles = userDetails.getAuthorities().stream()
+				.map(item -> item.getAuthority())
+				.collect(Collectors.toList());
+		Boolean hasToChangePass = authService.HasToChangePass(loginRequest);
+		Boolean isActive = user.isActive();
+		return ResponseEntity.ok(new JwtResponse(jwt, 
+												 userDetails.getId(), 
+												 userDetails.getUsername(), 
+												 userDetails.getEmail(),
+												 roles, hasToChangePass, isActive));
 	}
 	
 	@PostMapping("/registration")
@@ -99,5 +96,10 @@ public class AuthController {
 	@PostMapping("/continueRegistration")
     public boolean continueRegistration(@RequestBody String email){
         return authService.continueRegistration(email);
+    }
+	
+	@GetMapping("/getPenals/{userId}")
+    public Integer getPenals(@PathVariable Integer userId){
+        return authService.getPenals(userId);
     }
 }

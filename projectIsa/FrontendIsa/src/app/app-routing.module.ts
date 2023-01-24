@@ -21,6 +21,7 @@ import { PatientSurveyOverviewComponent } from './pages/patient-survey-overview/
 import { PatientAppointmentListComponent } from './pages/patient-appointment-list/patient-appointment-list.component';
 import { UpcomingAppointmentsComponent } from './pages/upcoming-appointments/upcoming-appointments.component';
 import { DonorsListComponent } from './pages/donors-list/donors-list.component';
+import { HistoryOfAppointmentsComponent } from './pages/history-of-appointments/history-of-appointments.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,8 @@ const routes: Routes = [
   { path: 'patientAppointments/:id', component: PatientAppointmentListComponent},
   { path: 'upcomingAppointments', component: UpcomingAppointmentsComponent},
   { path: 'donors', component: DonorsListComponent},
-  { path: "**", pathMatch:'full', redirectTo:'landingPage'},
+  { path: 'historyOfAppointments', component: HistoryOfAppointmentsComponent},
+  { path: "**", pathMatch:'full', redirectTo:'landingPage'}
  
 ];
 

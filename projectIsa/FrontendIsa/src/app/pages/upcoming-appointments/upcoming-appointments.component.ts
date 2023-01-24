@@ -48,6 +48,11 @@ export class UpcomingAppointmentsComponent implements OnInit {
     }
 
     this.appointmentService.scheduleAppointment(body).subscribe(data=>{
+      if(data.message == "You can't schedule an appointment if you have 3 and more penals") {
+        this._snackBar.open(data.message, 'Close',{
+          duration: 5000
+        });
+      }
       if(data.message == "You can make an appointment only if you take survey"){
         this._snackBar.open(data.message, 'Close',{
           duration: 5000

@@ -1,5 +1,8 @@
 package com.example.projectIsa.Service.Implementation;
 
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -120,5 +123,16 @@ public class AuthService implements IAuthService{
 		user.setActive(true);
         userRepository.save(user);
         return true;
+	}
+
+	@Override
+	public Integer getPenals(Integer userId) {
+		RegisteredUser regUser = userRepository.findOneUserById(userId);
+		if(regUser.getPenals() != 0) {
+			if(LocalDateTime.now().with(TemporalAdjusters.firstDayOfMonth()) == null) {
+				regUser.setPenals(0);
+			}
+		}
+		return regUser.getPenals();
 	}
 }

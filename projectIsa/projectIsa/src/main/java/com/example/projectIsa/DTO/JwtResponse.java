@@ -10,14 +10,17 @@ public class JwtResponse {
 	private String email;
 	private List<String> roles;
 	private Boolean hasToChangePass;
+	private Boolean isActive;
 
-	public JwtResponse(String accessToken, Integer id, String username, String email, List<String> roles, Boolean hasToChangePass) {
+	public JwtResponse(String accessToken, Integer id, String username, String email, List<String> roles, Boolean hasToChangePass,
+			Boolean isActive) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.roles = roles;
 		this.hasToChangePass = hasToChangePass;
+		this.isActive = isActive;
 	}
 
 	public String getAccessToken() {
@@ -71,4 +74,13 @@ public class JwtResponse {
 	public void setHasToChangePass(boolean hasToChangePass) {
 		this.hasToChangePass = hasToChangePass;
 	}
+
+	public Boolean isActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 }

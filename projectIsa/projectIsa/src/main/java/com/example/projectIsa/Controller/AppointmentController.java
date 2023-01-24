@@ -23,6 +23,7 @@ import com.example.projectIsa.DTO.CentersDTO;
 import com.example.projectIsa.DTO.FreeAppointmentDTO;
 import com.example.projectIsa.DTO.GetFreeAppointmentsDTO;
 import com.example.projectIsa.DTO.TakenAppointmentDTO;
+import com.example.projectIsa.Model.Appointment;
 import com.example.projectIsa.DTO.ScheduleAppointmentDTO;
 import com.example.projectIsa.Service.IAppointmentService;
 
@@ -50,7 +51,7 @@ public class AppointmentController {
 	@PreAuthorize("hasRole('ROLE_REGISTERED') or hasRole('ROLE_CENTERADMIN')")
     public List<AppointmentDTO> getAllAppointments(@PathVariable Integer centerId) {
         return appointmentService.getAllAppointments(centerId);
-    }
+	}
 	
 	@GetMapping("/getTakenAppointment/{adminId}")
 	@PreAuthorize("hasRole('ROLE_CENTERADMIN')")

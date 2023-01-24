@@ -66,6 +66,7 @@ public class WebSecurity {
       .authorizeRequests().antMatchers("/auth/login").permitAll()
       .antMatchers("/auth/registration").permitAll()
       .antMatchers("/auth/continueRegistration").permitAll()
+      .antMatchers("/auth/getPenals/{userId}").permitAll()
       .antMatchers("/profile/**").permitAll()
       .antMatchers("/center/**").permitAll()
       .antMatchers("/medicalEquipment/**").permitAll()

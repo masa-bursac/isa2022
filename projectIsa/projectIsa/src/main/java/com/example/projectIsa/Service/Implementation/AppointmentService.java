@@ -13,6 +13,7 @@ import com.example.projectIsa.Model.CenterAddress;
 import com.example.projectIsa.Model.CenterAdministrator;
 import com.example.projectIsa.Model.PatientAbilityForAppointmentStatus;
 import com.example.projectIsa.Model.RegisteredUser;
+import com.example.projectIsa.Model.Report;
 import com.example.projectIsa.Model.User;
 import com.example.projectIsa.Repository.AnsweredSurveyRepository;
 import com.example.projectIsa.Repository.AppointmentsRepository;
@@ -171,44 +172,47 @@ public class AppointmentService implements IAppointmentService{
 	@Override
 	public ResponseDTO scheduleAppointment(ScheduleAppointmentDTO appointmentDTO) {
 		List<Appointment> allAppointmnets = appointmentRepository.findAllByDate(appointmentDTO.getDate());
+		RegisteredUser regUser = userRepository.findOneUserById(appointmentDTO.getUserId());
 		ResponseDTO responseDTO = new ResponseDTO();
-
-		for(Appointment appointment: allAppointmnets) {
-			if(!appointment.isTaken() && appointment.getCenter().getId().equals(appointmentDTO.getCenterId())) {
-				
-				RegisteredUser regUser = userRepository.findOneUserById(appointmentDTO.getUserId());
-				
-				if(regUser.getGaveBloodDate() != null) {
-					if(LocalDateTime.now().isBefore(regUser.getGaveBloodDate().plusMonths(6))) {
-						responseDTO.setMessage("You can make an appointment only if you have not donated blood in the last 6 months");
+		if(regUser.getPenals() < 4) {
+			for(Appointment appointment: allAppointmnets) {
+				if(!appointment.isTaken() && appointment.getCenter().getId().equals(appointmentDTO.getCenterId())) {
+					
+					if(regUser.getGaveBloodDate() != null) {
+						if(LocalDateTime.now().isBefore(regUser.getGaveBloodDate().plusMonths(6))) {
+							responseDTO.setMessage("You can make an appointment only if you have not donated blood in the last 6 months");
+							return responseDTO;
+						}
+						
+					}
+					
+					if(regUser.getTookSurvey() == null) {
+						responseDTO.setMessage("You can make an appointment only if you take survey");
+						return responseDTO;
+					}else if(regUser.getTookSurvey().plusDays(1).isBefore(LocalDateTime.now())) {
+						responseDTO.setMessage("You can make an appointment only if you take survey again");
 						return responseDTO;
 					}
 					
+					appointment.setTaken(true);
+					appointment.setRegUser(regUser);	
+					regUser.setGaveBloodDate(appointmentDTO.getDate());
+					
+					appointmentRepository.save(appointment);
+					
+					emailService.scheduleAppointment(regUser.getName(), regUser.getSurname());
+					
 				}
-				
-				if(regUser.getTookSurvey() == null) {
-					responseDTO.setMessage("You can make an appointment only if you take survey");
-					return responseDTO;
-				}else if(regUser.getTookSurvey().plusDays(1).isBefore(LocalDateTime.now())) {
-					responseDTO.setMessage("You can make an appointment only if you take survey again");
-					return responseDTO;
-				}
-				
-				appointment.setTaken(true);
-				appointment.setRegUser(regUser);	
-				regUser.setGaveBloodDate(appointmentDTO.getDate());
-				
-				appointmentRepository.save(appointment);
-				
-				emailService.scheduleAppointment(regUser.getName(), regUser.getSurname());
 				
 			}
-			
+		} else {
+			responseDTO.setMessage("You can't schedule an appointment if you have 3 and more penals");
+			return responseDTO;
 		}
 		responseDTO.setMessage("Appointment scheduled successfully, you can see it on your profile page");
 		return responseDTO;
 	}
-
+	
 	@Override
 	public List<AppointmentCenterDTO> getUsersAppointment(Integer userId) {
 		List<AppointmentCenterDTO> allAppointmentCenterDTO = new ArrayList<>(); 

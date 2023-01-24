@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.projectIsa.DTO.AppointmentCenterDTO;
 import com.example.projectIsa.DTO.AppointmentDTO;
 import com.example.projectIsa.Model.Appointment;
 
@@ -17,6 +18,8 @@ public interface AppointmentsRepository extends JpaRepository<Appointment, Integ
 	List<Appointment> findAllByDate(LocalDateTime date);
 
 	List<Appointment> findAllByRegUserId(Integer userId);
+	
+	List<Appointment> findAllAppointmentsByRegUserId(Integer userId);
 	
 	Appointment findOneAppointmentById(Integer appointmentId);
 
