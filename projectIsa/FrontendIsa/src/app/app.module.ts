@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table'
 import { AppRoutingModule } from './app-routing.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -11,11 +11,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatMenuModule } from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { UserProfileComponent } from './pages/user-profile/user-profile/user-profile.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -29,7 +29,7 @@ import { RegisterCenterComponent } from './pages/register-center/register-center
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RegisterCenterAdministratorComponent } from './pages/register-center-administrator/register-center-administrator.component';
 import { ChangeCenterAdminPasswordComponent } from './pages/change-center-admin-password/change-center-admin-password.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 import { UsersComponent } from './pages/users/users.component';
 import { SurveyForUserComponent } from './pages/survey-for-user/survey-for-user.component';
@@ -71,14 +71,14 @@ import { HistoryOfAppointmentsComponent } from './pages/history-of-appointments/
     LandingPageComponent,
     ComplaintsComponent,
     ChangePasswordComponent,
-    AppointmentsComponent,  
-    ScheduleAppointmentRegUserComponent, 
+    AppointmentsComponent,
+    ScheduleAppointmentRegUserComponent,
     AddReportComponent,
     PatientSurveyOverviewComponent,
     PatientAppointmentListComponent,
     ScheduleAppointmentRegUserComponent,
     UpcomingAppointmentsComponent,
-    DonorsListComponent
+    DonorsListComponent,
     HistoryOfAppointmentsComponent
   ],
   imports: [
@@ -110,7 +110,7 @@ import { HistoryOfAppointmentsComponent } from './pages/history-of-appointments/
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    
+
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
