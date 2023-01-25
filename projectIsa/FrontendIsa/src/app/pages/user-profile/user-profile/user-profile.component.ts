@@ -80,6 +80,7 @@ export class UserProfileComponent implements OnInit {
 
     this.appointmentService.getUsersAppointment(this.tokenStorage.getUser().id).subscribe(data => {
       this.allUsersAppointments = data;
+      console.log(data)
     });
 
     this.authService.getPenals(this.tokenStorage.getUser().id).subscribe(data => {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -17,7 +18,7 @@ export class ChangeCenterAdminPasswordComponent implements OnInit {
   hideRp: boolean = true;
   passwordBoolean: boolean = false;
 
-  constructor(private fb: FormBuilder, private profileService: ProfileService, private tokenStorage: TokenStorageService) { }
+  constructor(private fb: FormBuilder, private profileService: ProfileService, private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -50,6 +51,9 @@ export class ChangeCenterAdminPasswordComponent implements OnInit {
           }
       this.profileService.changeCenterAdminPassword(body).subscribe((data: any) => {
         alert("Password changed sucessfully!");
+        this.tokenStorage.signOut();
+        this.router.navigate(['/landingPage']);
+        
       })
     });
   }

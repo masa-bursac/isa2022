@@ -218,9 +218,10 @@ public class AppointmentService implements IAppointmentService{
 		List<AppointmentCenterDTO> allAppointmentCenterDTO = new ArrayList<>(); 
 		List<Appointment> allAppointmnets = appointmentRepository.findAllByRegUserId(userId);
 		
-		AppointmentCenterDTO appointmentCenterDTO = new AppointmentCenterDTO();
+		
 
 		for(Appointment appointment: allAppointmnets) {
+			AppointmentCenterDTO appointmentCenterDTO = new AppointmentCenterDTO();
 			if(appointment.isTaken() == true) {
 				Center center = centerRepository.findOneById(appointment.getCenter().getId());
 				appointmentCenterDTO.setId(appointment.getId());
