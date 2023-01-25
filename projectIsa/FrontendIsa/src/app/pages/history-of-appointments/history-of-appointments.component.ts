@@ -12,7 +12,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 export class HistoryOfAppointmentsComponent implements OnInit {
 
   public allUsersAppointments: any[] = [];
-  public duration: number = 0;
+  public duration: any[] = [];
 
   constructor(private router: Router, private tokenStorage: TokenStorageService, private reportService: ReportService) { }
 
@@ -20,9 +20,11 @@ export class HistoryOfAppointmentsComponent implements OnInit {
     this.reportService.getHistoryForPatient(this.tokenStorage.getUser().id).subscribe(data=> {
       this.allUsersAppointments = data;
       this.allUsersAppointments.map((el) => {
-        var start = moment(el.startTime);
-        var end = moment(el.endTime);
-        this.duration = moment.duration(end.diff(start)).asMinutes();
+        const format = "YYYY-MM-DDTHH:mm:ss";
+        var start = moment(el.startTime, format);
+        var end = moment(el.endTime, format);
+        this.duration.push(moment.duration(end.diff(start)).asMinutes());
+        //.duration = moment(el.endTime, format).diff(moment(el.startTime, format));
       });
     });
   }

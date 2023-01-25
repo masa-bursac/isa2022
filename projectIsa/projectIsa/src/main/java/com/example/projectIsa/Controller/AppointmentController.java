@@ -48,7 +48,7 @@ public class AppointmentController {
     }
 	
 	@GetMapping("/getAllFreeAppointments/{centerId}")
-	@PreAuthorize("hasRole('ROLE_REGISTERED') or hasRole('ROLE_CENTERADMIN')")
+	@PreAuthorize("hasRole('ROLE_REGISTERED') or hasRole('ROLE_CENTERADMIN') or hasRole('ROLE_SYSTEMADMIN')")
     public List<AppointmentDTO> getAllAppointments(@PathVariable Integer centerId) {
         return appointmentService.getAllAppointments(centerId);
 	}
