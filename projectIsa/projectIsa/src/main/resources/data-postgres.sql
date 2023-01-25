@@ -40,7 +40,7 @@ insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, is_active, penals) values
 (5,0,'Biljana','Brankovic','bilja@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, true, 0);
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, is_active, penals) values
-(6,0,'Marica','Maric','mara@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, true, 0);
+(6,0,'Marica','Maric','mara@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0626254304','4567894561234', 1, false, true, 4);
 insert into users (id,role,name,surname,email,password,phone_number,jmbg,gender,has_to_change_pass, center_id, is_active) values
 (7,1,'Milana','Milanovic','milana@gmail.com','$2a$10$EfRcY6qiz3FUbUZ/UUdyCuFE9QcB8BlN25NXBqbvdBHAhAOiFOfn6','0639876543','0406894564321', 1, false,3, true);
 
@@ -149,15 +149,15 @@ UPDATE complaints SET center_id = 1 WHERE complaints.id = 3;
 UPDATE complaints SET center_id = 2 WHERE complaints.id = 5;
 
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
-(1, '2023-01-17 12:00:00', 30, true, 1, 3, 3);
+(1, '2023-02-02 12:00:00', 30, false, 1, null, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
-(2, '2023-12-27 12:30:00', 30, true, 1, 6, 3);
+(2, '2023-02-06 12:30:00', 30, true, 1, 6, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
-(3, '2022-01-27 08:00:00', 30, true, 1, 3, 3);
+(3, '2023-01-30 08:00:00', 30, true, 1, 5, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
-(4, '2022-12-30 08:30:00', 20, true, 1, 3, 3);
+(4, '2023-02-03 08:00:00', 20, false, 1, null, 3);
 insert into appointment(id, date, duration, taken, center_id, registered_user_id, patient_status) values
-(5, '2023-12-30 08:00:00', 20, false, 2, null, 3);
+(5, '2023-02-03 08:00:00', 20, false, 2, null, 3);
 
 alter sequence user_entity_id_seq restart with 8;
 alter sequence user_address_id_seq restart with 8;
