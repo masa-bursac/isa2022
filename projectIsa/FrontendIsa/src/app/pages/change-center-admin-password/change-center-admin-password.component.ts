@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-change-center-admin-password',
@@ -16,7 +17,7 @@ export class ChangeCenterAdminPasswordComponent implements OnInit {
   hideRp: boolean = true;
   passwordBoolean: boolean = false;
 
-  constructor(private fb: FormBuilder, private profileService: ProfileService) { }
+  constructor(private fb: FormBuilder, private profileService: ProfileService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -36,7 +37,7 @@ export class ChangeCenterAdminPasswordComponent implements OnInit {
 
   submitForm(): void {
     //this.username = this.route.snapshot.params.token;
-    this.profileService.getProfile('mila@gmail.com').subscribe(data=>{
+    this.profileService.getProfile(this.tokenStorage.getUser().email).subscribe(data=>{
       this.id = data.id;
       for (const i in this.validateForm.controls) {
         this.validateForm.controls[i].markAsDirty();
