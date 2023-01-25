@@ -84,6 +84,7 @@ public class CenterAdministratorService implements ICenterAdministratorService {
 		}	
 		for(CenterAdministrator ca: returnAdmin) {
 			ca.getComplaints().clear();
+			ca.getAppointment().clear();
 		}
 		return returnAdmin;
 	}
