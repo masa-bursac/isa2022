@@ -165,7 +165,7 @@ public List<DonorsDTO> getDonors() {
 	for(User reg: userRepository.findAll()) {
 		if(reg.getRole().equals(Role.ROLE_REGISTERED)) {
 			RegisteredUser registeredUser = userRepository.findOneUserById(reg.getId());
-			if(registeredUser.getGaveBloodDate()!=null) {
+			if(registeredUser.getGaveBloodDate()!=null && registeredUser.getGaveBloodDate().getHour()!=0) {
 				DonorsDTO donor = new DonorsDTO(reg);
 				donor.setGaveBlood(registeredUser.getGaveBloodDate());
 				donors.add(donor);
