@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const center_url = 'http://localhost:8080/center';
+const center_url = 'https://localhost:8080/center';
 
 @Injectable({
   providedIn: 'root'

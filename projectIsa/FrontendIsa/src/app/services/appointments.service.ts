@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const appointments_url = 'http://localhost:8080/appointment';
+const appointments_url = 'https://localhost:8080/appointment';
 
 @Injectable({
   providedIn: 'root'
